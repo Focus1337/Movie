@@ -2172,6 +2172,24 @@ ul.social-btns li {
     transition: all .3s
 }
 
+.social-btn-roll.vk {
+    border-color: #3b5998;
+    color: #3b5998
+}
+
+.social-btn-roll.vk:hover {
+    background: #3b5998
+}
+
+.social-btn-roll.telegram {
+    border-color: #4cc4f2;
+    color: #4cc4f2
+}
+
+.social-btn-roll.telegram:hover {
+    background: #4cc4f2
+}
+
 .social-btn-roll.facebook {
     border-color: #3b5998;
     color: #3b5998
