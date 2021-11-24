@@ -5319,3 +5319,11 @@ main .col-md-12:last-of-type .movie-list-2 {
     float: right;
     opacity: .7
 }
+
+p.privacy-cookies{
+    color: black; 
+    margin-left: -30px;
+    margin-right: -30px;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
