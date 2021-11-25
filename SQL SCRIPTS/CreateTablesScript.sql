@@ -45,6 +45,7 @@ CREATE TABLE Reviews
 	[text] TEXT NOT NULL,
 	review_date DATE NOT NULL, 
 	rating INT NOT NULL DEFAULT(0),
+	helpfulness INT NOT NULL DEFAULT(0),
 
 	CONSTRAINT pk_review PRIMARY KEY(review_id),
 	CONSTRAINT fk_review_user FOREIGN KEY(user_id)
