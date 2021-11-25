@@ -2962,8 +2962,8 @@ form.mailchimp .btn {
 .page-header {
     position: relative;
     padding: 50px 0;
-    background-repeat: no-repeat;
-    background-size: cover
+    background-repeat: no-repeat !important;
+    background-size: cover !important
 }
 
 .page-header:before {
@@ -5326,4 +5326,10 @@ p.privacy-cookies{
     margin-right: -30px;
     font-size: 16px !important;
     font-weight: 400 !important;
+}
+
+.poster.poster-fix
+{
+    width: 266.25px !important;
+    height: 394.05px !important;
 }
