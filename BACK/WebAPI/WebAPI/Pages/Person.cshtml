@@ -1,0 +1,66 @@
+﻿@* @page "{id:int}/{name:alpha:minlength(3)}/{age:int}" *@
+@* @model PersonModel *@
+@* @{ *@
+@*    // var userid = RouteData.Values["id"]; *@
+@*     ViewData["Title"] = "Ввод данных"; *@
+@* } *@
+@* <h2>@Model.Message</h2> *@
+@* <h2>Id = @Model.Person.Id</h2> *@
+@* <h2>Name = @Model.Person.Name</h2> *@
+@* <h2>Age = @Model.Person.Age</h2> *@
+@* <form method="post"> *@
+@*     <label for="name">Имя</label><br /> *@
+@*     <input type="text" name="name" id="name" /><br /><br /> *@
+@*     <label for="age">Возраст</label><br /> *@
+@*     <input type="number" name="age" id="age" /><br /><br /> *@
+@*     <input type="submit" value="Отправить" /> *@
+@* </form> *@
+
+
+@* @page "{handler?}" *@
+@*   *@
+@* @model PersonModel *@
+@* @using WebAPI.Models *@
+@*   *@
+@* <h2>Список пользователей</h2> *@
+@* <table class="table"> *@
+@*     <tr><td>Id</td><td>Name</td><td>Age</td></tr> *@
+@*     @foreach(var person in Model.DisplayedPeople) *@
+@*     { *@
+@*         <tr> *@
+@*             <td>@person.Id</td> *@
+@*             <td>@person.Name</td> *@
+@*             <td>@person.Age</td> *@
+@*         </tr> *@
+@*     } *@
+@* </table> *@
+
+
+@* <h2>Список пользователей</h2> *@
+@* <form method="POST"> *@
+@*     <input type="number" name="age" /> *@
+@*     <input type="submit" asp-page-handler="GreaterThan" value="Старше" /> *@
+@*     <input type="submit" asp-page-handler="LessThan" value="Младше" /> *@
+@* </form> *@
+@* <table class="table"> *@
+@*     <tr><td>Id</td><td>Name</td><td>Age</td></tr> *@
+@*     @foreach(var person in Model.DisplayedPeople) *@
+@*     { *@
+@*         <tr> *@
+@*             <td>@person.Id</td> *@
+@*             <td>@person.Name</td> *@
+@*             <td>@person.Age</td> *@
+@*         </tr> *@
+@*     } *@
+@* </table> *@
+
+
+
+@page
+ 
+@model PersonModel
+ 
+<h2>Информация о пользователе</h2>
+<p>Name = @Model.Person?.Name</p>
+<p>Age = @Model.Person?.Age</p>
+
