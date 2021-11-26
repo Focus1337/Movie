@@ -355,6 +355,17 @@
                                         suspenseful heist movie involving betrayal, family tragedy and a huge, long,
                                         mercialess gunfight in the final act.</p>
                                     <hr>
+
+                                    <div class="review-box-helpfulness">
+                                        Review helpfulness:
+                                        <a href="#" class="btn">
+                                            <i class="fa fa-arrow-up"></i>
+                                        </a>
+                                        <span>14340</span>
+                                        <a href="#" class="btn">
+                                            <i class="fa fa-arrow-down"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -390,6 +401,13 @@
 
                                     <div class="review-box-helpfulness">
                                         Review helpfulness:
+                                        <a href="#" class="btn">
+                                            <i class="fa fa-arrow-up"></i>
+                                        </a>
+                                        <span>120</span>
+                                        <a href="#" class="btn">
+                                            <i class="fa fa-arrow-down"></i>
+                                        </a>
                                     </div>
 
                                 </div>
@@ -406,12 +424,30 @@
                 <!-- Start of Review Form -->
                 <div class="comment-form">
                     <h3 class="mt-0 mb-1">Add Review</h3>
-                    <h6 class="subtitle">Only your first and last name will be visible in your review.</h6>
+                    <h3></h3>
 
                     <form class="row mt30">
+                        <div class="form-group col-md-6" style="padding-right: 35%;">
+                            <label for="rating-select" class="subtitle">Rating</label>
+                            <select name="rating-select" required>
+                                <option value="0" selected>Choose rating</option>
+                                <option value="1">1 -> Terrible</option>
+                                <option value="2">2 -> Bad</option>
+                                <option value="3">3 -> Bad</option>
+                                <option value="4">4 -> OK</option>
+                                <option value="5">5 -> OK</option>
+                                <option value="6">6 -> Good</option>
+                                <option value="7">7 -> Good</option>
+                                <option value="8">8 -> Great</option>
+                                <option value="9">9 -> Great</option>
+                                <option value="10">10 -> Excellent</option>
+                            </select>
+                        </div>
+
                         <div class="form-group col-md-12 m-t-20">
                             <textarea class="form-control" rows="5" placeholder="Review"></textarea>
                         </div>
+
                         <div class="form-group col-md-12 m-t-20">
                             <button type="submit" class="btn btn-main btn-effect">Submit</button>
                         </div>
