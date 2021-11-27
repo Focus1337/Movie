@@ -2,9 +2,9 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebAPI.Models;
+using Reviefy.API.Models;
 
-namespace WebAPI.Pages
+namespace Reviefy.API.Pages
 {
     public class PersonModel : PageModel
     {

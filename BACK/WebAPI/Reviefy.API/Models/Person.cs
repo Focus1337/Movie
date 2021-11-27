@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Models
+﻿namespace Reviefy.API.Models
 {
     public class Person
     {

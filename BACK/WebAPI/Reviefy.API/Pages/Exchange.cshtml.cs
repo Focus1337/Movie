@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebAPI.Pages
+namespace Reviefy.API.Pages
 {
     public class ExchangeModel : PageModel
     {
