@@ -9,8 +9,7 @@
     <meta name="description" content="Reviefy - Reviews of Films & Series">
     <meta name="keywords" content="movies, series, reviefy, review, critique">
     <meta name="author" content="Focus">
-
-    @* <title>Reviefy - Reviews of Films & Series</title> *@
+    
     <title>@ViewData["Title"] - Reviews of Films & Series</title>
 
     <!-- ===== Favicon & Different size apple touch icons ===== -->
@@ -44,7 +43,7 @@
         <!-- ====== Start of Navbar ====== -->
         <nav class="navbar navbar-expand-lg">
 
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" asp-page="Index">
                 <img src="~/images/reviefy-gradient.svg" alt="Reviefy" width="150" class="logo">
             </a>
 
@@ -55,7 +54,7 @@
                 <ul class="navbar-nav mx-auto" id="main-menu">
                     <!-- Menu Item -->
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" asp-page="Index">Home</a>
                     </li>
 
                     <!-- Menu Item -->
@@ -67,29 +66,29 @@
                         <ul class="dropdown-menu">
                             <!-- Menu Item -->
                             <li>
-                                <a class="dropdown-item" href="latest-movies.html">Latest Movies</a>
+                                <a class="dropdown-item" asp-page="LatestMovies">Latest Movies</a>
                             </li>
 
                             <!-- Menu Item -->
                             <li>
-                                <a class="dropdown-item" href="top-rated-movies.html">Top Rated Movies</a>
+                                <a class="dropdown-item" asp-page="TopRatedMovies">Top Rated Movies</a>
                             </li>
                         </ul>
                     </li>
 
                     <!-- Menu Item -->
                     <li class="nav-item">
-                        <a class="nav-link" href="news.html">News</a>
+                        <a class="nav-link" asp-page="News">News</a>
                     </li>
 
                     <!-- Menu Item -->
                     <li class="nav-item">
-                        <a class="nav-link" href="about-us.html">About Us</a>
+                        <a class="nav-link" asp-page="AboutUs">About Us</a>
                     </li>
 
                     <!-- Menu Item -->
                     <li class="nav-item">
-                        <a class="nav-link" href="contact-us.html">Contact Us</a>
+                        <a class="nav-link" asp-page="ContactUs">Contact Us</a>
                     </li>
 
                 </ul>
@@ -115,7 +114,7 @@
 
                     <!-- Menu Item -->
                     <li class="nav-item m-auto">
-                        <a href="login-register.html"
+                        <a asp-page="Authorization"
                            class="btn btn-main btn-effect login-btn">
                             <i class="icon-user"></i>login
                         </a>
@@ -165,10 +164,10 @@
 
                         <ul class="general-listing">
                             <li>
-                                <a href="about-us.html">about reviefy</a>
+                                <a asp-page="AboutUs">about reviefy</a>
                             </li>
                             <li>
-                                <a href="news.html">News</a>
+                                <a asp-page="News">News</a>
                             </li>
                             <li>
                                 <a href="#">my account</a>
@@ -261,18 +260,18 @@
                     <div class="d-flex">
                         <ul class="list-inline">
                             <li class="list-inline-item">
-                                <a href="privacy-cookies.html">Privacy & Cookies</a>
+                                <a asp-page="PrivacyCookies">Privacy & Cookies</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="terms-conditions.html">Terms & Conditions</a>
+                                <a asp-page="TermsConditions">Terms & Conditions</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="legal-disclaimer.html">Legal Disclaimer</a>
+                                <a asp-page="LegalDisclaimer">Legal Disclaimer</a>
                             </li>
                         </ul>
 
                         <div class="copyright ml-auto">
-                            All Rights Reserved by <a href="index.html">Reviefy</a>.
+                            All Rights Reserved by <a asp-page="Index">Reviefy</a>.
                         </div>
 
                     </div>
