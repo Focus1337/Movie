@@ -65,13 +65,13 @@
 
                                 <div class="form-group">
                                     <label for="loginEmail">Email *</label>
-                                    <input type="text" class="form-control" id="loginEmail" name="loginEmail"
+                                    <input type="email" class="form-control" id="loginEmail" name="loginEmail" required
                                         placeholder="Your Email *" />
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password">Password *</label>
-                                    <input type="password" class="form-control" id="loginPassword" name="loginPassword"
+                                    <label for="loginPassword">Password *</label>
+                                    <input type="password" class="form-control" id="loginPassword" name="loginPassword" required
                                         placeholder="Your Password *" />
                                 </div>
 
@@ -114,18 +114,29 @@
                             <form id="cariera_registration" action="#" method="POST">
 
                                 <div class="form-group">
-                                    <label for="registerEmail">Email</label>
-                                    <input name="registerEmail" id="registerEmail" class="form-control" type="email" />
+                                    <label for="registerName">Name *</label>
+                                    <input name="registerName" id="registerName" class="form-control" type="text" required />
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="registerLastName">Last Name *</label>
+                                    <input name="registerLastName" id="registerLastName" class="form-control" type="text" required />
+                                </div>
+                                
+                                
+                                <div class="form-group">
+                                    <label for="registerEmail">Email *</label>
+                                    <input name="registerEmail" id="registerEmail" class="form-control" type="email" required/>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="registerPassword">Password *</label>
                                     <input name="registerPassword" id="registerPassword" class="form-control"
                                         type="password" />
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-main btn-effect nomargin" value="Register" />
+                                    <input type="submit" class="btn btn-main btn-effect nomargin" value="Register" required/>
                                 </div>
                             </form>
                             <!-- End of Registration form -->
@@ -160,7 +171,7 @@
 
                                 <div class="form-group">
                                     <label for="password">Email Address *</label>
-                                    <input type="email" name="user_login" class="form-control" id="email3"
+                                    <input type="email" name="user_login" class="form-control" id="email3" required
                                         placeholder="Email Address *" />
                                 </div>
 

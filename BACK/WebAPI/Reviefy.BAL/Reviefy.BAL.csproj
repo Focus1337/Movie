@@ -8,4 +8,8 @@
       <ProjectReference Include="..\Reviefy.DAL\Reviefy.DAL.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.14.1" />
+    </ItemGroup>
+
 </Project>

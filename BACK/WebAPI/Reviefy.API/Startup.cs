@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Reviefy.API.Middleware;
+using Reviefy.BAL;
 using Reviefy.DAL;
 
 namespace Reviefy.API
@@ -23,8 +25,8 @@ namespace Reviefy.API
             services.AddRazorPages();
 
             //TODO: Jwt and Controllers With Views
-            //services.AddControllersWithViews();
-            //services.AddTransient<JwtLogic>();
+          //  services.AddControllersWithViews();
+          //  services.AddTransient<JwtLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

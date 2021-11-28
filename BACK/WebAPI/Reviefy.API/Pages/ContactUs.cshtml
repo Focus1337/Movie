@@ -69,7 +69,7 @@
                     <h3 class="title">Contact Form</h3>
 
                     <!-- Start of Contact Form -->
-                    <form id="contact-form">
+                    <form id="contact-form" method="post">
 
                         <!-- contact result -->
                         <div id="contact-result"></div>
@@ -78,31 +78,31 @@
                         <!-- Form Group -->
                         <div class="form-group">
                             <input class="form-control input-box" type="text" name="name" placeholder="Your Name"
-                                   autocomplete="off">
+                                   autocomplete="off" asp-page-handler="OnPostSendMessage">
                         </div>
 
                         <!-- Form Group -->
                         <div class="form-group">
                             <input class="form-control input-box" type="email" name="email"
-                                   placeholder="example@example.com" autocomplete="off">
+                                   placeholder="example@example.com" autocomplete="off" asp-page-handler="OnPostSendMessage">
                         </div>
 
 
                         <!-- Form Group -->
                         <div class="form-group">
                             <input class="form-control input-box" type="text" name="subject" placeholder="Subject"
-                                   autocomplete="off">
+                                   autocomplete="off" asp-page-handler="OnPostSendMessage">
                         </div>
 
                         <!-- Form Group -->
                         <div class="form-group mb20">
-                            <textarea class="form-control textarea-box" rows="8" name="message"
+                            <textarea class="form-control textarea-box" rows="8" name="message" asp-page-handler="OnPostSendMessage"
                                     placeholder="Type your message..."></textarea>
                         </div>
 
                         <!-- Form Group -->
                         <div class="form-group text-center">
-                            <button class="btn btn-main btn-effect" type="submit">Send message</button>
+                            <button class="btn btn-main btn-effect" type="submit" asp-page-handler="OnPostSendMessage">Send message</button>
                         </div>
                     </form>
                     <!-- End of Contact Form -->
