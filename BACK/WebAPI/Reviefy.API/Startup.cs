@@ -1,3 +1,4 @@
+using LinqToDB;
 using LinqToDB.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,8 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Reviefy.API.Middleware;
-using Reviefy.BAL;
-using Reviefy.DAL;
+using LinqToDB.AspNet;
+using LinqToDB.AspNet.Logging;
+using LinqToDB.Configuration;
+using Reviefy.API.Entities;
 
 namespace Reviefy.API
 {
@@ -22,18 +25,33 @@ namespace Reviefy.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddMvc();
 
+            services.AddLinqToDbContext<AppDataConnection>((provider, options) =>
+            {
+                options
+                    //will configure the AppDataConnection to use
+                    //SqlServer with the provided connection string
+                    //there are methods for each supported database
+                    .UseSqlServer(Configuration.GetConnectionString("Default"))
+                    //default logging will log everything using the ILoggerFactory configured in the provider
+                    .UseDefaultLogging(provider);
+            });
+            
             //TODO: Jwt and Controllers With Views
-          //  services.AddControllersWithViews();
-          //  services.AddTransient<JwtLogic>();
+            //  services.AddControllersWithViews();
+            //  services.AddTransient<JwtLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            DataConnection.DefaultSettings = new MySettings(); //TODO: почему это сработало
-            
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var dataConnection = scope.ServiceProvider.GetService<AppDataConnection>();
+                dataConnection.CreateTable<Account>();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

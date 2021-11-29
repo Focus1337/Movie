@@ -3,12 +3,9 @@
  using System.Linq;
  using System.Text;
  using System.Threading.Tasks;
- using Reviefy.DAL;
- using Reviefy.DAL.Models;
  using Microsoft.AspNetCore.Http;
  using Microsoft.Extensions.Options;
  using Microsoft.IdentityModel.Tokens;
- using Reviefy.BAL.Entities;
 
  namespace Reviefy.API.Middleware
  {

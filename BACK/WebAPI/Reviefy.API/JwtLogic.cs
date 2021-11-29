@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Reviefy.BAL
+namespace Reviefy.API
 {
    public class JwtLogic
     {

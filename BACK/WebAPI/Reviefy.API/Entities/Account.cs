@@ -1,20 +1,10 @@
 ﻿using System;
 using LinqToDB.Mapping;
 
-// Data Transfer Objects
-namespace Reviefy.DAL.Models
+namespace Reviefy.API.Entities
 {
-    // user_id INT NOT NULL IDENTITY,
-    // password NVARCHAR(max) NOT NULL,
-    // email NVARCHAR(max) NOT NULL,
-    // first_name NVARCHAR(max) NOT NULL,
-    // second_name NVARCHAR(max) NOT NULL,
-    // register_date DATE NOT NULL,
-    // avatar_url NVARCHAR(max), -- url to avatar img 
-    // CONSTRAINT pk_user PRIMARY KEY(user_id)
-
     [Table(Name = "Users")]
-    public class UserDTO
+    public class Account
     {
         [Column("user_id", IsPrimaryKey = true), NotNull]
         public int UserId { get; set; }

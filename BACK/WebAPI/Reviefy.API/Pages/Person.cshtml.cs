@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Reviefy.API.Models;
+using Reviefy.API.Entities;
 
 namespace Reviefy.API.Pages
 {
@@ -89,33 +89,33 @@ namespace Reviefy.API.Pages
 
         public PersonModel()
         {
-            people = new List<Person>
-            {
-                new() {Name = "Tom", Age = 23},
-                new() {Name = "Sam", Age = 25},
-                new() {Name = "Bob", Age = 23},
-                new() {Name = "Tim", Age = 25}
-            };
+            // people = new List<Person>
+            // {
+            //     new() {Name = "Tom", Age = 23},
+            //     new() {Name = "Sam", Age = 25},
+            //     new() {Name = "Bob", Age = 23},
+            //     new() {Name = "Tim", Age = 25}
+            // };
         }
 
         public IActionResult OnGet(string name)
         {
-            Person = people.FirstOrDefault(p => p.Name == name);
-            if (Person == null)
-                return NotFound("Такого пользователя не существует");
+            // Person = people.FirstOrDefault(p => p.Name == name);
+            // if (Person == null)
+            //     return NotFound("Такого пользователя не существует");
 
             return Page();
         }
         
         public IActionResult OnPost(int id, string name, int age)
         {
-            people.Add(new Person {Id = id, Name = name, Age = age});
-            
-            Person = people.FirstOrDefault(p => p.Name == name);
-            if (name is null)
-                return NotFound("Ошибка ввода");
-
-            return Page();
+            // people.Add(new Person {Id = id, Name = name, Age = age});
+            //
+            // Person = people.FirstOrDefault(p => p.Name == name);
+            // if (name is null)
+            //     return NotFound("Ошибка ввода");
+            //
+             return Page();
         }
     }
 }

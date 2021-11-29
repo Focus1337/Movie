@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Reviefy.BAL.Entities;
+using Reviefy.API.Entities;
 
 //TODO: разобраться в авторизации
 namespace Reviefy.API.Attributes
@@ -12,7 +12,7 @@ namespace Reviefy.API.Attributes
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var account = (Users)context.HttpContext.Items["Account"];
+            var account = (Account)context.HttpContext.Items["Account"];
             if (account == null)
             {
                 // not logged in
