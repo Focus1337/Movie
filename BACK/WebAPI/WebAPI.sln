@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reviefy.API", "Reviefy.API\Reviefy.API.csproj", "{A86E1D3E-0BB3-4605-81B4-799C6B9F9E5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reviefy", "Reviefy\Reviefy.csproj", "{28273EF3-F463-40A3-8A38-30B78F2BBB06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A86E1D3E-0BB3-4605-81B4-799C6B9F9E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A86E1D3E-0BB3-4605-81B4-799C6B9F9E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A86E1D3E-0BB3-4605-81B4-799C6B9F9E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A86E1D3E-0BB3-4605-81B4-799C6B9F9E5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28273EF3-F463-40A3-8A38-30B78F2BBB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28273EF3-F463-40A3-8A38-30B78F2BBB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28273EF3-F463-40A3-8A38-30B78F2BBB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28273EF3-F463-40A3-8A38-30B78F2BBB06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

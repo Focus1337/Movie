@@ -1,0 +1,642 @@
+﻿@{
+    ViewData["Title"] = "Reviefy";
+     Layout = "_Master";
+}
+
+<body>
+
+<!-- =============== START OF WRAPPER =============== -->
+<div class="wrapper">
+
+<!-- =============== START OF SLIDER REVOLUTION SECTION =============== -->
+<section id="slider" class="full-slider">
+
+    <div class="rev-slider-wrapper fullscreen-container overlay-gradient">
+        <div id="fullscreen-slider" class="rev_slider fullscreenbanner" style="display:none"
+             data-version="5.4.1">
+            <!-- ===== SLIDE NR. 1 ===== -->
+            <!-- MAIN IMAGE -->
+            <img src="~/images/posters/background-index.jpeg" alt="Image" title="slider-bg"
+                 data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"
+                 data-bgparallax="10" data-no-retina="">
+            <!-- LAYER NR. 1 -->
+        </div>
+    </div>
+    <!-- ===== END OF REV SLIDER WRAPPER ===== -->
+
+    <!-- =============== START OF TEXT WRAPPER =============== -->
+    <div class="search-form-wrapper search-form-rev" style="top: 40% !important;">
+        <div class="container">
+
+            <div class="row justify-content-center" style="color: #fff; font-weight: 900; font-size: 60px;">
+                SEARCH
+                REVIEWS NOW
+            </div>
+        </div>
+    </div>
+    <!-- =============== START OF TEXT WRAPPER =============== -->
+
+    <!-- ===== START OF SEARCH FORM WRAPPER ===== -->
+    <div class="search-form-wrapper search-form-rev">
+        <div class="container">
+
+            <!-- ===== START OF SEARCH FORM ===== -->
+            <form id="search-form-1">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-sm-10 col-12">
+                        <div class="form-group">
+                            <input name="search-keyword" type="text" id="search-keyword" value=""
+                                   class="form-control" placeholder="Enter Movies or Series Title">
+                            <button type="submit" class="btn btn-main btn-effect">
+                                <i
+                                    class="fa fa-search">
+                                </i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- ===== END OF SEARCH FORM ===== -->
+
+        </div>
+    </div>
+    <!-- ===== END OF SEARCH FORM WRAPPER ===== -->
+</section>
+<!-- =============== START OF SLIDER REVOLUTION SECTION =============== -->
+
+
+<!-- =============== START OF LATEST MOVIES SECTION =============== -->
+<section class="latest-movies ptb100">
+<div class="container">
+
+<!-- Start of row -->
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="title">Latest Movies</h2>
+    </div>
+
+
+    <div class="col-md-4 align-self-center text-right">
+        <a asp-page="/LatestMovies" class="btn btn-icon btn-main btn-effect">
+            view all
+            <i class="ti-angle-double-right"></i>
+        </a>
+    </div>
+</div>
+<!-- End of row -->
+
+
+<!-- Start of Latest Movies Slider -->
+<div class="owl-carousel latest-movies-slider mt20">
+
+<!-- === Start of Sliding Item 1 === -->
+<div class="item">
+    <!-- Start of Movie Box -->
+    <div class="movie-box-1">
+
+        <!-- Start of Poster -->
+        <div class="poster poster-fix">
+            <img src="https://lumiere-a.akamaihd.net/v1/images/sb_payoff_1-sht_v6_lg_tm_lg_e528c9e9.jpeg"
+                 alt="">
+        </div>
+        <!-- End of Poster -->
+
+        <!-- Start of Movie Details -->
+        <div class="movie-details">
+            <h4 class="movie-title">
+                <a asp-page="/MovieDetail">Star Wars</a>
+            </h4>
+            <span class="released">14 Dec 2017</span>
+        </div>
+        <!-- End of Movie Details -->
+
+        <!-- Start of Rating -->
+        <div class="stars">
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <span>7.5 / 10</span>
+        </div>
+        <!-- End of Rating -->
+
+    </div>
+    <!-- End of Movie Box -->
+</div>
+<!-- === End of Sliding Item 1 === -->
+
+
+<!-- === Start of Sliding Item 2 === -->
+<div class="item">
+    <!-- Start of Movie Box -->
+    <div class="movie-box-1">
+
+        <!-- Start of Poster -->
+        <div class="poster poster-fix">
+            <img src="~/images/posters/poster-2.jpg" alt="">
+        </div>
+        <!-- End of Poster -->
+
+        <!-- Start of Movie Details -->
+        <div class="movie-details">
+            <h4 class="movie-title">
+                <a asp-page="/MovieDetail">The Brain</a>
+            </h4>
+            <span class="released">20 Dec 2017</span>
+        </div>
+        <!-- End of Movie Details -->
+
+        <!-- Start of Rating -->
+        <div class="stars">
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <span>7.2 / 10</span>
+        </div>
+        <!-- End of Rating -->
+
+    </div>
+    <!-- End of Movie Box -->
+</div>
+<!-- === End of Sliding Item 2 === -->
+
+
+<!-- === Start of Sliding Item 3 === -->
+<div class="item">
+    <!-- Start of Movie Box -->
+    <div class="movie-box-1">
+
+        <!-- Start of Poster -->
+        <div class="poster poster-fix">
+            <img src="https://lumiere-a.akamaihd.net/v1/images/sb_payoff_1-sht_v6_lg_tm_lg_e528c9e9.jpeg"
+                 alt="">
+        </div>
+        <!-- End of Poster -->
+
+        <!-- Start of Movie Details -->
+        <div class="movie-details">
+            <h4 class="movie-title">
+                <a asp-page="/MovieDetail">The Mummy</a>
+            </h4>
+            <span class="released">9 Jun 2017</span>
+        </div>
+        <!-- End of Movie Details -->
+
+        <!-- Start of Rating -->
+        <div class="stars">
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <span>5.5 / 10</span>
+        </div>
+        <!-- End of Rating -->
+
+    </div>
+    <!-- End of Movie Box -->
+</div>
+<!-- === End of Sliding Item 3 === -->
+
+
+<!-- === Start of Sliding Item 4 === -->
+<div class="item">
+    <!-- Start of Movie Box -->
+    <div class="movie-box-1">
+
+        <!-- Start of Poster -->
+        <div class="poster poster-fix">
+            <img src="~/images/posters/poster-4.jpg" alt="">
+        </div>
+        <!-- End of Poster -->
+
+        <!-- Start of Movie Details -->
+        <div class="movie-details">
+            <h4 class="movie-title">
+                <a asp-page="/MovieDetail">The Parrot</a>
+            </h4>
+            <span class="released">20 Jan 2017</span>
+        </div>
+        <!-- End of Movie Details -->
+
+        <!-- Start of Rating -->
+        <div class="stars">
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <span>5.2 / 10</span>
+        </div>
+        <!-- End of Rating -->
+
+    </div>
+    <!-- End of Movie Box -->
+</div>
+<!-- === End of Sliding Item 4 === -->
+
+
+<!-- === Start of Sliding Item 5 === -->
+<div class="item">
+    <!-- Start of Movie Box -->
+    <div class="movie-box-1">
+
+        <!-- Start of Poster -->
+        <div class="poster">
+            <img src="~/images/posters/poster-1.jpg" alt="">
+        </div>
+        <!-- End of Poster -->
+
+
+        <!-- Start of Movie Details -->
+        <div class="movie-details">
+            <h4 class="movie-title">
+                <a asp-page="/MovieDetail">Star Wars</a>
+            </h4>
+            <span class="released">14 Dec 2017</span>
+        </div>
+        <!-- End of Movie Details -->
+
+        <!-- Start of Rating -->
+        <div class="stars">
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <span>7.5 / 10</span>
+        </div>
+        <!-- End of Rating -->
+
+    </div>
+    <!-- End of Movie Box -->
+</div>
+<!-- === End of Sliding Item 5 === -->
+
+
+<!-- === Start of Sliding Item 6 === -->
+<div class="item">
+    <!-- Start of Movie Box -->
+    <div class="movie-box-1">
+
+        <!-- Start of Poster -->
+        <div class="poster">
+            <img src="~/images/posters/poster-2.jpg" alt="">
+        </div>
+        <!-- End of Poster -->
+
+        <!-- Start of Movie Details -->
+        <div class="movie-details">
+            <h4 class="movie-title">
+                <a asp-page="/MovieDetail">The Brain</a>
+            </h4>
+            <span class="released">20 Dec 2017</span>
+        </div>
+        <!-- End of Movie Details -->
+
+        <!-- Start of Rating -->
+        <div class="stars">
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <span>7.2 / 10</span>
+        </div>
+        <!-- End of Rating -->
+
+    </div>
+    <!-- End of Movie Box -->
+</div>
+<!-- === End of Sliding Item 6 === -->
+
+</div>
+<!-- End of Latest Movies Slider -->
+
+
+</div>
+</section>
+<!-- =============== END OF LATEST MOVIES SECTION =============== -->
+
+
+<!-- =============== START OF WANT TO BE A REVIEWER =============== -->
+<section class="how-it-works bg-light ptb100">
+    <div class="container">
+
+        <!-- Start of row -->
+        <div class="row justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="title">Want to be a reviewer?</h2>
+                <h6 class="subtitle">
+                    We will show you step by step how to write your own review about
+                    movies!
+                </h6>
+            </div>
+        </div>
+        <!-- End of row -->
+
+
+        <!-- Start of Timeline -->
+        <div class="timeline">
+
+            <span class="main-line"></span>
+
+            <!-- === Start of Timeline Step 1 === -->
+            <div class="timeline-step row">
+                <span class="timeline-step-btn">Step 1</span>
+
+                <!-- Start of Timeline Text -->
+                <div class="col-md-6 col-sm-12 timeline-text-wrapper">
+                    <div class="timeline-text">
+                        <h3>Create an account</h3>
+                        <p>
+                            Only registered users can leave their comments. And registration is very easy!
+                            You just need to specify your username, mail and password.
+                        </p>
+                    </div>
+                </div>
+                <!-- End of Timeline Text -->
+
+                <!-- Start of Timeline Image -->
+                <div class="col-md-6 col-sm-12 timeline-image-wrapper">
+                    <div class="timeline-image">
+                        <img src="~/images/other/signup.png" alt="">
+                    </div>
+                </div>
+                <!-- End of Timeline Image -->
+
+            </div>
+            <!-- === End of Timeline Step 1 === -->
+
+
+            <!-- === Start of Timeline Step 2 === -->
+            <div class="timeline-step row">
+                <span class="timeline-step-btn" style="color: #2a7bc2; background: #c1ddf5;">Step 2</span>
+
+                <!-- Start of Timeline Image -->
+                <div class="col-md-6 col-sm-12 timeline-image-wrapper">
+                    <div>
+                        <img src="~/images/other/find-movie.png" alt="">
+                    </div>
+                </div>
+                <!-- End of Timeline Image -->
+
+                <!-- Start of Timeline Text -->
+                <div class="col-md-6 col-sm-12 timeline-text-wrapper">
+                    <div class="timeline-text-right">
+                        <h3>Find the movie</h3>
+                        <p>
+                            Now you need to find the movie you want to review. To do this,
+                            you can use the search that is located above.
+                        </p>
+                    </div>
+                </div>
+                <!-- End of Timeline Text -->
+
+            </div>
+            <!-- === End of Timeline Step 2 === -->
+
+
+            <!-- === Start of Timeline Step 3 === -->
+            <div class="timeline-step row">
+                <span class="timeline-step-btn" style="color: #eb305f; background: #f9c8d4;">Step 3</span>
+
+                <!-- Start of Timeline Text -->
+                <div class="col-md-6 col-sm-12 timeline-text-wrapper">
+                    <div class="timeline-text">
+                        <h3>Write your review</h3>
+                        <p>Finally, leave your impression of the movie! Perhaps you will find new fans.</p>
+                    </div>
+                </div>
+                <!-- End of Timeline Text -->
+
+                <!-- Start of Timeline Image -->
+                <div class="col-md-6 col-sm-12 timeline-image-wrapper">
+                    <div class="timeline-image">
+                        <img src="~/images/other/review.png" alt="">
+                    </div>
+                </div>
+                <!-- End of Timeline Image -->
+
+            </div>
+            <!-- === End of Timeline Step 3 === -->
+
+        </div>
+        <!-- End of Timeline -->
+
+    </div>
+</section>
+<!-- =============== END OF WANT TO BE A REVIEWER =============== -->
+
+
+<!-- =============== START OF COUNTER SECTION =============== -->
+<section class="counter bg-main-gradient ptb50 text-center">
+    <div class="container">
+        <div class="row">
+
+            <!-- 1st Count up item -->
+            <div class="col-md-4 col-sm-12">
+                <span class="counter-item" data-from="0" data-to="964">0</span>
+                <h4>Movies</h4>
+            </div>
+
+            <!-- 2nd Count up item -->
+            <div class="col-md-4 col-sm-12">
+                <span class="counter-item" data-from="0" data-to="743">0</span>
+                <h4>Reviews</h4>
+            </div>
+
+            <!-- 3rd Count up item -->
+            <div class="col-md-4 col-sm-12">
+                <span class="counter-item" data-from="0" data-to="1207">0</span>
+                <h4>Users</h4>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- =============== END OF COUNTER SECTION =============== -->
+
+
+<!-- =============== START OF BLOG SECTION =============== -->
+<section class="blog bg-light ptb100">
+    <div class="container">
+
+        <!-- Start of row -->
+        <div class="row justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="title">Latest News</h2>
+                <h6 class="subtitle">Check out the latest Movie News and Updates on our website!</h6>
+            </div>
+        </div>
+        <!-- End of row -->
+
+
+        <!-- Start of row -->
+        <div class="row mt50">
+
+            <!-- 1st Blog Item -->
+            <div class="col-md-4">
+                <div class="bloglist-post-holder shadow-hover">
+
+                    <!-- Blog Post Thumbnail -->
+                    <a asp-page="/NewsDetail" class="bloglist-thumb-link hover-link">
+                        <div class="bloglist-post-thumbnail"
+                             style="background: url(https://www.taylordailypress.net/wp-content/uploads/2021/08/Its-official-The-Expendables-4-has-been-announced-with-Megan-1024x576.jpg)">
+                        </div>
+                    </a>
+
+                    <!-- Blog Post Text Wrapper -->
+                    <div class="bloglist-text-wrapper">
+                        <!-- Author Avatar -->
+                        <span class="circle-img bloglist-avatar">
+                            <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
+                        </span>
+
+                        <h4 class="bloglist-title">
+                            <a asp-page="/NewsDetail">Papich in The Expendables</a>
+                        </h4>
+
+                        <div class="bloglist-meta">
+                            <i class="fa fa-calendar"></i> 21/11/2021
+                        </div>
+
+                        <div class="bloglist-excerpt">
+                            <p>
+                                The incredibly great, strong and adequate Vitaliy Tsal will star in the upcoming
+                                blockbuster "The Expendables 5."
+
+                                The Expendables 5 is an upcoming American action movie that is
+                                the fifth in the...
+                            </p>
+                            <a asp-page="/NewsDetail" class="btn btn-main btn-effect">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 2nd Blog Item -->
+            <div class="col-md-4">
+                <div class="bloglist-post-holder shadow-hover">
+
+                    <!-- Blog Post Thumbnail -->
+                    <a asp-page="/NewsDetail" class="bloglist-thumb-link hover-link">
+                        <div class="bloglist-post-thumbnail"
+                             style="background: url(https://blog.pdainternational.net/en-UK/wp-content/uploads/sites/8/2018/08/Blog-entrada-3-1.jpg)">
+                        </div>
+                    </a>
+
+                    <!-- Blog Post Text Wrapper -->
+                    <div class="bloglist-text-wrapper">
+                        <!-- Author Avatar -->
+                        <span class="circle-img bloglist-avatar">
+                            <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
+                        </span>
+
+                        <h4 class="bloglist-title">
+                            <a asp-page="/NewsDetail">Reviefy is released</a>
+                        </h4>
+
+                        <div class="bloglist-meta">
+                            <i class="fa fa-calendar"></i> 23/10/2021
+                        </div>
+
+                        <div class="bloglist-excerpt">
+                            <p>
+                                After 3 months of work we finally start our project.
+                                On our site you can leave various reviews for films, also
+                                you can llalalallaffdgdfghrshjd
+                                gfhjdghjdtghtkdgadhfaerghaergaerg...
+                            </p>
+                            <a asp-page="/NewsDetail" class="btn btn-main btn-effect">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 3rd Blog Item -->
+            <div class="col-md-4">
+                <div class="bloglist-post-holder shadow-hover">
+
+                    <!-- Blog Post Thumbnail -->
+                    <a asp-page="/NewsDetail" class="bloglist-thumb-link hover-link">
+                        <div class="bloglist-post-thumbnail"
+                             style="background: url(https://techtoday.in.ua/wp-content/uploads/2020/10/programmer-working-on-computers.jpg)">
+                        </div>
+                    </a>
+
+                    <!-- Blog Post Text Wrapper -->
+                    <div class="bloglist-text-wrapper">
+                        <!-- Author Avatar -->
+                        <span class="circle-img bloglist-avatar">
+                            <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
+                        </span>
+
+                        <h4 class="bloglist-title">
+                            <a asp-page="/NewsDetail">Beginning of work</a>
+                        </h4>
+
+                        <div class="bloglist-meta">
+                            <i class="fa fa-calendar"></i> 03/09/2021
+                        </div>
+
+                        <div class="bloglist-excerpt">
+                            <p>
+                                Hello everyone! We started working on our project - Reviefy.
+                                The point of this site is that you can leave your opinion on different films, as
+                                well as communicate with different people. Thanks to your...
+                            </p>
+                            <a asp-page="/NewsDetail" class="btn btn-main btn-effect">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+        <!-- End of row -->
+
+    </div>
+</section>
+<!-- =============== END OF BLOG SECTION =============== -->
+
+</div>
+<!-- =============== END OF WRAPPER =============== -->
+
+
+<!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
+<div class="general-search-wrapper">
+    <form class="general-search" role="search" method="get" action="#">
+        <input type="text" placeholder="Type and hit enter...">
+        <span id="general-search-close" class="ti-close toggle-search"></span>
+    </form>
+</div>
+<!-- =============== END OF GENERAL SEARCH WRAPPER =============== -->
+
+
+<!-- ===== Start of Back to Top Button ===== -->
+<div id="backtotop">
+    <a href="#"></a>
+</div>
+<!-- ===== End of Back to Top Button ===== -->
+
+</body>

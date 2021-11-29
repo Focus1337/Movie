@@ -1,0 +1,239 @@
+@{
+    ViewData["Title"] = "Authorization";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- ===== Meta Tags - Description for Search Engine purposes ===== -->
+    <meta name="description" content="Reviefy - Reviews of Films & Series">
+    <meta name="keywords" content="movies, series, reviefy, review, critique">
+    <meta name="author" content="Focus">
+    
+    <title>@ViewData["Title"] - Reviews of Films & Series</title>
+
+    <!-- ===== Favicon & Different size apple touch icons ===== -->
+    <link rel="shortcut icon" href="~/images/favicon.png" type="image/x-icon">
+
+    <!-- ===== Google Fonts ===== -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+
+    <!-- ===== CSS links ===== -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/revolution/css/settings.css">
+    <link rel="stylesheet" type="text/css" href="~/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="~/revolution/css/navigation.css">
+    <link rel="stylesheet" type="text/css" href="~/css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="~/css/jquery.mmenu.css">
+    <link rel="stylesheet" type="text/css" href="~/css/owl.carousel.min.css">
+
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
+
+</head>
+
+
+<body>
+
+    <!-- =============== START OF WRAPPER =============== -->
+    <div class="wrapper">
+        <main class="login-register-page" style="background-image: url(https://img.freepik.com/free-photo/top-view-laptop-with-notebook-magnifying-glass_23-2148578061.jpg)">
+
+            <div class="container">
+
+                <!-- =============== START OF LOGIN & REGISTER POPUP =============== -->
+                <div class="small-dialog login-register">
+
+                    <!-- ===== Start of Signin wrapper ===== -->
+                    <div class="signin-wrapper">
+                        <div class="small-dialog-headline">
+                            <h4 class="text-center">Sign in</h4>
+                        </div>
+
+                        <div class="small-dialog-content">
+
+                            <!-- Start of Login form -->
+                            <form id="cariera_login" method="post">
+
+                                <div class="form-group">
+                                    <label for="loginEmail">Email *</label>
+                                    <input type="email" class="form-control" id="loginEmail" name="loginEmail" required
+                                        placeholder="Your Email *" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="loginPassword">Password *</label>
+                                    <input type="password" class="form-control" id="loginPassword" name="loginPassword" required
+                                        placeholder="Your Password *" />
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="checkbox pad-bottom-10">
+                                        <input id="check1" type="checkbox" name="remember" value="yes">
+                                        <label for="check1">Keep me signed in</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Sign in" class="btn btn-main btn-effect nomargin" />
+                                </div>
+                            </form>
+                            <!-- End of Login form -->
+
+                            <div class="bottom-links">
+                                <span>
+                                    Not a member?
+                                    <a class="signUpClick">Sign up</a>
+                                </span>
+                                <a class="forgetPasswordClick pull-right">Forgot Password</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- ===== End of Signin wrapper ===== -->
+
+
+
+                    <!-- ===== Start of Signup wrapper ===== -->
+                    <div class="signup-wrapper">
+                        <div class="small-dialog-headline">
+                            <h4 class="text-center">Sign Up</h4>
+                        </div>
+
+                        <div class="small-dialog-content">
+
+                            <!-- Start of Registration form -->
+                            <form id="cariera_registration" action="#" method="POST">
+
+                                <div class="form-group">
+                                    <label for="registerName">Name *</label>
+                                    <input name="registerName" id="registerName" class="form-control" type="text" required />
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="registerLastName">Last Name *</label>
+                                    <input name="registerLastName" id="registerLastName" class="form-control" type="text" required />
+                                </div>
+                                
+                                
+                                <div class="form-group">
+                                    <label for="registerEmail">Email *</label>
+                                    <input name="registerEmail" id="registerEmail" class="form-control" type="email" required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="registerPassword">Password *</label>
+                                    <input name="registerPassword" id="registerPassword" class="form-control"
+                                        type="password" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-main btn-effect nomargin" value="Register" required/>
+                                </div>
+                            </form>
+                            <!-- End of Registration form -->
+
+                            <div class="bottom-links">
+                                <span>
+                                    Already have an account?
+                                    <a class="signInClick">Sign in</a>
+                                </span>
+
+                                <a class="forgetPasswordClick pull-right">Forgot Password</a>
+                            </div>
+
+                        </div>
+                        <!-- .small-dialog-content -->
+
+                    </div>
+                    <!-- ===== End of Signup wrapper ===== -->
+
+
+
+                    <!-- ===== Start of Forget Password wrapper ===== -->
+                    <div class="forgetpassword-wrapper">
+                        <div class="small-dialog-headline">
+                            <h4 class="text-center">Forgotten Password</h4>
+                        </div>
+
+                        <div class="small-dialog-content">
+
+                            <!-- Start of Forger Password form -->
+                            <form id="forget_pass_form" action="#" method="post">
+
+                                <div class="form-group">
+                                    <label for="password">Email Address *</label>
+                                    <input type="email" name="user_login" class="form-control" id="email3" required
+                                        placeholder="Email Address *" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" name="submit" value="Get New Password"
+                                        class="btn btn-main btn-effect nomargin" />
+                                </div>
+                            </form>
+                            <!-- End of Forger Password form -->
+
+                            <div class="bottom-links">
+                                <a class="cancelClick">Cancel</a>
+                            </div>
+
+                        </div>
+                        <!-- .small-dialog-content -->
+
+                    </div>
+                    <!-- ===== End of Forget Password wrapper ===== -->
+
+                </div>
+                <!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
+
+                <a asp-page="/Index" class="text-white">Back to Home</a>
+
+            </div>
+        </main>
+    </div>
+    <!-- =============== END OF WRAPPER =============== -->
+
+
+
+<!-- ===== All Javascript at the bottom of the page for faster page loading ===== -->
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/jquery.ajaxchimp.js"></script>
+<script src="~/js/jquery.magnific-popup.min.js"></script>
+<script src="~/js/jquery.mmenu.js"></script>
+<script src="~/js/jquery.inview.min.js"></script>
+<script src="~/js/jquery.countTo.min.js"></script>
+<script src="~/js/jquery.countdown.min.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/imagesloaded.pkgd.min.js"></script>
+<script src="~/js/isotope.pkgd.min.js"></script>
+<script src="~/js/headroom.js"></script>
+<script src="~/js/custom.js"></script>
+
+<!-- ===== Slider Revolution core JavaScript files ===== -->
+<script type="text/javascript" src="~/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="~/revolution/js/jquery.themepunch.revolution.min.js"></script>
+
+<!-- ===== Slider Revolution extension scripts ===== -->
+<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script type="text/javascript"
+        src="~/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+<script type="text/javascript"
+        src="~/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script type="text/javascript"
+        src="~/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.video.min.js"></script>
+
+</body>
+
+</html>

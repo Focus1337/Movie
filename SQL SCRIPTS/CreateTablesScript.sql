@@ -4,12 +4,12 @@ GO
 CREATE TABLE Users
 (
 	user_id INT NOT NULL IDENTITY,
-	password NVARCHAR(max) NOT NULL,
-	email NVARCHAR(max) NOT NULL,
-	first_name NVARCHAR(max) NOT NULL,
-	second_name NVARCHAR(max) NOT NULL,
+	password NVARCHAR(255) NOT NULL,
+	email NVARCHAR(255) NOT NULL,
+	first_name NVARCHAR(255) NOT NULL,
+	second_name NVARCHAR(255) NOT NULL,
 	register_date DATE NOT NULL,
-	avatar_url NVARCHAR(max), -- url to avatar img 
+	avatar_url NVARCHAR(255), -- url to avatar img 
 	CONSTRAINT pk_user PRIMARY KEY(user_id)
 )
 GO
@@ -18,18 +18,18 @@ GO
 CREATE TABLE Movies
 (
 	movie_id INT NOT NULL IDENTITY,
-	title NVARCHAR(max) NOT NULL, 
+	title NVARCHAR(255) NOT NULL, 
 	[length] INT NOT NULL check([length] >= 0),
-	genre NVARCHAR(max) NOT NULL,
+	genre NVARCHAR(255) NOT NULL,
 	realese_date DATE NOT NULL,
 	rating FLOAT NOT NULL default(0),
 	storyline TEXT NOT NULL,
-	director NVARCHAR(max) NOT NULL default('unknown'),
+	director NVARCHAR(255) NOT NULL default('unknown'),
 	budget INT NOT NULL check(budget >= 0),
-	country NVARCHAR(max) NOT NULL,
-	[language] NVARCHAR(max) NOT NULL,
-	company NVARCHAR(max) NOT NULL default('unknown'),
-	poster_url NVARCHAR(max), -- url to poster img 
+	country NVARCHAR(255) NOT NULL,
+	[language] NVARCHAR(255) NOT NULL,
+	company NVARCHAR(255) NOT NULL default('unknown'),
+	poster_url NVARCHAR(255), -- url to poster img 
 
 
 	CONSTRAINT pk_movie PRIMARY KEY(movie_id),
@@ -61,8 +61,8 @@ GO
 CREATE TABLE News
 (
 	news_id INT NOT NULL IDENTITY,
-	poster_url NVARCHAR(max), -- url to poster img 
-	title NVARCHAR(max) NOT NULL, 
+	poster_url NVARCHAR(255), -- url to poster img 
+	title NVARCHAR(255) NOT NULL, 
 	news_date DATE NOT NULL,
 	[text] TEXT NOT NULL
 
