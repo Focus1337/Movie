@@ -33,20 +33,6 @@ namespace Reviefy.Controllers
             return _connection.Account.Where(account => account.UserId == id).DeleteAsync();
         }
 
-        [HttpPatch]
-        public Task<int> UpdateAccount(Account account)
-        {
-            return _connection.UpdateAsync(account);
-        }
-
-        [HttpPatch("{id}/new-name")]
-        public Task<int> UpdateAccountFirstName(int id, string newName)
-        {
-            return _connection.Account.Where(account => account.UserId == id)
-                .Set(account => account.FirstName, newName)
-                .UpdateAsync();
-        }
-
         [HttpPut]
         public Task<int> InsertAccount(Account account)
         {

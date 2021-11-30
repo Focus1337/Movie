@@ -1,15 +1,14 @@
-use reviefydb;
+use ReviefyDB;
 
 GO
 CREATE TABLE Users
 (
-	user_id INT NOT NULL IDENTITY,
+	user_id uniqueidentifier NOT NULL,
 	password NVARCHAR(255) NOT NULL,
 	email NVARCHAR(255) NOT NULL,
-	first_name NVARCHAR(255) NOT NULL,
-	second_name NVARCHAR(255) NOT NULL,
+	nickname NVARCHAR(255) NOT NULL,
 	register_date DATE NOT NULL,
-	avatar_url NVARCHAR(255), -- url to avatar img 
+	avatar_path NVARCHAR(255),
 	CONSTRAINT pk_user PRIMARY KEY(user_id)
 )
 GO
@@ -17,7 +16,7 @@ GO
 GO
 CREATE TABLE Movies
 (
-	movie_id INT NOT NULL IDENTITY,
+	movie_id uniqueidentifier NOT NULL,
 	title NVARCHAR(255) NOT NULL, 
 	[length] INT NOT NULL check([length] >= 0),
 	genre NVARCHAR(255) NOT NULL,
@@ -29,19 +28,18 @@ CREATE TABLE Movies
 	country NVARCHAR(255) NOT NULL,
 	[language] NVARCHAR(255) NOT NULL,
 	company NVARCHAR(255) NOT NULL default('unknown'),
-	poster_url NVARCHAR(255), -- url to poster img 
+	poster_path NVARCHAR(255),
 
-
-	CONSTRAINT pk_movie PRIMARY KEY(movie_id),
+	CONSTRAINT pk_movie PRIMARY KEY(movie_id)
 )
 GO
 
 GO
 CREATE TABLE Reviews
 (
-	review_id INT NOT NULL IDENTITY,
-	user_id INT NOT NULL, --FK (poka xz kak imenno)
-	movie_id INT NOT NULL, --FK (poka xz kak imenno)
+	review_id uniqueidentifier NOT NULL,
+	user_id uniqueidentifier NOT NULL,
+	movie_id uniqueidentifier NOT NULL,
 	[text] TEXT NOT NULL,
 	review_date DATE NOT NULL, 
 	rating INT NOT NULL DEFAULT(0),
@@ -60,8 +58,8 @@ GO
 GO
 CREATE TABLE News
 (
-	news_id INT NOT NULL IDENTITY,
-	poster_url NVARCHAR(255), -- url to poster img 
+	news_id uniqueidentifier NOT NULL,
+	poster_path NVARCHAR(255),
 	title NVARCHAR(255) NOT NULL, 
 	news_date DATE NOT NULL,
 	[text] TEXT NOT NULL

@@ -3,33 +3,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-
-    <!-- ===== Meta Tags - Description for Search Engine purposes ===== -->
-    <meta name="description" content="Reviefy - Reviews of Films & Series">
-    <meta name="keywords" content="movies, series, reviefy, review, critique">
-    <meta name="author" content="Focus">
-    
-    <title>@ViewData["Title"] - Reviews of Films & Series</title>
-
-    <!-- ===== Favicon & Different size apple touch icons ===== -->
-    <link rel="shortcut icon" href="~/images/favicon.png" type="image/x-icon">
-
-    <!-- ===== Google Fonts ===== -->
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
-
-    <!-- ===== CSS links ===== -->
-    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/revolution/css/settings.css">
-    <link rel="stylesheet" type="text/css" href="~/revolution/css/layers.css">
-    <link rel="stylesheet" type="text/css" href="~/revolution/css/navigation.css">
-    <link rel="stylesheet" type="text/css" href="~/css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="~/css/jquery.mmenu.css">
-    <link rel="stylesheet" type="text/css" href="~/css/owl.carousel.min.css">
-
-    <link rel="stylesheet" type="text/css" href="~/css/style.css">
-    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
-
+    @await Html.PartialAsync("MetatagsPartial")
+    @await Html.PartialAsync("CssPartial")
 </head>
 
 <body>
@@ -47,83 +22,8 @@
                 <img src="~/images/reviefy-gradient.svg" alt="Reviefy" width="150" class="logo">
             </a>
 
-            <!-- ====== Start of #main-nav ====== -->
-            <div class="navbar-collapse" id="main-nav">
-
-                <!-- ====== Start of Main Menu ====== -->
-                <ul class="navbar-nav mx-auto" id="main-menu">
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link" href='@Url.Action("Index", "Home")'>Home</a>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">Movies</a>
-
-                        <!-- Dropdown Menu -->
-                        <ul class="dropdown-menu">
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href='@Url.Action("LatestMovies", "Home")' >Latest Movies</a>
-                            </li>
-
-                            <!-- Menu Item -->
-                            <li>
-                                <a class="dropdown-item" href='@Url.Action("TopRatedMovies", "Home")' >Top Rated Movies</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link" href='@Url.Action("News", "Home")'>News</a>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link" href='@Url.Action("AboutUs", "Home")' >About Us</a>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link"  href='@Url.Action("ContactUs", "Home")' >Contact Us</a>
-                    </li>
-
-                </ul>
-                <!-- ====== End of Main Menu ====== -->
-
-
-                <!-- ====== Start of Extra Nav ====== -->
-                <ul class="navbar-nav extra-nav">
-
-                    <!-- Menu Item -->
-                    <li class="nav-item">
-                        <a class="nav-link toggle-search" href="#">
-                            <i class="fa fa-search"></i>
-                        </a>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item notification-wrapper">
-                        <a class="nav-link notification" href="#">
-                            <i class="fa fa-globe"></i>
-                        </a>
-                    </li>
-
-                    <!-- Menu Item -->
-                    <li class="nav-item m-auto">
-                        <a href='@Url.Action("Authorization", "Home")'
-                           class="btn btn-main btn-effect login-btn">
-                            <i class="icon-user"></i>login
-                        </a>
-                    </li>
-                </ul>
-                <!-- ====== End of Extra Nav ====== -->
-
-            </div>
-            <!-- ====== End of #main-nav ====== -->
+            @await Html.PartialAsync("HeaderPartial")
+            
         </nav>
         <!-- ====== End of Navbar ====== -->
 
@@ -133,195 +33,13 @@
 
 @RenderBody()
 
-<!-- =============== START OF FOOTER =============== -->
-<footer class="footer1 bg-dark">
-
-    <!-- ===== START OF FOOTER WIDGET AREA ===== -->
-    <div class="footer-widget-area ptb100">
-        <div class="container">
-            <div class="row">
-
-                <!-- Start of Widget 1 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget widget-about">
-
-                        <!-- INSERT YOUR LOGO HERE -->
-                        <img src="~/images/reviefy-gradient.svg" alt="logo" class="logo">
-                        <!-- INSERT YOUR WHITE LOGO HERE -->
-                        <img src="~/images/reviefy-logo.svg" alt="white logo" class="logo-white">
-                        <p class="nomargin">
-                            Reviefy is a site where you can watch other users' reviews
-                            and also leave your own review.
-                        </p>
-                    </div>
-                </div>
-                <!-- End of Widget 1 -->
-
-                <!-- Start of Widget 2 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget widget-links">
-                        <h4 class="widget-title">Useful links</h4>
-
-                        <ul class="general-listing">
-                            <li>
-                                <a href='@Url.Action("AboutUs", "Home")'>about reviefy</a>
-                            </li>
-                            <li>
-                                <a href='@Url.Action("News", "Home")'>News</a>
-                            </li>
-                            <li>
-                                <a href="#">my account</a>
-                            </li>
-                            <li>
-                                <a href="#">watch list</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-                <!-- End of Widget 2 -->
-
-                <!-- Start of Widget 3 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget widget-blog">
-                        <h4 class="widget-title">latest news</h4>
-
-                        <ul class="blog-posts">
-                            <li>
-                                <a href="#">Papich in The Expendables</a><small>21.11.2021</small>
-                            </li>
-                            <li>
-                                <a href="#">Reviefy is released</a><small>23.10.2021</small>
-                            </li>
-                            <li>
-                                <a href="#">Beginning of work</a><small>03.09.2021</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- End of Widget 3 -->
-
-                <!-- Start of Widget 4 -->
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="widget widget-social">
-                        <h4 class="widget-title">follow us</h4>
-
-                        <p>Did you like our site? You can subscribe to us to follow the news!</p>
-
-                        <!-- Start of Social Buttons -->
-                        <ul class="social-btns">
-                            <!-- Social Media -->
-                            <li>
-                                <a href="https://vk.com/id0" class="social-btn-roll vk">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-vk"></i>
-                                        <i class="social-btn-roll-icon fa fa-vk"></i>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <!-- Social Media -->
-                            <li>
-                                <a href="https://web.telegram.org" class="social-btn-roll telegram">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-telegram"></i>
-                                        <i class="social-btn-roll-icon fa fa-telegram"></i>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <!-- Social Media -->
-                            <li>
-                                <a href="https://instagram.com" class="social-btn-roll instagram">
-                                    <div class="social-btn-roll-icons">
-                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                        <i class="social-btn-roll-icon fa fa-instagram"></i>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End of Social Buttons -->
-
-                    </div>
-                </div>
-                <!-- End of Widget 4 -->
-
-            </div>
-        </div>
-    </div>
-    <!-- ===== END OF FOOTER WIDGET AREA ===== -->
-
-
-    <!-- ===== START OF FOOTER COPYRIGHT AREA ===== -->
-    <div class="footer-copyright-area ptb30">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="d-flex">
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href='@Url.Action("PrivacyCookies", "Home")'>Privacy & Cookies</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href='@Url.Action("TermsConditions", "Home")'>Terms & Conditions</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href='@Url.Action("LegalDisclaimer", "Home")'>Legal Disclaimer</a>
-                            </li>
-                        </ul>
-
-                        <div class="copyright ml-auto">
-                            All Rights Reserved by <a href='@Url.Action("Index", "Home")'>Reviefy</a>.
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ===== END OF FOOTER COPYRIGHT AREA ===== -->
-
-</footer>
-<!-- =============== END OF FOOTER =============== -->
+@await Html.PartialAsync("FooterPartial")
 
 </div>
 <!-- =============== END OF WRAPPER =============== -->
 
 
-<!-- ===== All Javascript at the bottom of the page for faster page loading ===== -->
-<script src="~/js/jquery-3.2.1.min.js"></script>
-<script src="~/js/bootstrap.min.js"></script>
-<script src="~/js/jquery.ajaxchimp.js"></script>
-<script src="~/js/jquery.magnific-popup.min.js"></script>
-<script src="~/js/jquery.mmenu.js"></script>
-<script src="~/js/jquery.inview.min.js"></script>
-<script src="~/js/jquery.countTo.min.js"></script>
-<script src="~/js/jquery.countdown.min.js"></script>
-<script src="~/js/owl.carousel.min.js"></script>
-<script src="~/js/imagesloaded.pkgd.min.js"></script>
-<script src="~/js/isotope.pkgd.min.js"></script>
-<script src="~/js/headroom.js"></script>
-<script src="~/js/custom.js"></script>
-
-<!-- ===== Slider Revolution core JavaScript files ===== -->
-<script type="text/javascript" src="~/revolution/js/jquery.themepunch.tools.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/jquery.themepunch.revolution.min.js"></script>
-
-<!-- ===== Slider Revolution extension scripts ===== -->
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-<script type="text/javascript"
-        src="~/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-<script type="text/javascript"
-        src="~/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-<script type="text/javascript"
-        src="~/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.video.min.js"></script>
-
-
+@await Html.PartialAsync("ScriptsPartial")
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
