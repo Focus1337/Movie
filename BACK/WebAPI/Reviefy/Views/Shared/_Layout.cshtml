@@ -43,7 +43,7 @@
         <!-- ====== Start of Navbar ====== -->
         <nav class="navbar navbar-expand-lg">
 
-            <a class="navbar-brand" asp-page="Index">
+            <a class="navbar-brand" href='@Url.Action("Index", "Home")'>
                 <img src="~/images/reviefy-gradient.svg" alt="Reviefy" width="150" class="logo">
             </a>
 
@@ -54,7 +54,7 @@
                 <ul class="navbar-nav mx-auto" id="main-menu">
                     <!-- Menu Item -->
                     <li class="nav-item">
-                        <a class="nav-link" asp-page="Index">Home</a>
+                        <a class="nav-link" href='@Url.Action("Index", "Home")'>Home</a>
                     </li>
 
                     <!-- Menu Item -->
@@ -66,29 +66,29 @@
                         <ul class="dropdown-menu">
                             <!-- Menu Item -->
                             <li>
-                                <a class="dropdown-item" asp-page="LatestMovies">Latest Movies</a>
+                                <a class="dropdown-item" href='@Url.Action("LatestMovies", "Home")' >Latest Movies</a>
                             </li>
 
                             <!-- Menu Item -->
                             <li>
-                                <a class="dropdown-item" asp-page="TopRatedMovies">Top Rated Movies</a>
+                                <a class="dropdown-item" href='@Url.Action("TopRatedMovies", "Home")' >Top Rated Movies</a>
                             </li>
                         </ul>
                     </li>
 
                     <!-- Menu Item -->
                     <li class="nav-item">
-                        <a class="nav-link" asp-page="News">News</a>
+                        <a class="nav-link" href='@Url.Action("News", "Home")'>News</a>
                     </li>
 
                     <!-- Menu Item -->
                     <li class="nav-item">
-                        <a class="nav-link" asp-page="AboutUs">About Us</a>
+                        <a class="nav-link" href='@Url.Action("AboutUs", "Home")' >About Us</a>
                     </li>
 
                     <!-- Menu Item -->
                     <li class="nav-item">
-                        <a class="nav-link" asp-page="ContactUs">Contact Us</a>
+                        <a class="nav-link"  href='@Url.Action("ContactUs", "Home")' >Contact Us</a>
                     </li>
 
                 </ul>
@@ -114,7 +114,7 @@
 
                     <!-- Menu Item -->
                     <li class="nav-item m-auto">
-                        <a asp-page="Authorization"
+                        <a href='@Url.Action("Authorization", "Home")'
                            class="btn btn-main btn-effect login-btn">
                             <i class="icon-user"></i>login
                         </a>
@@ -164,10 +164,10 @@
 
                         <ul class="general-listing">
                             <li>
-                                <a asp-page="AboutUs">about reviefy</a>
+                                <a href='@Url.Action("AboutUs", "Home")'>about reviefy</a>
                             </li>
                             <li>
-                                <a asp-page="News">News</a>
+                                <a href='@Url.Action("News", "Home")'>News</a>
                             </li>
                             <li>
                                 <a href="#">my account</a>
@@ -260,18 +260,18 @@
                     <div class="d-flex">
                         <ul class="list-inline">
                             <li class="list-inline-item">
-                                <a asp-page="PrivacyCookies">Privacy & Cookies</a>
+                                <a href='@Url.Action("PrivacyCookies", "Home")'>Privacy & Cookies</a>
                             </li>
                             <li class="list-inline-item">
-                                <a asp-page="TermsConditions">Terms & Conditions</a>
+                                <a href='@Url.Action("TermsConditions", "Home")'>Terms & Conditions</a>
                             </li>
                             <li class="list-inline-item">
-                                <a asp-page="LegalDisclaimer">Legal Disclaimer</a>
+                                <a href='@Url.Action("LegalDisclaimer", "Home")'>Legal Disclaimer</a>
                             </li>
                         </ul>
 
                         <div class="copyright ml-auto">
-                            All Rights Reserved by <a asp-page="Index">Reviefy</a>.
+                            All Rights Reserved by <a href='@Url.Action("Index", "Home")'>Reviefy</a>.
                         </div>
 
                     </div>
