@@ -5,9 +5,10 @@ using Reviefy.Models;
 
 namespace Reviefy
 {
+    // Custom Data Connection
     public class AppDataConnection : DataConnection
     {
-        public ITable<Account> Account => GetTable<Account>();
+        public ITable<User> User => GetTable<User>();
         public ITable<Person> Person => GetTable<Person>();
 
         public AppDataConnection(LinqToDbConnectionOptions<AppDataConnection> options)

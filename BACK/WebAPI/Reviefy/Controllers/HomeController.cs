@@ -37,28 +37,8 @@ namespace Reviefy.Controllers
         {
             return View();
         }
-
-        public IActionResult LatestMovies()
-        {
-            return View();
-        }
-
+        
         public IActionResult LegalDisclaimer()
-        {
-            return View();
-        }
-
-        public IActionResult MovieDetail()
-        {
-            return View();
-        }
-
-        public IActionResult News()
-        {
-            return View();
-        }
-
-        public IActionResult NewsDetail()
         {
             return View();
         }

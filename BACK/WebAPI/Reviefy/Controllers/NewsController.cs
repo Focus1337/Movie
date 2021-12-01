@@ -2,20 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Reviefy.Controllers
 {
-    public class MoviesController : Controller
+    public class NewsController : Controller
     {
         // GET
         public IActionResult Index()
         {
-            return View("LatestMovies");
+            return View();
         }
-        
-        public IActionResult LatestMovies()
+
+        public IActionResult News()
         {
             return View();
         }
         
-        public IActionResult MovieDetail()
+        public IActionResult NewsDetail()
         {
             return View();
         }

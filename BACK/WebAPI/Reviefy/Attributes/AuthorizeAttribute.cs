@@ -12,7 +12,7 @@ namespace Reviefy.Attributes
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var account = (Account)context.HttpContext.Items["Account"];
+            var account = (User)context.HttpContext.Items["Account"];
             if (account == null)
             {
                 // not logged in
