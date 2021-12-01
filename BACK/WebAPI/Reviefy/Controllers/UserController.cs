@@ -22,11 +22,11 @@ namespace Reviefy.Controllers
             return _connection.User.ToArrayAsync();
         }
 
-        [HttpGet("{id}")]
-        public Task<User?> GetUser(Guid id)
-        {
-            return _connection.User.SingleOrDefaultAsync(account => account.UserId == id);
-        }
+        // [HttpGet("{id}")]
+        // public Task<int> GetUser(Guid id)
+        // {
+        //     return _connection.User.SingleOrDefaultAsync(account => account.UserId == id);
+        // }
 
         [HttpDelete("{id}")]
         public Task<int> DeleteUser(Guid id)

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IQueryable<News>
+
+@{
     ViewData["Title"] = "Reviefy";
      Layout = "_Master";
 }
@@ -104,7 +106,7 @@
         <!-- Start of Movie Details -->
         <div class="movie-details">
             <h4 class="movie-title">
-                <a href='@Url.Action("MovieDetail", "Movies")'>Star Wars</a>
+                <a href='@Url.Action("MovieDetail", "Home")'>Star Wars</a>
             </h4>
             <span class="released">14 Dec 2017</span>
         </div>
@@ -143,7 +145,7 @@
         <!-- Start of Movie Details -->
         <div class="movie-details">
             <h4 class="movie-title">
-                <a asp-controller="Movies" asp-action="MovieDetail">The Brain</a>
+                <a asp-controller="Home" asp-action="MovieDetail">The Brain</a>
             </h4>
             <span class="released">20 Dec 2017</span>
         </div>
@@ -183,7 +185,7 @@
         <!-- Start of Movie Details -->
         <div class="movie-details">
             <h4 class="movie-title">
-                <a asp-controller="Movies" asp-action="MovieDetail">The Mummy</a>
+                <a asp-controller="Home" asp-action="MovieDetail">The Mummy</a>
             </h4>
             <span class="released">9 Jun 2017</span>
         </div>
@@ -222,7 +224,7 @@
         <!-- Start of Movie Details -->
         <div class="movie-details">
             <h4 class="movie-title">
-                <a asp-controller="Movies" asp-action="MovieDetail">The Parrot</a>
+                <a asp-controller="Home" asp-action="MovieDetail">The Parrot</a>
             </h4>
             <span class="released">20 Jan 2017</span>
         </div>
@@ -262,7 +264,7 @@
         <!-- Start of Movie Details -->
         <div class="movie-details">
             <h4 class="movie-title">
-                <a asp-controller="Movies" asp-action="MovieDetail">Star Wars</a>
+                <a asp-controller="Home" asp-action="MovieDetail">Star Wars</a>
             </h4>
             <span class="released">14 Dec 2017</span>
         </div>
@@ -301,7 +303,7 @@
         <!-- Start of Movie Details -->
         <div class="movie-details">
             <h4 class="movie-title">
-                <a asp-controller="Movies" asp-action="MovieDetail">The Brain</a>
+                <a asp-controller="Home" asp-action="MovieDetail">The Brain</a>
             </h4>
             <span class="released">20 Dec 2017</span>
         </div>
@@ -490,127 +492,133 @@
         <!-- Start of row -->
         <div class="row mt50">
 
-            <!-- 1st Blog Item -->
-            <div class="col-md-4">
-                <div class="bloglist-post-holder shadow-hover">
+             @if (Model.Any())
+             {
+                 @foreach (News entity in Model)
+                 {
+                    <!-- 1st Blog Item -->
+                     <div class="col-md-4">
+                         <div class="bloglist-post-holder shadow-hover">
 
-                    <!-- Blog Post Thumbnail -->
-                    <a asp-controller="News" asp-action="NewsDetail" class="bloglist-thumb-link hover-link">
-                        <div class="bloglist-post-thumbnail"
-                             style="background: url(https://www.taylordailypress.net/wp-content/uploads/2021/08/Its-official-The-Expendables-4-has-been-announced-with-Megan-1024x576.jpg)">
-                        </div>
-                    </a>
+                             <!-- Blog Post Thumbnail -->
+                             <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId" class="bloglist-thumb-link hover-link">
+                                 <div class="bloglist-post-thumbnail"
+                                      style="background: url(@entity.PosterPath)">
+                                 </div>
+                             </a>
 
-                    <!-- Blog Post Text Wrapper -->
-                    <div class="bloglist-text-wrapper">
-                        <!-- Author Avatar -->
-                        <span class="circle-img bloglist-avatar">
-                            <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
-                        </span>
+                             <!-- Blog Post Text Wrapper -->
+                             <div class="bloglist-text-wrapper">
+                                 <!-- Author Avatar -->
+                                 <span class="circle-img bloglist-avatar">
+                                     <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
+                                 </span>
 
-                        <h4 class="bloglist-title">
-                            <a asp-controller="News" asp-action="NewsDetail" >Papich in The Expendables</a>
-                        </h4>
+                                 <h4 class="bloglist-title">
+                                     <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId">@entity.Title</a>
+                                 </h4>
 
-                        <div class="bloglist-meta">
-                            <i class="fa fa-calendar"></i> 21/11/2021
-                        </div>
+                                 <div class="bloglist-meta">
+                                     <i class="fa fa-calendar"></i> @entity.NewsDate
+                                 </div>
 
-                        <div class="bloglist-excerpt">
-                            <p>
-                                The incredibly great, strong and adequate Vitaliy Tsal will star in the upcoming
-                                blockbuster "The Expendables 5."
+                                 <div class="bloglist-excerpt">
+                                     <p>
+                                         The incredibly great, strong and adequate Vitaliy Tsal will star in the upcoming
+                                         blockbuster "The Expendables 5."
 
-                                The Expendables 5 is an upcoming American action movie that is
-                                the fifth in the...
-                            </p>
-                            <a asp-controller="News" asp-action="NewsDetail" class="btn btn-main btn-effect">read more</a>
-                        </div>
-                    </div>
+                                         The Expendables 5 is an upcoming American action movie that is
+                                         the fifth in the...
+                                     </p>
+                                     <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId" class="btn btn-main btn-effect">read more</a>
+                                 </div>
+                             </div>
 
-                </div>
-            </div>
+                         </div>
+                     </div>
+                         
+                 }
+             }
 
-
-            <!-- 2nd Blog Item -->
-            <div class="col-md-4">
-                <div class="bloglist-post-holder shadow-hover">
-
-                    <!-- Blog Post Thumbnail -->
-                    <a asp-controller="News" asp-action="NewsDetail"  class="bloglist-thumb-link hover-link">
-                        <div class="bloglist-post-thumbnail"
-                             style="background: url(https://blog.pdainternational.net/en-UK/wp-content/uploads/sites/8/2018/08/Blog-entrada-3-1.jpg)">
-                        </div>
-                    </a>
-
-                    <!-- Blog Post Text Wrapper -->
-                    <div class="bloglist-text-wrapper">
-                        <!-- Author Avatar -->
-                        <span class="circle-img bloglist-avatar">
-                            <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
-                        </span>
-
-                        <h4 class="bloglist-title">
-                            <a asp-controller="News" asp-action="NewsDetail" >Reviefy is released</a>
-                        </h4>
-
-                        <div class="bloglist-meta">
-                            <i class="fa fa-calendar"></i> 23/10/2021
-                        </div>
-
-                        <div class="bloglist-excerpt">
-                            <p>
-                                After 3 months of work we finally start our project.
-                                On our site you can leave various reviews for films, also
-                                you can llalalallaffdgdfghrshjd
-                                gfhjdghjdtghtkdgadhfaerghaergaerg...
-                            </p>
-                            <a asp-controller="News" asp-action="NewsDetail"  class="btn btn-main btn-effect">read more</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <!-- 3rd Blog Item -->
-            <div class="col-md-4">
-                <div class="bloglist-post-holder shadow-hover">
-
-                    <!-- Blog Post Thumbnail -->
-                    <a asp-controller="News" asp-action="NewsDetail" class="bloglist-thumb-link hover-link">
-                        <div class="bloglist-post-thumbnail"
-                             style="background: url(https://techtoday.in.ua/wp-content/uploads/2020/10/programmer-working-on-computers.jpg)">
-                        </div>
-                    </a>
-
-                    <!-- Blog Post Text Wrapper -->
-                    <div class="bloglist-text-wrapper">
-                        <!-- Author Avatar -->
-                        <span class="circle-img bloglist-avatar">
-                            <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
-                        </span>
-
-                        <h4 class="bloglist-title">
-                            <a asp-controller="News" asp-action="NewsDetail" >Beginning of work</a>
-                        </h4>
-
-                        <div class="bloglist-meta">
-                            <i class="fa fa-calendar"></i> 03/09/2021
-                        </div>
-
-                        <div class="bloglist-excerpt">
-                            <p>
-                                Hello everyone! We started working on our project - Reviefy.
-                                The point of this site is that you can leave your opinion on different films, as
-                                well as communicate with different people. Thanks to your...
-                            </p>
-                            <a asp-controller="News" asp-action="NewsDetail"  class="btn btn-main btn-effect">read more</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            @* <!-- 2nd Blog Item --> *@
+            @* <div class="col-md-4"> *@
+            @*     <div class="bloglist-post-holder shadow-hover"> *@
+            @* *@
+            @*         <!-- Blog Post Thumbnail --> *@
+            @*         <a asp-controller="Home" asp-action="NewsDetail"  class="bloglist-thumb-link hover-link"> *@
+            @*             <div class="bloglist-post-thumbnail" *@
+            @*                  style="background: url(https://blog.pdainternational.net/en-UK/wp-content/uploads/sites/8/2018/08/Blog-entrada-3-1.jpg)"> *@
+            @*             </div> *@
+            @*         </a> *@
+            @* *@
+            @*         <!-- Blog Post Text Wrapper --> *@
+            @*         <div class="bloglist-text-wrapper"> *@
+            @*             <!-- Author Avatar --> *@
+            @*             <span class="circle-img bloglist-avatar"> *@
+            @*                 <img src="~/images/admin.jpg" width="50" height="50" alt="author img"> *@
+            @*             </span> *@
+            @* *@
+            @*             <h4 class="bloglist-title"> *@
+            @*                 <a asp-controller="Home" asp-action="NewsDetail" >Reviefy is released</a> *@
+            @*             </h4> *@
+            @* *@
+            @*             <div class="bloglist-meta"> *@
+            @*                 <i class="fa fa-calendar"></i> 23/10/2021 *@
+            @*             </div> *@
+            @* *@
+            @*             <div class="bloglist-excerpt"> *@
+            @*                 <p> *@
+            @*                     After 3 months of work we finally start our project. *@
+            @*                     On our site you can leave various reviews for films, also *@
+            @*                     you can do smth that you want. I'm out of ideas to write *@
+            @*                     smth here... *@
+            @*                 </p> *@
+            @*                 <a asp-controller="Home" asp-action="NewsDetail"  class="btn btn-main btn-effect">read more</a> *@
+            @*             </div> *@
+            @*         </div> *@
+            @* *@
+            @*     </div> *@
+            @* </div> *@
+            @* *@
+            @* *@
+            @* <!-- 3rd Blog Item --> *@
+            @* <div class="col-md-4"> *@
+            @*     <div class="bloglist-post-holder shadow-hover"> *@
+            @* *@
+            @*         <!-- Blog Post Thumbnail --> *@
+            @*         <a asp-controller="Home" asp-action="NewsDetail" class="bloglist-thumb-link hover-link"> *@
+            @*             <div class="bloglist-post-thumbnail" *@
+            @*                  style="background: url(https://techtoday.in.ua/wp-content/uploads/2020/10/programmer-working-on-computers.jpg)"> *@
+            @*             </div> *@
+            @*         </a> *@
+            @* *@
+            @*         <!-- Blog Post Text Wrapper --> *@
+            @*         <div class="bloglist-text-wrapper"> *@
+            @*             <!-- Author Avatar --> *@
+            @*             <span class="circle-img bloglist-avatar"> *@
+            @*                 <img src="~/images/admin.jpg" width="50" height="50" alt="author img"> *@
+            @*             </span> *@
+            @* *@
+            @*             <h4 class="bloglist-title"> *@
+            @*                 <a asp-controller="Home" asp-action="NewsDetail" >Beginning of work</a> *@
+            @*             </h4> *@
+            @* *@
+            @*             <div class="bloglist-meta"> *@
+            @*                 <i class="fa fa-calendar"></i> 03/09/2021 *@
+            @*             </div> *@
+            @* *@
+            @*             <div class="bloglist-excerpt"> *@
+            @*                 <p> *@
+            @*                     Hello everyone! We started working on our project - Reviefy. *@
+            @*                     The point of this site is that you can leave your opinion on different films, as *@
+            @*                     well as communicate with different people. Thanks to your... *@
+            @*                 </p> *@
+            @*                 <a asp-controller="Home" asp-action="NewsDetail"  class="btn btn-main btn-effect">read more</a> *@
+            @*             </div> *@
+            @*         </div> *@
+            @* *@
+            @*     </div> *@
+            @* </div> *@
             
         </div>
         <!-- End of row -->

@@ -20,7 +20,7 @@ CREATE TABLE Movies
 	title NVARCHAR(255) NOT NULL, 
 	[length] INT NOT NULL check([length] >= 0),
 	genre NVARCHAR(255) NOT NULL,
-	realese_date DATE NOT NULL,
+	release_date DATE NOT NULL,
 	rating FLOAT NOT NULL default(0),
 	storyline TEXT NOT NULL,
 	director NVARCHAR(255) NOT NULL default('unknown'),
