@@ -10,7 +10,6 @@ using Reviefy.Models;
 
 namespace Reviefy.Controllers
 {
-    [Route("News")]
     public class NewsController : Controller
     {
         private readonly AppDataConnection _connection;
@@ -18,10 +17,7 @@ namespace Reviefy.Controllers
         public NewsController(AppDataConnection connection) => _connection = connection;
 
         // GET
-        [Route("")]
-        [Route("Index")]
-        [Route("Index/{id?}")]
-        public IActionResult Index(Guid id)
+        public IActionResult LatestNews(Guid id)
         {
             if (id == Guid.Empty)
                 return View(GetNews());

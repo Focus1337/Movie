@@ -38,7 +38,7 @@
 
                                     <!-- Image -->
                                     <div class="blog-thumb">
-                                        <a asp-controller="News" asp-action="Index" asp-route-id="@entity.NewsId" class="post-img hover-link">
+                                        <a asp-controller="News" asp-action="LatestNews" asp-route-id="@entity.NewsId" class="post-img hover-link">
                                             <img src="@entity.PosterPath" alt="">
                                         </a>
                                     </div>
@@ -46,7 +46,7 @@
                                     <!-- Content -->
                                     <div class="post-content">
                                         <h3 class="title">
-                                            <a asp-controller="News" asp-action="Index" asp-route-id="@entity.NewsId">
+                                            <a asp-controller="News" asp-action="LatestNews" asp-route-id="@entity.NewsId">
                                                 @entity.Title
                                             </a>
                                         </h3>
@@ -59,7 +59,7 @@
                                             @Html.Raw(entity.Text)
                                         </p>
 
-                                        <a asp-controller="News" asp-action="Index" asp-route-id="@entity.NewsId" class="read-more">
+                                        <a asp-controller="News" asp-action="LatestNews" asp-route-id="@entity.NewsId" class="read-more">
                                             Read More <i class="fa fa-angle-right"></i>
                                         </a>
                                     </div>

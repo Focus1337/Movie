@@ -32,12 +32,12 @@
                             <h3 class="title">@Model?.Title</h3>
 
                             <ul class="movie-subtext">
-                                <li>@Model?.Length min</li>
+                                <li>@Model?.Duration min</li>
                                 <li>@Model?.Genre</li>
                                 <li>@Model?.ReleaseDate.ToString("d") (@Model?.Country)</li>
                             </ul>
 
-                            <a href="https://www.youtube.com/watch?v=EFYEni2gsK0"
+                            <a href="@Model?.TrailerPath"
                                 class="btn btn-main btn-effect">trailer</a>
                             <a href="#" class="btn btn-main btn-effect">watch later</a>
                             <a href="#" class="btn rate-movie"><i class="icon-heart"></i></a>

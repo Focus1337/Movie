@@ -18,7 +18,7 @@ CREATE TABLE Movies
 (
 	movie_id uniqueidentifier NOT NULL,
 	title NVARCHAR(255) NOT NULL, 
-	[length] INT NOT NULL check([length] >= 0),
+	duration INT NOT NULL check(duration >= 0),
 	genre NVARCHAR(255) NOT NULL,
 	release_date DATE NOT NULL,
 	rating FLOAT NOT NULL default(0),
@@ -29,8 +29,31 @@ CREATE TABLE Movies
 	[language] NVARCHAR(255) NOT NULL,
 	company NVARCHAR(255) NOT NULL default('unknown'),
 	poster_path NVARCHAR(255),
+	trailer_path NVARCHAR(255)
 
 	CONSTRAINT pk_movie PRIMARY KEY(movie_id)
+)
+GO
+
+GO
+CREATE TABLE MoviePhotos
+(
+	photos_id uniqueidentifier NOT NULL,
+	movie_id uniqueidentifier NOT NULL,
+	background NVARCHAR(255) NOT NULL default(''),
+	photo1 NVARCHAR(255) NOT NULL default(''),
+	photo2 NVARCHAR(255) NOT NULL default(''),
+	photo3 NVARCHAR(255) NOT NULL default(''),
+	photo4 NVARCHAR(255) NOT NULL default(''),
+	photo5 NVARCHAR(255) NOT NULL default(''),
+	photo6 NVARCHAR(255) NOT NULL default(''),
+	photo7 NVARCHAR(255) NOT NULL default(''),
+	photo8 NVARCHAR(255) NOT NULL default(''),
+	photo9 NVARCHAR(255) NOT NULL default(''),
+	CONSTRAINT pk_moviePhoto PRIMARY KEY(photos_id),
+	CONSTRAINT fk_moviePhoto_movie FOREIGN KEY(movie_id)
+		REFERENCES Movies(movie_id)
+		on delete cascade on update cascade
 )
 GO
 

@@ -305,7 +305,7 @@
                     <div class="bloglist-post-holder shadow-hover">
 
                         <!-- Blog Post Thumbnail -->
-                        <a asp-controller="News" asp-action="Index" asp-route-id="@news.NewsId" class="bloglist-thumb-link hover-link">
+                        <a asp-controller="News" asp-action="LatestNews" asp-route-id="@news.NewsId" class="bloglist-thumb-link hover-link">
                             <div class="bloglist-post-thumbnail"
                                  style="background: url(@news.PosterPath)">
                             </div>
@@ -319,7 +319,7 @@
                             </span>
 
                             <h4 class="bloglist-title">
-                                <a asp-controller="News" asp-action="Index" asp-route-id="@news.NewsId">@news.Title</a>
+                                <a asp-controller="News" asp-action="LatestNews" asp-route-id="@news.NewsId">@news.Title</a>
                             </h4>
 
                             <div class="bloglist-meta">
@@ -330,7 +330,7 @@
                                 <p>
                                    @Html.Raw(news.Text)
                                 </p>
-                                <a asp-controller="News" asp-action="Index" asp-route-id="@news.NewsId" class="btn btn-main btn-effect">read more</a>
+                                <a asp-controller="News" asp-action="LatestNews" asp-route-id="@news.NewsId" class="btn btn-main btn-effect">read more</a>
                             </div>
                         </div>
 

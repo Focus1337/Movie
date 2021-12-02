@@ -11,7 +11,7 @@ namespace Reviefy.Models
 
 		[Column("title"), NotNull] public string Title { get; set; }
 
-		[Column("length"), NotNull] public int Length { get; set; }
+		[Column("duration"), NotNull] public int Duration { get; set; }
 
 		[Column("genre"), NotNull] public string Genre { get; set; }
 
@@ -32,6 +32,8 @@ namespace Reviefy.Models
 		[Column("company"), NotNull] public string Company { get; set; }
 
 		[Column("poster_path"), Nullable] public string PosterPath { get; set; }
+		
+		[Column("trailer_path"), Nullable] public string TrailerPath { get; set; }
 
 	}
 }
