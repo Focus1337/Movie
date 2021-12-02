@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Reviefy.Models;
 
 namespace Reviefy.Controllers
@@ -22,20 +18,14 @@ namespace Reviefy.Controllers
         {
             if (id == Guid.Empty)
                 return View(GetMovies());
-            
+
             var movie = _connection.Movie.FirstOrDefault(account => account.MovieId == id);
             var moviePhoto = _connection.MoviePhoto.FirstOrDefault(account => account.MovieId == id);
-            
-            var viewModelObject = new ViewModelObject
-            {
-                Movie = movie,
-                MoviePhoto = moviePhoto
-            };
 
-            //return movie == null ? RedirectToAction("PageNotFound", "Home") : View("MovieDetail",movie);
-            return movie == null ? RedirectToAction("PageNotFound", "Home") : View("MovieDetail",viewModelObject);
+            ViewBag.Movie = movie;
+            ViewBag.MoviePhoto = moviePhoto;
+            return movie == null ? RedirectToAction("PageNotFound", "Home") : View("MovieDetail");
         }
-        
         
         public IActionResult TopRatedMovies() => View();
     }

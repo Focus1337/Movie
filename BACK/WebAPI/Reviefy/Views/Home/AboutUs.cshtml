@@ -1,38 +1,15 @@
 @{
-    ViewData["Title"] = "About us";
+    ViewBag.Title = "About Us";
     Layout = null;
 }
 
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-
-    <!-- ===== Meta Tags - Description for Search Engine purposes ===== -->
-    <meta name="description" content="Reviefy - Reviews of Films & Series">
-    <meta name="keywords" content="movies, series, reviefy, review, critique">
-    <meta name="author" content="Focus">
-
-    <title>About us - Reviews of Films & Series</title>
-
-    <!-- ===== Favicon & Different size apple touch icons ===== -->
-    <link rel="shortcut icon" href="~/images/favicon.png" type="image/x-icon">
-
-    <!-- ===== Google Fonts ===== -->
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
-
-    <!-- ===== CSS links ===== -->
-    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/revolution/css/settings.css">
-    <link rel="stylesheet" type="text/css" href="~/revolution/css/layers.css">
-    <link rel="stylesheet" type="text/css" href="~/revolution/css/navigation.css">
-    <link rel="stylesheet" type="text/css" href="~/css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="~/css/jquery.mmenu.css">
-    <link rel="stylesheet" type="text/css" href="~/css/owl.carousel.min.css">
-
-    <link rel="stylesheet" type="text/css" href="~/css/style.css">
-    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
-
+    @await Html.PartialAsync("MetatagsPartial")
+    @await Html.PartialAsync("CssPartial")
 </head>
 
 <body>
@@ -115,40 +92,7 @@
 </div>
 <!-- =============== END OF WRAPPER =============== -->
 
-
-
-<!-- ===== All Javascript at the bottom of the page for faster page loading ===== -->
-<script src="~/js/jquery-3.2.1.min.js"></script>
-<script src="~/js/bootstrap.min.js"></script>
-<script src="~/js/jquery.ajaxchimp.js"></script>
-<script src="~/js/jquery.magnific-popup.min.js"></script>
-<script src="~/js/jquery.mmenu.js"></script>
-<script src="~/js/jquery.inview.min.js"></script>
-<script src="~/js/jquery.countTo.min.js"></script>
-<script src="~/js/jquery.countdown.min.js"></script>
-<script src="~/js/owl.carousel.min.js"></script>
-<script src="~/js/imagesloaded.pkgd.min.js"></script>
-<script src="~/js/isotope.pkgd.min.js"></script>
-<script src="~/js/headroom.js"></script>
-<script src="~/js/custom.js"></script>
-
-<!-- ===== Slider Revolution core JavaScript files ===== -->
-<script type="text/javascript" src="~/revolution/js/jquery.themepunch.tools.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/jquery.themepunch.revolution.min.js"></script>
-
-<!-- ===== Slider Revolution extension scripts ===== -->
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-<script type="text/javascript"
-        src="~/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-<script type="text/javascript"
-        src="~/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-<script type="text/javascript"
-        src="~/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script type="text/javascript" src="~/revolution/js/extensions/revolution.extension.video.min.js"></script>
+@await Html.PartialAsync("ScriptsPartial")
 
 </body>
 </html>
