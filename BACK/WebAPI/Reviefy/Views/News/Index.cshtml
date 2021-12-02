@@ -1,7 +1,7 @@
-@model IQueryable<News>
+@model List<News>
 
 @{
-    ViewData["Title"] = "News";
+    ViewBag.Title = "News";
     Layout = "_Layout";
 }
 
@@ -33,12 +33,12 @@
                         {
                             @foreach (News entity in Model)
                             {
-                                <!-- Start of Blog Post 1 -->
-                                <article class="blog-post">
+                            <!-- Start of Blog Post 1 -->
+                            <article class="blog-post">
 
                                     <!-- Image -->
                                     <div class="blog-thumb">
-                                        <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId" class="post-img hover-link">
+                                        <a asp-controller="News" asp-action="Index" asp-route-id="@entity.NewsId" class="post-img hover-link">
                                             <img src="@entity.PosterPath" alt="">
                                         </a>
                                     </div>
@@ -46,20 +46,20 @@
                                     <!-- Content -->
                                     <div class="post-content">
                                         <h3 class="title">
-                                            <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId">
+                                            <a asp-controller="News" asp-action="Index" asp-route-id="@entity.NewsId">
                                                 @entity.Title
                                             </a>
                                         </h3>
 
                                         <ul class="post-meta">
-                                            <li>@entity.NewsDate</li>
+                                            <li>@entity.NewsDate.ToString("d")</li>
                                         </ul>
 
-                                        <p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula
-                                            nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue
-                                            dapibus facilisis.</p>
+                                        <p>
+                                            @Html.Raw(entity.Text)
+                                        </p>
 
-                                        <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId" class="read-more">
+                                        <a asp-controller="News" asp-action="Index" asp-route-id="@entity.NewsId" class="read-more">
                                             Read More <i class="fa fa-angle-right"></i>
                                         </a>
                                     </div>
@@ -67,7 +67,7 @@
                                 </article>
                                 <!-- End of Blog Post 1 -->
                             }
-                        }
+                         } 
 
                         @* <!-- Start of Blog Post 2 --> *@
                         @* <article class="blog-post"> *@

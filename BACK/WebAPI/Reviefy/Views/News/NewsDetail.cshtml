@@ -1,9 +1,10 @@
-@model News
+@model Reviefy.Models.News
 
 @{
-    ViewData["Title"] = "News detail";
+    ViewBag.Title = @Model?.Title;
     Layout = "_Layout";
 }
+
 <body>
     <!-- =============== START OF WRAPPER =============== -->
 <div class="wrapper">
@@ -13,7 +14,7 @@
              style="background: url(https://ak.picdn.net/shutterstock/videos/1055155340/thumb/1.jpg)">
         <div class="container">
             <div class="inner">
-                <h2 class="title">@Model.Title</h2>
+                <h2 class="title">@Model?.Title</h2>
             </div>
         </div>
     </section>
@@ -33,23 +34,23 @@
                             
                         <!-- Image -->
                         <div class="blog-thumb">
-                            <img src="@Model.PosterPath" alt="">
+                            <img src="@Model?.PosterPath" alt="">
                         </div>
 
                         <!-- Content -->
                         <div class="post-content">
                             <h3 class="title">
-                                <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@Model.NewsId">
-                                    @Model.Title
+                                <a asp-controller="News" asp-action="Index" asp-route-id="@Model?.NewsId">
+                                    @Model?.Title
                                 </a>
                             </h3>
                             
                             <ul class="post-meta">
-                                <li>@Model.NewsDate</li>
+                                <li>@Model?.NewsDate.ToString("d")</li>
                             </ul>
 
                             <p>
-                                @Html.Raw(Model.Text)
+                                @Html.Raw(Model?.Text)
                             </p>
 
                             <!-- Start of Social Buttons -->

@@ -31,7 +31,7 @@ namespace Reviefy.Models
 
 		[Column("company"), NotNull] public string Company { get; set; }
 
-		[Column("poster_url"), Nullable] public string PosterUrl { get; set; }
+		[Column("poster_path"), Nullable] public string PosterPath { get; set; }
 
 	}
 }

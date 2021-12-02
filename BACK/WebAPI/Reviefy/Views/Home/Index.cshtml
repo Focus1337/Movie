@@ -1,4 +1,4 @@
-﻿@model IQueryable<News>
+﻿@model ViewModel
 
 @{
     ViewData["Title"] = "Reviefy";
@@ -79,7 +79,7 @@
 
 
     <div class="col-md-4 align-self-center text-right">
-        <a asp-page="/LatestMovies" class="btn btn-icon btn-main btn-effect">
+        <a asp-controller="Home" asp-action="Movies" class="btn btn-icon btn-main btn-effect">
             view all
             <i class="ti-angle-double-right"></i>
         </a>
@@ -91,241 +91,47 @@
 <!-- Start of Latest Movies Slider -->
 <div class="owl-carousel latest-movies-slider mt20">
 
-<!-- === Start of Sliding Item 1 === -->
-<div class="item">
-    <!-- Start of Movie Box -->
-    <div class="movie-box-1">
+    @foreach (Movie movie in Model.Movies)
+    {
+     <!-- === Start of Sliding Item === -->
+        <div class="item">
+            <!-- Start of Movie Box -->
+            <div class="movie-box-1">
 
-        <!-- Start of Poster -->
-        <div class="poster poster-fix">
-            <img src="https://lumiere-a.akamaihd.net/v1/images/sb_payoff_1-sht_v6_lg_tm_lg_e528c9e9.jpeg"
-                 alt="">
-        </div>
-        <!-- End of Poster -->
+                <!-- Start of Poster -->
+                <div class="poster poster-fix">
+                    <img src="@movie.PosterPath"
+                         alt="">
+                </div>
+                <!-- End of Poster -->
 
-        <!-- Start of Movie Details -->
-        <div class="movie-details">
-            <h4 class="movie-title">
-                <a href='@Url.Action("MovieDetail", "Home")'>Star Wars</a>
-            </h4>
-            <span class="released">14 Dec 2017</span>
-        </div>
-        <!-- End of Movie Details -->
+                <!-- Start of Movie Details -->
+                <div class="movie-details">
+                    <h4 class="movie-title">
+                        <a asp-controller="Home" asp-action="MovieDetail" asp-route-id="@movie.MovieId">@movie.Title</a>
+                    </h4>
+                    <span class="released">@movie.ReleaseDate.ToString("d")</span>
+                </div>
+                <!-- End of Movie Details -->
 
-        <!-- Start of Rating -->
-        <div class="stars">
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
+                <!-- Start of Rating -->
+                <div class="stars">
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <span>@movie.Rating / 10</span>
+                </div>
+                <!-- End of Rating -->
+
             </div>
-            <span>7.5 / 10</span>
+            <!-- End of Movie Box -->
         </div>
-        <!-- End of Rating -->
-
-    </div>
-    <!-- End of Movie Box -->
-</div>
-<!-- === End of Sliding Item 1 === -->
-
-
-<!-- === Start of Sliding Item 2 === -->
-<div class="item">
-    <!-- Start of Movie Box -->
-    <div class="movie-box-1">
-
-        <!-- Start of Poster -->
-        <div class="poster poster-fix">
-            <img src="~/images/posters/poster-2.jpg" alt="">
-        </div>
-        <!-- End of Poster -->
-
-        <!-- Start of Movie Details -->
-        <div class="movie-details">
-            <h4 class="movie-title">
-                <a asp-controller="Home" asp-action="MovieDetail">The Brain</a>
-            </h4>
-            <span class="released">20 Dec 2017</span>
-        </div>
-        <!-- End of Movie Details -->
-
-        <!-- Start of Rating -->
-        <div class="stars">
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <span>7.2 / 10</span>
-        </div>
-        <!-- End of Rating -->
-
-    </div>
-    <!-- End of Movie Box -->
-</div>
-<!-- === End of Sliding Item 2 === -->
-
-
-<!-- === Start of Sliding Item 3 === -->
-<div class="item">
-    <!-- Start of Movie Box -->
-    <div class="movie-box-1">
-
-        <!-- Start of Poster -->
-        <div class="poster poster-fix">
-            <img src="https://lumiere-a.akamaihd.net/v1/images/sb_payoff_1-sht_v6_lg_tm_lg_e528c9e9.jpeg"
-                 alt="">
-        </div>
-        <!-- End of Poster -->
-
-        <!-- Start of Movie Details -->
-        <div class="movie-details">
-            <h4 class="movie-title">
-                <a asp-controller="Home" asp-action="MovieDetail">The Mummy</a>
-            </h4>
-            <span class="released">9 Jun 2017</span>
-        </div>
-        <!-- End of Movie Details -->
-
-        <!-- Start of Rating -->
-        <div class="stars">
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <span>5.5 / 10</span>
-        </div>
-        <!-- End of Rating -->
-
-    </div>
-    <!-- End of Movie Box -->
-</div>
-<!-- === End of Sliding Item 3 === -->
-
-
-<!-- === Start of Sliding Item 4 === -->
-<div class="item">
-    <!-- Start of Movie Box -->
-    <div class="movie-box-1">
-
-        <!-- Start of Poster -->
-        <div class="poster poster-fix">
-            <img src="~/images/posters/poster-4.jpg" alt="">
-        </div>
-        <!-- End of Poster -->
-
-        <!-- Start of Movie Details -->
-        <div class="movie-details">
-            <h4 class="movie-title">
-                <a asp-controller="Home" asp-action="MovieDetail">The Parrot</a>
-            </h4>
-            <span class="released">20 Jan 2017</span>
-        </div>
-        <!-- End of Movie Details -->
-
-        <!-- Start of Rating -->
-        <div class="stars">
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <span>5.2 / 10</span>
-        </div>
-        <!-- End of Rating -->
-
-    </div>
-    <!-- End of Movie Box -->
-</div>
-<!-- === End of Sliding Item 4 === -->
-
-
-<!-- === Start of Sliding Item 5 === -->
-<div class="item">
-    <!-- Start of Movie Box -->
-    <div class="movie-box-1">
-
-        <!-- Start of Poster -->
-        <div class="poster">
-            <img src="~/images/posters/poster-1.jpg" alt="">
-        </div>
-        <!-- End of Poster -->
-
-
-        <!-- Start of Movie Details -->
-        <div class="movie-details">
-            <h4 class="movie-title">
-                <a asp-controller="Home" asp-action="MovieDetail">Star Wars</a>
-            </h4>
-            <span class="released">14 Dec 2017</span>
-        </div>
-        <!-- End of Movie Details -->
-
-        <!-- Start of Rating -->
-        <div class="stars">
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <span>7.5 / 10</span>
-        </div>
-        <!-- End of Rating -->
-
-    </div>
-    <!-- End of Movie Box -->
-</div>
-<!-- === End of Sliding Item 5 === -->
-
-
-<!-- === Start of Sliding Item 6 === -->
-<div class="item">
-    <!-- Start of Movie Box -->
-    <div class="movie-box-1">
-
-        <!-- Start of Poster -->
-        <div class="poster">
-            <img src="~/images/posters/poster-2.jpg" alt="">
-        </div>
-        <!-- End of Poster -->
-
-        <!-- Start of Movie Details -->
-        <div class="movie-details">
-            <h4 class="movie-title">
-                <a asp-controller="Home" asp-action="MovieDetail">The Brain</a>
-            </h4>
-            <span class="released">20 Dec 2017</span>
-        </div>
-        <!-- End of Movie Details -->
-
-        <!-- Start of Rating -->
-        <div class="stars">
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <span>7.2 / 10</span>
-        </div>
-        <!-- End of Rating -->
-
-    </div>
-    <!-- End of Movie Box -->
-</div>
-<!-- === End of Sliding Item 6 === -->
+     <!-- === End of Sliding Item === -->
+     }
 
 </div>
 <!-- End of Latest Movies Slider -->
@@ -491,134 +297,47 @@
 
         <!-- Start of row -->
         <div class="row mt50">
+        
+            @foreach (News news in Model.News)
+            {
+                <!-- Start of Blog Item -->
+                <div class="col-md-4">
+                    <div class="bloglist-post-holder shadow-hover">
 
-             @if (Model.Any())
-             {
-                 @foreach (News entity in Model)
-                 {
-                    <!-- 1st Blog Item -->
-                     <div class="col-md-4">
-                         <div class="bloglist-post-holder shadow-hover">
+                        <!-- Blog Post Thumbnail -->
+                        <a asp-controller="News" asp-action="Index" asp-route-id="@news.NewsId" class="bloglist-thumb-link hover-link">
+                            <div class="bloglist-post-thumbnail"
+                                 style="background: url(@news.PosterPath)">
+                            </div>
+                        </a>
 
-                             <!-- Blog Post Thumbnail -->
-                             <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId" class="bloglist-thumb-link hover-link">
-                                 <div class="bloglist-post-thumbnail"
-                                      style="background: url(@entity.PosterPath)">
-                                 </div>
-                             </a>
+                        <!-- Blog Post Text Wrapper -->
+                        <div class="bloglist-text-wrapper">
+                            <!-- Author Avatar -->
+                            <span class="circle-img bloglist-avatar">
+                                <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
+                            </span>
 
-                             <!-- Blog Post Text Wrapper -->
-                             <div class="bloglist-text-wrapper">
-                                 <!-- Author Avatar -->
-                                 <span class="circle-img bloglist-avatar">
-                                     <img src="~/images/admin.jpg" width="50" height="50" alt="author img">
-                                 </span>
+                            <h4 class="bloglist-title">
+                                <a asp-controller="News" asp-action="Index" asp-route-id="@news.NewsId">@news.Title</a>
+                            </h4>
 
-                                 <h4 class="bloglist-title">
-                                     <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId">@entity.Title</a>
-                                 </h4>
+                            <div class="bloglist-meta">
+                                <i class="fa fa-calendar"></i> @news.NewsDate.ToString("d")
+                            </div>
+                            
+                            <div class="bloglist-excerpt">
+                                <p>
+                                   @Html.Raw(news.Text)
+                                </p>
+                                <a asp-controller="News" asp-action="Index" asp-route-id="@news.NewsId" class="btn btn-main btn-effect">read more</a>
+                            </div>
+                        </div>
 
-                                 <div class="bloglist-meta">
-                                     <i class="fa fa-calendar"></i> @entity.NewsDate
-                                 </div>
-
-                                 <div class="bloglist-excerpt">
-                                     <p>
-                                         The incredibly great, strong and adequate Vitaliy Tsal will star in the upcoming
-                                         blockbuster "The Expendables 5."
-
-                                         The Expendables 5 is an upcoming American action movie that is
-                                         the fifth in the...
-                                     </p>
-                                     <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@entity.NewsId" class="btn btn-main btn-effect">read more</a>
-                                 </div>
-                             </div>
-
-                         </div>
-                     </div>
-                         
-                 }
-             }
-
-            @* <!-- 2nd Blog Item --> *@
-            @* <div class="col-md-4"> *@
-            @*     <div class="bloglist-post-holder shadow-hover"> *@
-            @* *@
-            @*         <!-- Blog Post Thumbnail --> *@
-            @*         <a asp-controller="Home" asp-action="NewsDetail"  class="bloglist-thumb-link hover-link"> *@
-            @*             <div class="bloglist-post-thumbnail" *@
-            @*                  style="background: url(https://blog.pdainternational.net/en-UK/wp-content/uploads/sites/8/2018/08/Blog-entrada-3-1.jpg)"> *@
-            @*             </div> *@
-            @*         </a> *@
-            @* *@
-            @*         <!-- Blog Post Text Wrapper --> *@
-            @*         <div class="bloglist-text-wrapper"> *@
-            @*             <!-- Author Avatar --> *@
-            @*             <span class="circle-img bloglist-avatar"> *@
-            @*                 <img src="~/images/admin.jpg" width="50" height="50" alt="author img"> *@
-            @*             </span> *@
-            @* *@
-            @*             <h4 class="bloglist-title"> *@
-            @*                 <a asp-controller="Home" asp-action="NewsDetail" >Reviefy is released</a> *@
-            @*             </h4> *@
-            @* *@
-            @*             <div class="bloglist-meta"> *@
-            @*                 <i class="fa fa-calendar"></i> 23/10/2021 *@
-            @*             </div> *@
-            @* *@
-            @*             <div class="bloglist-excerpt"> *@
-            @*                 <p> *@
-            @*                     After 3 months of work we finally start our project. *@
-            @*                     On our site you can leave various reviews for films, also *@
-            @*                     you can do smth that you want. I'm out of ideas to write *@
-            @*                     smth here... *@
-            @*                 </p> *@
-            @*                 <a asp-controller="Home" asp-action="NewsDetail"  class="btn btn-main btn-effect">read more</a> *@
-            @*             </div> *@
-            @*         </div> *@
-            @* *@
-            @*     </div> *@
-            @* </div> *@
-            @* *@
-            @* *@
-            @* <!-- 3rd Blog Item --> *@
-            @* <div class="col-md-4"> *@
-            @*     <div class="bloglist-post-holder shadow-hover"> *@
-            @* *@
-            @*         <!-- Blog Post Thumbnail --> *@
-            @*         <a asp-controller="Home" asp-action="NewsDetail" class="bloglist-thumb-link hover-link"> *@
-            @*             <div class="bloglist-post-thumbnail" *@
-            @*                  style="background: url(https://techtoday.in.ua/wp-content/uploads/2020/10/programmer-working-on-computers.jpg)"> *@
-            @*             </div> *@
-            @*         </a> *@
-            @* *@
-            @*         <!-- Blog Post Text Wrapper --> *@
-            @*         <div class="bloglist-text-wrapper"> *@
-            @*             <!-- Author Avatar --> *@
-            @*             <span class="circle-img bloglist-avatar"> *@
-            @*                 <img src="~/images/admin.jpg" width="50" height="50" alt="author img"> *@
-            @*             </span> *@
-            @* *@
-            @*             <h4 class="bloglist-title"> *@
-            @*                 <a asp-controller="Home" asp-action="NewsDetail" >Beginning of work</a> *@
-            @*             </h4> *@
-            @* *@
-            @*             <div class="bloglist-meta"> *@
-            @*                 <i class="fa fa-calendar"></i> 03/09/2021 *@
-            @*             </div> *@
-            @* *@
-            @*             <div class="bloglist-excerpt"> *@
-            @*                 <p> *@
-            @*                     Hello everyone! We started working on our project - Reviefy. *@
-            @*                     The point of this site is that you can leave your opinion on different films, as *@
-            @*                     well as communicate with different people. Thanks to your... *@
-            @*                 </p> *@
-            @*                 <a asp-controller="Home" asp-action="NewsDetail"  class="btn btn-main btn-effect">read more</a> *@
-            @*             </div> *@
-            @*         </div> *@
-            @* *@
-            @*     </div> *@
-            @* </div> *@
+                    </div>
+                </div>
+                <!-- End Of Blog Item -->
+            }
             
         </div>
         <!-- End of row -->
