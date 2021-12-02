@@ -24,7 +24,6 @@ namespace Reviefy.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Message = "Welcome to my demo!";
             var viewModel = new ViewModel
             {
                 Movies = GetMovies(),

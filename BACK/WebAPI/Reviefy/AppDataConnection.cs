@@ -9,9 +9,11 @@ namespace Reviefy
     public class AppDataConnection : DataConnection
     {
         public ITable<User> User => GetTable<User>();
-        public ITable<Person> Person => GetTable<Person>();
         public ITable<Movie> Movie => GetTable<Movie>();
         public ITable<News> News => GetTable<News>();
+        public ITable<Review> Review => GetTable<Review>();
+        public ITable<MoviePhoto> MoviePhotos => GetTable<MoviePhoto>();
+        
 
         public AppDataConnection(LinqToDbConnectionOptions<AppDataConnection> options)
             : base(options)
