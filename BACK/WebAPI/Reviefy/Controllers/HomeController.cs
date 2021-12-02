@@ -13,15 +13,12 @@ namespace Reviefy.Controllers
     public class HomeController : Controller
     {
         private readonly AppDataConnection _connection;
-        
-        public HomeController(AppDataConnection connection)
-        {
-            _connection = connection;
-        }
+
+        public HomeController(AppDataConnection connection) => _connection = connection;
 
         private IEnumerable<News> GetNews() =>
             _connection.News.OrderByDescending(x => x.NewsDate).ToList().Take(3);
-
+        
         private IEnumerable<Movie> GetMovies() =>
             _connection.Movie.OrderByDescending(x => x.ReleaseDate).ToList().Take(6);
 
@@ -46,52 +43,18 @@ namespace Reviefy.Controllers
             return View();
         }
 
-        public IActionResult AboutUs()
-        {
-            return View();
-        }
+        public IActionResult AboutUs() => View();
 
+        public IActionResult LegalDisclaimer() => View();
 
-        public IActionResult Movies()
-        {
-            return View();
-        }
+        public IActionResult PageNotFound() => View();
 
-        public IActionResult MovieDetail()
-        {
-            return View();
-        }
+        public IActionResult PrivacyCookies() => View();
 
-
-        public IActionResult LegalDisclaimer()
-        {
-            return View();
-        }
-
-        public IActionResult PageNotFound()
-        {
-            return View();
-        }
-
-        public IActionResult PrivacyCookies()
-        {
-            return View();
-        }
-
-        public IActionResult TermsConditions()
-        {
-            return View();
-        }
-
-        public IActionResult TopRatedMovies()
-        {
-            return View();
-        }
+        public IActionResult TermsConditions() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
-        }
+        public IActionResult Error() => View(new ErrorViewModel
+            {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
 }

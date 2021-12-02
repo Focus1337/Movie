@@ -1,7 +1,7 @@
 ﻿@model ViewModel
 
 @{
-    ViewData["Title"] = "Reviefy";
+    ViewBag.Title = "Reviefy";
      Layout = "_Master";
 }
 
@@ -79,7 +79,7 @@
 
 
     <div class="col-md-4 align-self-center text-right">
-        <a asp-controller="Home" asp-action="Movies" class="btn btn-icon btn-main btn-effect">
+        <a asp-controller="Movie" asp-action="LatestMovies" class="btn btn-icon btn-main btn-effect">
             view all
             <i class="ti-angle-double-right"></i>
         </a>
@@ -108,7 +108,7 @@
                 <!-- Start of Movie Details -->
                 <div class="movie-details">
                     <h4 class="movie-title">
-                        <a asp-controller="Home" asp-action="MovieDetail" asp-route-id="@movie.MovieId">@movie.Title</a>
+                        <a asp-controller="Movie" asp-action="LatestMovies" asp-route-id="@movie.MovieId">@movie.Title</a>
                     </h4>
                     <span class="released">@movie.ReleaseDate.ToString("d")</span>
                 </div>

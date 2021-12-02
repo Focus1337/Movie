@@ -1,5 +1,7 @@
+@model Reviefy.Models.Movie
+
 @{
-    ViewData["Title"] = "Movie detail";
+    ViewBag.Title = Model.Title;
     Layout = "_Master";
 }
 
@@ -22,17 +24,17 @@
                     <div class="col-md-12">
 
                         <div class="movie-poster movie-poster-fix">
-                            <img src="https://m.media-amazon.com/images/M/MV5BYTA3MTdiOGMtY2EwNC00OTljLTg1YWItNmNkNDNlOThkOTFmXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg"
+                            <img src="@Model?.PosterPath"
                                 alt="">
                         </div>
 
                         <div class="movie-details">
-                            <h3 class="title">Wrath of Man</h3>
+                            <h3 class="title">@Model?.Title</h3>
 
                             <ul class="movie-subtext">
-                                <li>118min</li>
-                                <li>Action, Crime, Thriller</li>
-                                <li>May 7 2021 (USA)</li>
+                                <li>@Model?.Length min</li>
+                                <li>@Model?.Genre</li>
+                                <li>@Model?.ReleaseDate.ToString("d") (@Model?.Country)</li>
                             </ul>
 
                             <a href="https://www.youtube.com/watch?v=EFYEni2gsK0"
@@ -46,7 +48,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i>
-                                <span>8.8/10</span>
+                                <span>@Model?.Rating / 10</span>
                             </div>
                         </div>
 
@@ -72,10 +74,7 @@
                             <div class="storyline">
                                 <h3 class="title">Storyline</h3>
 
-                                <p>Mysterious and wild-eyed, a new security guard for a cash truck surprises his
-                                    co-workers when he unleashes precision skills during a heist. The crew is left
-                                    wondering who he is and where he came from. Soon, the marksman's ultimate motive
-                                    becomes clear as he takes dramatic and irrevocable steps to settle a score.</p>
+                                <p>@Model?.Storyline</p>
                             </div>
 
                             <!-- Media -->
@@ -154,12 +153,12 @@
                                 <h3 class="title">Details</h3>
 
                                 <ul>
-                                    <li><strong>Release date: </strong>May 7, 2021</li>
-                                    <li><strong>Director: </strong>Guy Ritchie</li>
-                                    <li><strong>Budget: </strong>40 million USD</li>
-                                    <li><strong>Country: </strong>USA</li>
-                                    <li><strong>Language: </strong>English</li>
-                                    <li><strong>Production Co: </strong>Metro-Goldwyn-Mayer</li>
+                                    <li><strong>Release date: </strong>@Model?.ReleaseDate.ToString("d")</li>
+                                    <li><strong>Director: </strong>@Model?.Director</li>
+                                    <li><strong>Budget: </strong>@Model?.Budget million USD</li>
+                                    <li><strong>Country: </strong>@Model?.Country</li>
+                                    <li><strong>Language: </strong>@Model?.Language</li>
+                                    <li><strong>Production Co: </strong>@Model?.Company</li>
                                 </ul>
                             </aside>
                             <!-- End of Details Widget -->
