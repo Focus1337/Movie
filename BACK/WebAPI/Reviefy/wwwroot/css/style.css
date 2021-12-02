@@ -5328,19 +5328,6 @@ p.privacy-cookies{
     font-weight: 400 !important;
 }
 
-.poster.poster-fix
-{
-    width: 266.25px !important;
-    height: 394.05px !important;
-}
-
-.movie-poster.movie-poster-fix
-{
-    width: 300px !important; 
-    height: 444px !important
-}
-
-
 .review-box {
     position: relative;
     background-color: #fff;

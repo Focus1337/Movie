@@ -1,7 +1,7 @@
-@model Reviefy.Models.Movie
+@model ViewModelObject
 
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = Model.Movie.Title;
     Layout = "_Master";
 }
 
@@ -12,7 +12,7 @@
     
         <!-- =============== START OF MOVIE DETAIL INTRO =============== -->
         <section class="movie-detail-intro overlay-gradient ptb100"
-            style="background: url(https://upload.wikimedia.org/wikipedia/en/a/af/Wrath-of-man.jpg)">
+            style="background: url(@Model?.MoviePhoto.Background)">
         </section>
         <!-- =============== END OF MOVIE DETAIL INTRO =============== -->
     
@@ -23,21 +23,21 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <div class="movie-poster movie-poster-fix">
-                            <img src="@Model?.PosterPath"
-                                alt="">
+                        <div class="movie-poster">
+                            <img src="@Model?.Movie.PosterPath"
+                                alt="" width="300">
                         </div>
 
                         <div class="movie-details">
-                            <h3 class="title">@Model?.Title</h3>
+                            <h3 class="title">@Model?.Movie.Title</h3>
 
                             <ul class="movie-subtext">
-                                <li>@Model?.Duration min</li>
-                                <li>@Model?.Genre</li>
-                                <li>@Model?.ReleaseDate.ToString("d") (@Model?.Country)</li>
+                                <li>@Model?.Movie.Duration min</li>
+                                <li>@Model?.Movie.Genre</li>
+                                <li>@Model?.Movie.ReleaseDate.ToString("d") (@Model?.Movie.Country)</li>
                             </ul>
 
-                            <a href="@Model?.TrailerPath"
+                            <a href="@Model?.Movie.TrailerPath"
                                 class="btn btn-main btn-effect">trailer</a>
                             <a href="#" class="btn btn-main btn-effect">watch later</a>
                             <a href="#" class="btn rate-movie"><i class="icon-heart"></i></a>
@@ -48,7 +48,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i>
-                                <span>@Model?.Rating / 10</span>
+                                <span>@Model?.Movie.Rating / 10</span>
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
                             <div class="storyline">
                                 <h3 class="title">Storyline</h3>
 
-                                <p>@Model?.Storyline</p>
+                                <p>@Model?.Movie.Storyline</p>
                             </div>
 
                             <!-- Media -->
@@ -83,56 +83,56 @@
 
                                 <ul class="image-gallery isotope">
                                     <li class="element">
-                                        <a href="~/images/news/news-1.jpg">
-                                            <img src="~/images/news/news-1.jpg" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo1">
+                                            <img src="@Model?.MoviePhoto.Photo1" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="~/images/news/news-2.png">
-                                            <img src="~/images/news/news-2.png" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo2">
+                                            <img src="@Model?.MoviePhoto.Photo2" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="~/images/other/home2-bg.jpg">
-                                            <img src="~/images/other/home2-bg.jpg" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo3">
+                                            <img src="@Model?.MoviePhoto.Photo3" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="~/images/news/bloglist-2.jpg">
-                                            <img src="~/images/news/bloglist-2.jpg" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo4">
+                                            <img src="@Model?.MoviePhoto.Photo4" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="~/images/news/bloglist-1.jpg">
-                                            <img src="~/images/news/bloglist-1.jpg" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo5">
+                                            <img src="@Model?.MoviePhoto.Photo5" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="~/images/news/bloglist-3.jpg">
-                                            <img src="~/images/news/bloglist-3.jpg" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo6">
+                                            <img src="@Model?.MoviePhoto.Photo6" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="~/images/news/bloglist-1.jpg">
-                                            <img src="~/images/news/bloglist-1.jpg" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo7">
+                                            <img src="@Model?.MoviePhoto.Photo7" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="~/images/other/landscape.jpg">
-                                            <img src="~/images/other/landscape.jpg" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo8">
+                                            <img src="@Model?.MoviePhoto.Photo8" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="~/images/other/home2-bg.jpg">
-                                            <img src="~/images/other/home2-bg.jpg" class="img-responsive" alt="">
+                                        <a href="@Model?.MoviePhoto.Photo9">
+                                            <img src="@Model?.MoviePhoto.Photo9" class="img-responsive" alt="">
                                         </a>
                                     </li>
                                 </ul>
@@ -153,12 +153,12 @@
                                 <h3 class="title">Details</h3>
 
                                 <ul>
-                                    <li><strong>Release date: </strong>@Model?.ReleaseDate.ToString("d")</li>
-                                    <li><strong>Director: </strong>@Model?.Director</li>
-                                    <li><strong>Budget: </strong>@Model?.Budget million USD</li>
-                                    <li><strong>Country: </strong>@Model?.Country</li>
-                                    <li><strong>Language: </strong>@Model?.Language</li>
-                                    <li><strong>Production Co: </strong>@Model?.Company</li>
+                                    <li><strong>Release date: </strong>@Model?.Movie.ReleaseDate.ToString("d")</li>
+                                    <li><strong>Director: </strong>@Model?.Movie.Director</li>
+                                    <li><strong>Budget: </strong>@Model?.Movie.Budget million USD</li>
+                                    <li><strong>Country: </strong>@Model?.Movie.Country</li>
+                                    <li><strong>Language: </strong>@Model?.Movie.Language</li>
+                                    <li><strong>Production Co: </strong>@Model?.Movie.Company</li>
                                 </ul>
                             </aside>
                             <!-- End of Details Widget -->

@@ -17,7 +17,40 @@ VALUES	(NEWID(), 'Wrath of Man', 118, 'Action, Crime, Thriller', '2021-05-07', 8
 
 -- MOVIEPHOTOS
 SELECT * FROM MoviePhotos
-
+INSERT INTO MoviePhotos
+VALUES	(NEWID(), 'ECD826E4-0526-4020-9121-8DCCE47C110A', 
+					'https://www.hollywoodreporter.com/wp-content/uploads/2021/05/058_WOM_FP_00022-copy.jpg', 
+					'https://www.denofgeek.com/wp-content/uploads/2021/05/Jason-Statham-and-Josh-Harnett-in-Wrath-of-Man.jpeg',
+					'https://www.hollywoodreporter.com/wp-content/uploads/2021/05/058_WOM_FP_00022-copy.jpg',
+					'https://storage.googleapis.com/orchestra-cafe-7jp1kqsp/uploads/2021/03/4d7411be-jason-statham-wrath-of-man.jpg',
+					'https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/newscms/2021_18/3470256/210504-jason-statham-wrath-of-man-ac-818p.jpg',
+					'https://lh3.googleusercontent.com/proxy/HgZ0jrrzRvlxdT-_be3qmZlMqikKVZDRv77ftfuVr-KnqyTIKQdGBwnxUgLcoRYA8K86l8Fml-AbStHh5byw2YBtsTyYhS8pmCGc2zim4ONQLN4Ypg',
+					'https://www.slashfilm.com/img/gallery/wrath-of-man-trailer/intro-import.jpg',
+					'https://itc.ua/wp-content/uploads/2021/05/1-9-770x513.jpg',
+					'https://glamadelaide.com.au/wp-content/uploads/2021/05/Wrath-of-Man.jpeg',
+					'https://www.rollingstone.com/wp-content/uploads/2021/03/163_WOM_FP_00076_rgbc.jpg'),
+		(NEWID(), 'E68AE4EB-0BB6-4D7C-AA9B-4B346CBE95DB', 
+					'', 
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					''),		
+		(NEWID(), '3F213609-99E1-4929-9F8E-CCBC807CB828', 
+					'', 
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					'',
+					''),
 
 -- REVIEWS
 SELECT * FROM Reviews

@@ -12,7 +12,7 @@ namespace Reviefy
         public ITable<Movie> Movie => GetTable<Movie>();
         public ITable<News> News => GetTable<News>();
         public ITable<Review> Review => GetTable<Review>();
-        public ITable<MoviePhoto> MoviePhotos => GetTable<MoviePhoto>();
+        public ITable<MoviePhoto> MoviePhoto => GetTable<MoviePhoto>();
         
 
         public AppDataConnection(LinqToDbConnectionOptions<AppDataConnection> options)

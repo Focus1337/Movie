@@ -96,10 +96,10 @@
      <!-- === Start of Sliding Item === -->
         <div class="item">
             <!-- Start of Movie Box -->
-            <div class="movie-box-1">
+            <div class="movie-box-1" style="width: 266px; height: 375px;">
 
                 <!-- Start of Poster -->
-                <div class="poster poster-fix">
+                <div class="poster">
                     <img src="@movie.PosterPath"
                          alt="">
                 </div>
@@ -328,7 +328,7 @@
                             
                             <div class="bloglist-excerpt">
                                 <p>
-                                   @Html.Raw(news.Text)
+                                    @Html.Raw(news.Text[..173])...
                                 </p>
                                 <a asp-controller="News" asp-action="LatestNews" asp-route-id="@news.NewsId" class="btn btn-main btn-effect">read more</a>
                             </div>
