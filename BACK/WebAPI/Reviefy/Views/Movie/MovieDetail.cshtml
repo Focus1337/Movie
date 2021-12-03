@@ -175,107 +175,46 @@
 
                 <!-- Start of Reviews -->
                 <div class="comments">
-                    <h3 class="title">Reviews (2)</h3>
+                    <h3 class="title">Reviews (@ViewBag.Reviews.Count)</h3>
 
                     <ul class="list-unstyled mt30">
 
-                        <li class="media">
-                            <div class="review-box">
-                                <img class="img-circle" src="~/images/papanya.png" alt="">
-                                <div class="review-box-fix">
-                                    <h4>Vitaliy Tsal</h4>
-                                    <div class="review-box-rating">
-                                        <i class="fa fa-star"></i>
-                                        <span>8/10</span>
-                                    </div>
+                        @foreach(Review review in ViewBag.Reviews)
+                        {
+                            <li class="media">
+                                <div class="review-box">
+                                    <img class="img-circle" src="~/images/papanya.png" alt="">
+                                    <div class="review-box-fix">
+                                        <h4>Vitaliy Tsal</h4>
+                                        <div class="review-box-rating">
+                                            <i class="fa fa-star"></i>
+                                            <span>@review.Rating/10</span>
+                                        </div>
 
-                                    <div class="review-box-date">
-                                        <div class="bloglist-meta">
-                                            <i class="fa fa-calendar"></i> 25/11/2021
+                                        <div class="review-box-date">
+                                            <div class="bloglist-meta">
+                                                <i class="fa fa-calendar"></i> @review.ReviewDate.ToString("d")
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                            <p>@Html.Raw(@review.Text)</p>
+                                        <hr>
+
+                                        <div class="review-box-helpfulness">
+                                            Review helpfulness:
+                                            <a href="#" class="btn">
+                                                <i class="fa fa-arrow-up"></i>
+                                            </a>
+                                            <span>@review.Helpfulness</span>
+                                            <a href="#" class="btn">
+                                                <i class="fa fa-arrow-down"></i>
+                                            </a>
                                         </div>
                                     </div>
-
-                                    <hr>
-                                    <p>This is definitely not your average Guy Ritchie film. It is not
-                                        light-hearted, albeit there is some slick dialogues. It has no comic appeal,
-                                        albeit there is a bit of dry humor. Think of shortened edition of Michel
-                                        Mann's "Heat" rather than "Snatch" or "Lock, Stock And Two Smoking Barrels",
-                                        and you'll got some understanding of what it's all about.</p>
-
-                                    <p> Jason Statham is perfectly fitting for the role of mysterious H., a
-                                        character with dark past and blurred present. Again, it's not Statham
-                                        typical B-movie action performance, since here thriller for the most part
-                                        prevails over action. It's not entirely original work: Ritchie's film based
-                                        on French Le Convoyeur (2004), but it's more of re-imagning than a direct
-                                        copy or a straitforward remake.</p>
-
-                                    <p> Starts like action-comedy, but then getting more and more dark, as new
-                                        elements of the story introduced. At some moments plot is a bit hard to
-                                        follow due to non-linear structure, but the basic points are always intact.
-                                        Some subplots seems lost by the third act, and its preventing film from
-                                        being great. However, for the most part it's a very soild, if unusual,
-                                        effort from Ritchie entetring to a more mature ground. In the end, it's a
-                                        suspenseful heist movie involving betrayal, family tragedy and a huge, long,
-                                        mercialess gunfight in the final act.</p>
-                                    <hr>
-
-                                    <div class="review-box-helpfulness">
-                                        Review helpfulness:
-                                        <a href="#" class="btn">
-                                            <i class="fa fa-arrow-up"></i>
-                                        </a>
-                                        <span>14340</span>
-                                        <a href="#" class="btn">
-                                            <i class="fa fa-arrow-down"></i>
-                                        </a>
-                                    </div>
                                 </div>
-                            </div>
-                        </li>
-
-
-                        <li class="media">
-                            <div class="review-box">
-                                <img class="img-circle" src="~/images/user.png" alt="">
-                                <div class="review-box-fix">
-                                    <h4>Anon Anon</h4>
-                                    <div class="review-box-rating">
-                                        <i class="fa fa-star"></i>
-                                        <span>9/10</span>
-                                    </div>
-
-                                    <div class="review-box-date">
-                                        <div class="bloglist-meta">
-                                            <i class="fa fa-calendar"></i> 25/11/2021
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <p>I am surprised of some reviews that are saying about frustration from this movie.
-                                        What did you expect from the Ritchie's film with Statham in 2021? Sophisticated
-                                        drama with Oscar winning plot?</p>
-
-                                    <p> In fact I got from "Wrath of Man" exactly what I expected - charismatic and not
-                                        very
-                                        complicated action movie of a good quality. The only surprising moment for me is
-                                        a
-                                        gloomy atmosphere of the whole story. But Jason 100% fits this dark drama.</p>
-                                    <hr>
-
-                                    <div class="review-box-helpfulness">
-                                        Review helpfulness:
-                                        <a href="#" class="btn">
-                                            <i class="fa fa-arrow-up"></i>
-                                        </a>
-                                        <span>120</span>
-                                        <a href="#" class="btn">
-                                            <i class="fa fa-arrow-down"></i>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
                     </ul>
 
                 </div>

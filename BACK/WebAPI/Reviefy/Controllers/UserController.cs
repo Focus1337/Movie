@@ -13,6 +13,7 @@ namespace Reviefy.Controllers
         private readonly AppDataConnection _connection;
         public UserController(AppDataConnection connection) => _connection = connection;
         
+        //private List<User> GetUsers() => _connection.User.OrderByDescending(x => x.UserId).ToList();
         
         // GET
         public IActionResult UserProfile(Guid id)

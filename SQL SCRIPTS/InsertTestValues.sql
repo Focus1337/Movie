@@ -21,7 +21,7 @@ VALUES	(NEWID(), 'Wrath of Man', 118, 'Action, Crime, Thriller', '2021-05-07', 8
 		(NEWID(), 'Free Guy', 115, 'Action, Adventure, Comedies', '2021-08-13', 7.2, 'A bank teller discovers that hes actually an NPC inside a brutal, open world video game.', 'Shawn Levy', 120, 'USA', 'English', 'Maximum Effort', 'https://m.media-amazon.com/images/M/MV5BOTY2NzFjODctOWUzMC00MGZhLTlhNjMtM2Y2ODBiNGY1ZWRiXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg', 'https://www.youtube.com/watch?v=X2m-08cOAbc')
 
 INSERT INTO Movies
-VALUES	(NEWID(), 'Zalupka', 165, 'Action, Adventure, Comedies', '2021-12-02', 9.2, 'test test test', 'Test Test', 200, 'USA', 'English', 'Test', 'test', 'test')
+VALUES	(NEWID(), 'Tes', 165, 'Action, Adventure, Comedies', '2021-12-02', 9.2, 'test test test', 'Test Test', 200, 'USA', 'English', 'Test', 'test', 'test')
 
 
 
@@ -61,6 +61,13 @@ VALUES (NEWID(), 'E0FE7A6E-B6EB-4338-9EF9-E2B4B6DDD44F', 'E89416F9-7860-48F8-8BD
 Jason Statham is perfectly fitting for the role of mysterious H., a character with dark past and blurred present. Again, its not Statham typical B-movie action performance, since here thriller for the most part prevails over action. Its not entirely original work: Ritchies film based on French Le Convoyeur (2004), but its more of re-imagning than a direct copy or a straitforward remake.
 
 Starts like action-comedy, but then getting more and more dark, as new elements of the story introduced. At some moments plot is a bit hard to follow due to non-linear structure, but the basic points are always intact. Some subplots seems lost by the third act, and its preventing film from being great. However, for the most part its a very soild, if unusual, effort from Ritchie entetring to a more mature ground. In the end, its a suspenseful heist movie involving betrayal, family tragedy and a huge, long, mercialess gunfight in the final act.', '2021-12-02', 8, 14340)
+
+INSERT INTO Reviews
+VALUES (NEWID(), 'B2D9D186-3E79-4824-9DCE-14CA8E7C5EB2', 'ECD826E4-0526-4020-9121-8DCCE47C110A', 'I am surprised of some reviews that are saying about frustration from this movie.
+                                        What did you expect from the Ritchies film with Statham in 2021? Sophisticated
+                                        drama with Oscar winning plot?In fact I got from "Wrath of Man" exactly what I expected - charismatic and not
+                                        very complicated action movie of a good quality. The only surprising moment for me is a gloomy atmosphere of the whole story. But Jason 100% fits this dark drama.', '2021-12-03', 9, 112)
+
 
 
 

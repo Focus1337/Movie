@@ -20,10 +20,14 @@ namespace Reviefy.Controllers
                 return View(GetMovies());
 
             var movie = _connection.Movie.FirstOrDefault(x => x.MovieId == id);
-            var moviePhoto = _connection.MoviePhoto.FirstOrDefault(photo => photo.MovieId == id);
+            var moviePhoto = _connection.MoviePhoto.FirstOrDefault(x => x.MovieId == id);
+            var reviews = _connection.Review
+                                    .Where(x => x.MovieId == id)
+                                    .OrderBy(x => x.ReviewDate).ToList();
 
             ViewBag.Movie = movie;
             ViewBag.MoviePhoto = moviePhoto;
+            ViewBag.Reviews = reviews;
             return movie == null ? RedirectToAction("PageNotFound", "Home") : View("MovieDetail");
         }
         
