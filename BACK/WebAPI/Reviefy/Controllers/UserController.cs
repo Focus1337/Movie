@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LinqToDB;
@@ -10,34 +11,19 @@ namespace Reviefy.Controllers
     public class UserController : Controller
     {
         private readonly AppDataConnection _connection;
-
-        public UserController(AppDataConnection connection)
+        public UserController(AppDataConnection connection) => _connection = connection;
+        
+        
+        // GET
+        public IActionResult UserProfile(Guid id)
         {
-            _connection = connection;
-        }
+            if (id == Guid.Empty)
+                return RedirectToAction("PageNotFound", "Home");
 
-        [HttpGet]
-        public Task<User[]> ListUser()
-        {
-            return _connection.User.ToArrayAsync();
+            var user = _connection.User.FirstOrDefault(x => x.UserId == id);
+            return user == null ? RedirectToAction("PageNotFound", "Home") : View(user);
         }
-
-        // [HttpGet("{id}")]
-        // public Task<int> GetUser(Guid id)
-        // {
-        //     return _connection.User.SingleOrDefaultAsync(account => account.UserId == id);
-        // }
-
-        [HttpDelete("{id}")]
-        public Task<int> DeleteUser(Guid id)
-        {
-            return _connection.User.Where(account => account.UserId == id).DeleteAsync();
-        }
-
-        [HttpPut]
-        public Task<int> InsertUser(User user)
-        {
-            return _connection.InsertAsync(user);
-        }
+        
+        public IActionResult MyProfile() => View();
     }
 }

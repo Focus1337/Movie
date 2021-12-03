@@ -1,0 +1,112 @@
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "_Layout";
+}
+
+<body>
+<!-- =============== START OF WRAPPER =============== -->
+<div class="wrapper">
+    
+    
+    
+    <!-- =============== START OF MAIN =============== -->
+    <main class="contact-page ptb100">
+        <div class="container">
+            <div class="row">
+                
+                <!-- Start of Avatar Form -->
+                <div class="col-md-4 col-sm-12">
+                    <h3 class="title">Avatar</h3>
+                    
+                    <div style="margin-top: 10px;">
+                        <div class="movie-poster">
+                            <img src="~/images/user.png"
+                                 alt="" width="200">
+                        </div>
+                        
+                        <p></p>
+                        
+                        <form id="avatar-form" method="post">
+                            <!-- Form Group -->
+                            <div class="form-group text-center col-7">
+                                <button class="btn btn-main btn-effect" type="submit">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of Avatar Form -->
+
+
+                
+                <div class="col-md-8">
+                    <!-- Start of Information Form -->
+                    <h3 class="title">Information</h3>
+                    <form id="information-form" method="post">
+                        
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="nickname">Nickname</label>
+                            <input name="nickname" id="nickname" class="form-control input-box" type="text" 
+                                   value="Current Name" autocomplete="off" required/>
+                        </div>
+
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="avatar">Avatar url</label>
+                            <input name="avatar" id="avatar" class="form-control input-box" type="url" 
+                                   value="link to avatar" autocomplete="off" required/>
+                        </div>
+                        
+                        <!-- Form Group -->
+                        <div>
+                            <label>Registration date: 2021-12-01</label>
+                        </div>
+                        
+                        <!-- Form Group -->
+                        <div>
+                            <label>Reviews count: 21</label>
+                        </div>
+
+                        <!-- Form Group -->
+                        <div class="form-group text-center">
+                            <button class="btn btn-main btn-effect" type="submit">Update</button>
+                        </div>
+                    </form>
+                    <!-- End of Information Form -->
+
+                    
+                    <h3 class="title">Security</h3>
+                    <!-- Start of Security Form -->
+                    <form id="security-form" method="post">
+                    
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input name="email" id="email" class="form-control input-box" type="email" 
+                                   value="example@example.com" autocomplete="off" required/>
+                        </div>
+                        
+                        <!-- Form Group -->
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input name="password" id="password" class="form-control input-box" type="password" 
+                                   value="123456" autocomplete="off" required/>
+                        </div>
+
+                        <!-- Form Group -->
+                        <div class="form-group text-center">
+                            <button class="btn btn-main btn-effect" type="submit">Update</button>
+                        </div>
+                    </form>
+                    <!-- End of Security Form -->
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- =============== END OF MAIN =============== -->
+    
+</div>
+<!-- =============== END OF WRAPPER =============== -->
+
+
+</body>

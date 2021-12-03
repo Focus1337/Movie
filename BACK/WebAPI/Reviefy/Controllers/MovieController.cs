@@ -19,8 +19,8 @@ namespace Reviefy.Controllers
             if (id == Guid.Empty)
                 return View(GetMovies());
 
-            var movie = _connection.Movie.FirstOrDefault(account => account.MovieId == id);
-            var moviePhoto = _connection.MoviePhoto.FirstOrDefault(account => account.MovieId == id);
+            var movie = _connection.Movie.FirstOrDefault(x => x.MovieId == id);
+            var moviePhoto = _connection.MoviePhoto.FirstOrDefault(photo => photo.MovieId == id);
 
             ViewBag.Movie = movie;
             ViewBag.MoviePhoto = moviePhoto;
