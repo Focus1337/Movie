@@ -12,9 +12,7 @@ namespace Reviefy.Controllers
     {
         private readonly AppDataConnection _connection;
         public UserController(AppDataConnection connection) => _connection = connection;
-        
-        //private List<User> GetUsers() => _connection.User.OrderByDescending(x => x.UserId).ToList();
-        
+
         // GET
         public IActionResult UserProfile(Guid id)
         {
@@ -22,9 +20,16 @@ namespace Reviefy.Controllers
                 return RedirectToAction("PageNotFound", "Home");
 
             var user = _connection.User.FirstOrDefault(x => x.UserId == id);
+
+            ViewBag.User = user;
+            ViewBag.Reviews = _connection.Review
+                .Where(x => x.UserId == id)
+                .OrderByDescending(x => x.ReviewDate).ToList();
+            ViewBag.Movie = _connection.Movie;
+
             return user == null ? RedirectToAction("PageNotFound", "Home") : View(user);
         }
-        
+
         public IActionResult MyProfile() => View();
     }
 }

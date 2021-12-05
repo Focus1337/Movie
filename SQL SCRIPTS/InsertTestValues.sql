@@ -68,6 +68,11 @@ VALUES (NEWID(), 'B2D9D186-3E79-4824-9DCE-14CA8E7C5EB2', 'ECD826E4-0526-4020-912
                                         drama with Oscar winning plot?In fact I got from "Wrath of Man" exactly what I expected - charismatic and not
                                         very complicated action movie of a good quality. The only surprising moment for me is a gloomy atmosphere of the whole story. But Jason 100% fits this dark drama.', '2021-12-03', 9, 112)
 
+INSERT INTO Reviews
+VALUES (NEWID(), '3DB2B1C3-EC97-4439-9143-8AA2EFAE015D', '', 'I am surprised of some reviews that are saying about frustration from this movie.
+                                        What did you expect from the Ritchies film with Statham in 2021? Sophisticated
+                                        drama with Oscar winning plot?In fact I got from "Wrath of Man" exactly what I expected - charismatic and not
+                                        very complicated action movie of a good quality. The only surprising moment for me is a gloomy atmosphere of the whole story. But Jason 100% fits this dark drama.', '2021-12-03', 9, 112)
 
 
 

@@ -25,12 +25,15 @@ namespace Reviefy.Controllers
                                     .Where(x => x.MovieId == id)
                                     .OrderBy(x => x.ReviewDate).ToList();
 
+            var user = _connection.User;
+
             ViewBag.Movie = movie;
             ViewBag.MoviePhoto = moviePhoto;
             ViewBag.Reviews = reviews;
+            ViewBag.User = user;
             return movie == null ? RedirectToAction("PageNotFound", "Home") : View("MovieDetail");
         }
-        
+
         public IActionResult TopRatedMovies() => View();
     }
 }

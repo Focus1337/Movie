@@ -1,5 +1,7 @@
+@using LinqToDB.Reflection
+@using LinqToDB
 @{
-    ViewBag.Title = ViewBag.Movie.Title;
+    ViewBag.Title = ViewBag.Movie.Title  + " - Movies";
     Layout = "_Master";
 }
 
@@ -183,9 +185,10 @@
                         {
                             <li class="media">
                                 <div class="review-box">
-                                    <img class="img-circle" src="~/images/papanya.png" alt="">
+                                    <img class="img-circle" src="@(((ITable<User>)ViewBag.User).FirstOrDefault(x => x.UserId == review.UserId)?.AvatarPath)" alt="">
                                     <div class="review-box-fix">
-                                        <h4>Vitaliy Tsal</h4>
+                                       
+                                        <h4>@(((ITable<User>)ViewBag.User).FirstOrDefault(x => x.UserId == review.UserId)?.Nickname)</h4>
                                         <div class="review-box-rating">
                                             <i class="fa fa-star"></i>
                                             <span>@review.Rating/10</span>
@@ -198,7 +201,7 @@
                                         </div>
 
                                         <hr>
-                                            <p>@Html.Raw(@review.Text)</p>
+                                        <p>@Html.Raw(@review.Text)</p>
                                         <hr>
 
                                         <div class="review-box-helpfulness">

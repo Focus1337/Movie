@@ -21,7 +21,7 @@ namespace Reviefy.Models
         [Column("register_date"), NotNull] 
         public DateTime RegisterDate { get; set; }
         
-        [Column("avatar_url"), NotNull]
-        public string AvatarUrl { get; set; }
+        [Column("avatar_path"), NotNull]
+        public string AvatarPath { get; set; }
     }
 }

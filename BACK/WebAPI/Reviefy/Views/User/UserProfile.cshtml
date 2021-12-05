@@ -1,7 +1,6 @@
-@model User
-
+@using LinqToDB
 @{
-    ViewBag.Title = "User Profile";
+    ViewBag.Title = ViewBag.User.Nickname + " - Users";
     Layout = "_Layout";
 }
 
@@ -18,7 +17,7 @@
                 <div class="col-md-3" style="margin-left: 30%">
                     <div style="margin-top: 40px;">
                         <div class="movie-poster">
-                            <img src="~/images/user.png"
+                            <img src="@ViewBag.User.AvatarPath"
                                  alt="" width="200">
                         </div>
                     </div>
@@ -26,13 +25,27 @@
                 <!-- End of Avatar Form -->
                 
                 <div>
-                    <h2>Username</h2>
+                    <h2>@ViewBag.User.Nickname</h2>
                     
-                    <h6>Registration date: 2021-12-01</h6>
-                    <h6>Reviews count: 12</h6>
+                    <h6>Registration date: @ViewBag.User.RegisterDate.ToString("d")</h6>
+                    <h6>Reviews count: @ViewBag.Reviews.Count</h6>
                 </div>
-
+                
             </div>
+            
+            <p></p>
+            <hr>
+            <h4 class="row justify-content-center pt10">Latest Reviews</h4>
+            <ol>
+            @foreach (Review review in ViewBag.Reviews)
+            {
+                <li >
+                    <a asp-controller="Movie" asp-action="LatestMovies" asp-route-id="@review.MovieId"
+                       class="row justify-content-center pt10" style="font-weight: 400; margin-right: 25px">@(((ITable<Movie>)ViewBag.Movie).FirstOrDefault(x => x.MovieId == review.MovieId)?.Title)</a>
+                </li>
+            }
+            </ol>
+            
         </div>
     </main>
     <!-- =============== END OF MAIN =============== -->
