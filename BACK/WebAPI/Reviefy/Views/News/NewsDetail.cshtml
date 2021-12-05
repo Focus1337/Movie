@@ -1,7 +1,7 @@
-@model Reviefy.Models.News
+@model ViewModel
 
 @{
-    ViewBag.Title = Model?.Title  + " - News";
+    ViewBag.Title = Model.NewsById.Title  + " - News";
     Layout = "_Layout";
 }
 
@@ -14,7 +14,7 @@
              style="background: url(https://ak.picdn.net/shutterstock/videos/1055155340/thumb/1.jpg)">
         <div class="container">
             <div class="inner">
-                <h2 class="title">@Model?.Title</h2>
+                <h2 class="title">@Model.NewsById.Title</h2>
             </div>
         </div>
     </section>
@@ -34,23 +34,23 @@
                             
                         <!-- Image -->
                         <div class="blog-thumb">
-                            <img src="@Model?.PosterPath" alt="">
+                            <img src="@Model.NewsById.PosterPath" alt="">
                         </div>
 
                         <!-- Content -->
                         <div class="post-content">
                             <h3 class="title">
-                                <a asp-controller="News" asp-action="LatestNews" asp-route-id="@Model?.NewsId">
-                                    @Model?.Title
+                                <a asp-controller="News" asp-action="GetNews" asp-route-id="@Model.NewsById.NewsId">
+                                    @Model.NewsById.Title
                                 </a>
                             </h3>
                             
                             <ul class="post-meta">
-                                <li>@Model?.NewsDate.ToString("d")</li>
+                                <li>@Model.NewsById.NewsDate.ToString("d")</li>
                             </ul>
 
                             <p>
-                                @Html.Raw(Model?.Text)
+                                @Html.Raw(Model.NewsById.Text)
                             </p>
 
                             <!-- Start of Social Buttons -->
@@ -125,16 +125,6 @@
     <!-- =============== END OF MAIN =============== -->
 </div>
     <!-- =============== END OF WRAPPER =============== -->
-
-
-    <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
-    <div class="general-search-wrapper">
-        <form class="general-search" role="search" method="get" action="#">
-            <input type="text" placeholder="Type and hit enter...">
-            <span id="general-search-close" class="ti-close toggle-search"></span>
-        </form>
-    </div>
-    <!-- =============== END OF GENERAL SEARCH WRAPPER =============== -->
 
 
     <!-- ===== Start of Back to Top Button ===== -->

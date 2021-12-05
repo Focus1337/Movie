@@ -1,6 +1,7 @@
-@using LinqToDB
+@model ViewModel
+
 @{
-    ViewBag.Title = ViewBag.User.Nickname + " - Users";
+    ViewBag.Title = Model.UserById.Nickname + " - Users";
     Layout = "_Layout";
 }
 
@@ -17,7 +18,7 @@
                 <div class="col-md-3" style="margin-left: 30%">
                     <div style="margin-top: 40px;">
                         <div class="movie-poster">
-                            <img src="@ViewBag.User.AvatarPath"
+                            <img src="@Model.UserById.AvatarPath"
                                  alt="" width="200">
                         </div>
                     </div>
@@ -25,10 +26,10 @@
                 <!-- End of Avatar Form -->
                 
                 <div>
-                    <h2>@ViewBag.User.Nickname</h2>
+                    <h2>@Model.UserById.Nickname</h2>
                     
-                    <h6>Registration date: @ViewBag.User.RegisterDate.ToString("d")</h6>
-                    <h6>Reviews count: @ViewBag.Reviews.Count</h6>
+                    <h6>Registration date: @Model.UserById.RegisterDate.ToString("d")</h6>
+                    <h6>Reviews count: @Model.Reviews.Count</h6>
                 </div>
                 
             </div>
@@ -37,11 +38,16 @@
             <hr>
             <h4 class="row justify-content-center pt10">Latest Reviews</h4>
             <ol>
-            @foreach (Review review in ViewBag.Reviews)
+            @foreach (var review in Model.Reviews)
             {
-                <li >
-                    <a asp-controller="Movie" asp-action="LatestMovies" asp-route-id="@review.MovieId"
-                       class="row justify-content-center pt10" style="font-weight: 400; margin-right: 25px">@(((ITable<Movie>)ViewBag.Movie).FirstOrDefault(x => x.MovieId == review.MovieId)?.Title)</a>
+                <li>
+                    <a asp-controller="Movie" asp-action="GetMovie" asp-route-id="@review.MovieId"
+                       class="row justify-content-center" style="font-weight: 400; margin-right: 25px">
+                        @Model.Movies.FirstOrDefault(x => x.MovieId == review.MovieId)?.Title
+                    </a>
+                    <small class="row justify-content-center" style="font-weight: 400; margin-right: 25px">
+                        review from @review.ReviewDate.ToString("d")
+                    </small>
                 </li>
             }
             </ol>

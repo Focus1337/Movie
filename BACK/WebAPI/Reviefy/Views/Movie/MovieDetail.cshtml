@@ -1,7 +1,7 @@
-@using LinqToDB.Reflection
-@using LinqToDB
+@model ViewModel
+
 @{
-    ViewBag.Title = ViewBag.Movie.Title  + " - Movies";
+    ViewBag.Title = Model.MovieById.Title  + " - Movies";
     Layout = "_Master";
 }
 
@@ -12,7 +12,7 @@
     
         <!-- =============== START OF MOVIE DETAIL INTRO =============== -->
         <section class="movie-detail-intro overlay-gradient ptb100"
-            style="background: url(@ViewBag.MoviePhoto.Background)">
+            style="background: url(@Model.MoviePhotoById.Background)">
         </section>
         <!-- =============== END OF MOVIE DETAIL INTRO =============== -->
     
@@ -24,20 +24,20 @@
                     <div class="col-md-12">
 
                         <div class="movie-poster">
-                            <img src="@ViewBag.Movie.PosterPath"
+                            <img src="@Model.MovieById.PosterPath"
                                 alt="" width="300">
                         </div>
 
                         <div class="movie-details">
-                            <h3 class="title">@ViewBag.Movie.Title</h3>
+                            <h3 class="title">@Model.MovieById.Title</h3>
 
                             <ul class="movie-subtext">
-                                <li>@ViewBag.Movie.Duration min</li>
-                                <li>@ViewBag.Movie.Genre</li>
-                                <li>@ViewBag.Movie.ReleaseDate.ToString("d") (@ViewBag.Movie.Country)</li>
+                                <li>@Model.MovieById.Duration min</li>
+                                <li>@Model.MovieById.Genre</li>
+                                <li>@Model.MovieById.ReleaseDate.ToString("d") (@Model.MovieById.Country)</li>
                             </ul>
 
-                            <a href="@ViewBag.Movie.TrailerPath"
+                            <a href="@Model.MovieById.TrailerPath"
                                 class="btn btn-main btn-effect">trailer</a>
 
                             <div class="rating mt10">
@@ -46,7 +46,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i>
-                                <span>@ViewBag.Movie.Rating / 10</span>
+                                <span>@Model.MovieById.Rating / 10</span>
                             </div>
                         </div>
 
@@ -72,7 +72,7 @@
                             <div class="storyline">
                                 <h3 class="title">Storyline</h3>
 
-                                <p>@ViewBag.Movie.Storyline</p>
+                                <p>@Model.MovieById.Storyline</p>
                             </div>
 
                             <!-- Media -->
@@ -81,56 +81,56 @@
 
                                 <ul class="image-gallery isotope">
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo1">
-                                            <img src="@ViewBag.MoviePhoto.Photo1" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo1">
+                                            <img src="@Model.MoviePhotoById.Photo1" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo2">
-                                            <img src="@ViewBag.MoviePhoto.Photo2" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo2">
+                                            <img src="@Model.MoviePhotoById.Photo2" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo3">
-                                            <img src="@ViewBag.MoviePhoto.Photo3" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo3">
+                                            <img src="@Model.MoviePhotoById.Photo3" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo4">
-                                            <img src="@ViewBag.MoviePhoto.Photo4" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo4">
+                                            <img src="@Model.MoviePhotoById.Photo4" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo5">
-                                            <img src="@ViewBag.MoviePhoto.Photo5" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo5">
+                                            <img src="@Model.MoviePhotoById.Photo5" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo6">
-                                            <img src="@ViewBag.MoviePhoto.Photo6" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo6">
+                                            <img src="@Model.MoviePhotoById.Photo6" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo7">
-                                            <img src="@ViewBag.MoviePhoto.Photo7" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo7">
+                                            <img src="@Model.MoviePhotoById.Photo7" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo8">
-                                            <img src="@ViewBag.MoviePhoto.Photo8" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo8">
+                                            <img src="@Model.MoviePhotoById.Photo8" class="img-responsive" alt="">
                                         </a>
                                     </li>
 
                                     <li class="element">
-                                        <a href="@ViewBag.MoviePhoto.Photo9">
-                                            <img src="@ViewBag.MoviePhoto.Photo9" class="img-responsive" alt="">
+                                        <a href="@Model.MoviePhotoById.Photo9">
+                                            <img src="@Model.MoviePhotoById.Photo9" class="img-responsive" alt="">
                                         </a>
                                     </li>
                                 </ul>
@@ -151,12 +151,12 @@
                                 <h3 class="title">Details</h3>
 
                                 <ul>
-                                    <li><strong>Release date: </strong>@ViewBag.Movie.ReleaseDate.ToString("d")</li>
-                                    <li><strong>Director: </strong>@ViewBag.Movie.Director</li>
-                                    <li><strong>Budget: </strong>@ViewBag.Movie.Budget million USD</li>
-                                    <li><strong>Country: </strong>@ViewBag.Movie.Country</li>
-                                    <li><strong>Language: </strong>@ViewBag.Movie.Language</li>
-                                    <li><strong>Production Co: </strong>@ViewBag.Movie.Company</li>
+                                    <li><strong>Release date: </strong>@Model.MovieById.ReleaseDate.ToString("d")</li>
+                                    <li><strong>Director: </strong>@Model.MovieById.Director</li>
+                                    <li><strong>Budget: </strong>@Model.MovieById.Budget million USD</li>
+                                    <li><strong>Country: </strong>@Model.MovieById.Country</li>
+                                    <li><strong>Language: </strong>@Model.MovieById.Language</li>
+                                    <li><strong>Production Co: </strong>@Model.MovieById.Company</li>
                                 </ul>
                             </aside>
                             <!-- End of Details Widget -->
@@ -177,18 +177,21 @@
 
                 <!-- Start of Reviews -->
                 <div class="comments">
-                    <h3 class="title">Reviews (@ViewBag.Reviews.Count)</h3>
+                    <h3 class="title">Reviews (@Model.Reviews.Count)</h3>
 
                     <ul class="list-unstyled mt30">
 
-                        @foreach(Review review in ViewBag.Reviews)
+                        @foreach(var review in Model.Reviews)
                         {
                             <li class="media">
                                 <div class="review-box">
-                                    <img class="img-circle" src="@(((ITable<User>)ViewBag.User).FirstOrDefault(x => x.UserId == review.UserId)?.AvatarPath)" alt="">
+                                    <img class="img-circle" src="@Model.Users.FirstOrDefault(x => x.UserId == review.UserId)?.AvatarPath" alt="">
+                                    
                                     <div class="review-box-fix">
                                        
-                                        <h4>@(((ITable<User>)ViewBag.User).FirstOrDefault(x => x.UserId == review.UserId)?.Nickname)</h4>
+                                        <a asp-controller="User" asp-action="UserProfile" asp-route-id="@review.UserId">
+                                            <h4>@Model.Users.FirstOrDefault(x => x.UserId == review.UserId)?.Nickname</h4>
+                                        </a>
                                         <div class="review-box-rating">
                                             <i class="fa fa-star"></i>
                                             <span>@review.Rating/10</span>
@@ -201,7 +204,7 @@
                                         </div>
 
                                         <hr>
-                                        <p>@Html.Raw(@review.Text)</p>
+                                        <p>@Html.Raw(review.Text)</p>
                                         <hr>
 
                                         <div class="review-box-helpfulness">
@@ -266,16 +269,6 @@
     
     </div>
     <!-- =============== END OF WRAPPER =============== -->
-
-
-    <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
-    <div class="general-search-wrapper">
-        <form class="general-search" role="search" method="get" action="#">
-            <input type="text" placeholder="Type and hit enter...">
-            <span id="general-search-close" class="ti-close toggle-search"></span>
-        </form>
-    </div>
-    <!-- =============== END OF GENERAL SEARCH WRAPPER =============== -->
 
 
     <!-- ===== Start of Back to Top Button ===== -->

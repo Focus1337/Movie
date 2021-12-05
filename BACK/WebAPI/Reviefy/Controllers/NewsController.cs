@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Reviefy.Models;
 
 namespace Reviefy.Controllers
@@ -13,20 +9,24 @@ namespace Reviefy.Controllers
     public class NewsController : Controller
     {
         private readonly AppDataConnection _connection;
-
         public NewsController(AppDataConnection connection) => _connection = connection;
+        private List<News> GetNewsList() => 
+            _connection.News.OrderByDescending(x => x.NewsDate).ToList();
+
+        public IActionResult LatestNews() => View(GetNewsList());
 
         // GET
-        public IActionResult LatestNews(Guid id)
+        public IActionResult GetNews(Guid id)
         {
-            if (id == Guid.Empty)
-                return View(GetNews());
+            if (_connection.News.All(x => x.NewsId != id))
+                return RedirectToAction("PageNotFound", "Home");
 
-            var news = _connection.News.FirstOrDefault(account => account.NewsId == id);
-            return news == null ? RedirectToAction("PageNotFound", "Home") : View("NewsDetail",news);
+            var viewModel = new ViewModel
+            {
+                NewsById = _connection.News.FirstOrDefault(x => x.NewsId == id)
+            };
+
+            return View("NewsDetail", viewModel);
         }
-        
-        
-        private List<News> GetNews() => _connection.News.OrderByDescending(x => x.NewsDate).ToList();
     }
 }

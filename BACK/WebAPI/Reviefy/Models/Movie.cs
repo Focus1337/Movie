@@ -34,6 +34,5 @@ namespace Reviefy.Models
 		[Column("poster_path"), Nullable] public string PosterPath { get; set; }
 		
 		[Column("trailer_path"), Nullable] public string TrailerPath { get; set; }
-
 	}
 }

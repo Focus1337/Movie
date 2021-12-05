@@ -31,35 +31,35 @@
 
                         @if (Model.Any())
                         {
-                            @foreach (News entity in Model)
+                            @foreach (var news in Model)
                             {
                             <!-- Start of Blog Post 1 -->
                             <article class="blog-post">
 
                                     <!-- Image -->
                                     <div class="blog-thumb">
-                                        <a asp-controller="News" asp-action="LatestNews" asp-route-id="@entity.NewsId" class="post-img hover-link">
-                                            <img src="@entity.PosterPath" alt="">
+                                        <a asp-controller="News" asp-action="GetNews" asp-route-id="@news.NewsId" class="post-img hover-link">
+                                            <img src="@news.PosterPath" alt="">
                                         </a>
                                     </div>
 
                                     <!-- Content -->
                                     <div class="post-content">
                                         <h3 class="title">
-                                            <a asp-controller="News" asp-action="LatestNews" asp-route-id="@entity.NewsId">
-                                                @entity.Title
+                                            <a asp-controller="News" asp-action="GetNews" asp-route-id="@news.NewsId">
+                                                @news.Title
                                             </a>
                                         </h3>
 
                                         <ul class="post-meta">
-                                            <li>@entity.NewsDate.ToString("d")</li>
+                                            <li>@news.NewsDate.ToString("d")</li>
                                         </ul>
 
                                         <p>
-                                            @Html.Raw(entity.Text)
+                                            @Html.Raw(news.Text)
                                         </p>
 
-                                        <a asp-controller="News" asp-action="LatestNews" asp-route-id="@entity.NewsId" class="read-more">
+                                        <a asp-controller="News" asp-action="GetNews" asp-route-id="@news.NewsId" class="read-more">
                                             Read More <i class="fa fa-angle-right"></i>
                                         </a>
                                     </div>
@@ -67,80 +67,7 @@
                                 </article>
                                 <!-- End of Blog Post 1 -->
                             }
-                         } 
-
-                        @* <!-- Start of Blog Post 2 --> *@
-                        @* <article class="blog-post"> *@
-                        @* *@
-                        @*     <!-- Image --> *@
-                        @*     <div class="blog-thumb"> *@
-                        @*         <a href='@Url.Action("NewsDetail", "Home")' class="post-img hover-link"> *@
-                        @*             <img src="~/images/news/news-2.png" alt=""> *@
-                        @*         </a> *@
-                        @*     </div> *@
-                        @* *@
-                        @*     <!-- Content --> *@
-                        @*     <div class="post-content"> *@
-                        @*         <h3 class="title"> *@
-                        @*             <a href='@Url.Action("NewsDetail", "Home")'> *@
-                        @*                 Oscar Awards *@
-                        @*             </a> *@
-                        @*         </h3> *@
-                        @* *@
-                        @*         <ul class="post-meta"> *@
-                        @*             <li>February 9, 2018</li> *@
-                        @*             <li><a href="#">News</a></li> *@
-                        @*             <li><a href="#">5 Comments</a></li> *@
-                        @*         </ul> *@
-                        @* *@
-                        @*         <p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula *@
-                        @*             nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue *@
-                        @*             dapibus facilisis.</p> *@
-                        @* *@
-                        @*         <a href='@Url.Action("NewsDetail", "Home")' class="read-more"> *@
-                        @*             Read More <i class="fa fa-angle-right"></i> *@
-                        @*         </a> *@
-                        @*     </div> *@
-                        @* *@
-                        @* </article> *@
-                        @* <!-- End of Blog Post 2 --> *@
-                        @* *@
-                        @* <!-- Start of Blog Post 3 --> *@
-                        @* <article class="blog-post"> *@
-                        @* *@
-                        @*     <!-- Image --> *@
-                        @*     <div class="blog-thumb"> *@
-                        @*         <a href='@Url.Action("NewsDetail", "Home")' class="post-img hover-link"> *@
-                        @*             <img src="~/images/news/news-3.jpg" alt=""> *@
-                        @*         </a> *@
-                        @*     </div> *@
-                        @* *@
-                        @*     <!-- Content --> *@
-                        @*     <div class="post-content"> *@
-                        @*         <h3 class="title"> *@
-                        @*             <a href='@Url.Action("NewsDetail", "Home")'> *@
-                        @*                 Top Upcoming Movies *@
-                        @*             </a> *@
-                        @*         </h3> *@
-                        @* *@
-                        @*         <ul class="post-meta"> *@
-                        @*             <li>January 18, 2018</li> *@
-                        @*             <li><a href="#">News</a></li> *@
-                        @*             <li><a href="#">5 Comments</a></li> *@
-                        @*         </ul> *@
-                        @* *@
-                        @*         <p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula *@
-                        @*             nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue *@
-                        @*             dapibus facilisis.</p> *@
-                        @* *@
-                        @*         <a asp-area="" asp-controller="Home" asp-action="News" asp-route-id="@Model.NewsId" class="read-more"> *@
-                        @*             Read More <i class="fa fa-angle-right"></i> *@
-                        @*         </a> *@
-                        @*     </div> *@
-                        @* *@
-                        @* </article> *@
-                        @* <!-- End of Blog Post 3 --> *@
-
+                         }
 
                         <!-- Start of Pagination -->
                         <div class="row">
@@ -167,17 +94,6 @@
 
     </div>
     <!-- =============== END OF WRAPPER =============== -->
-
-
-    <!-- =============== START OF GENERAL SEARCH WRAPPER =============== -->
-    <div class="general-search-wrapper">
-        <form class="general-search" role="search" method="get" action="#">
-            <input type="text" placeholder="Type and hit enter...">
-            <span id="general-search-close" class="ti-close toggle-search"></span>
-        </form>
-    </div>
-    <!-- =============== END OF GENERAL SEARCH WRAPPER =============== -->
-
 
     <!-- ===== Start of Back to Top Button ===== -->
     <div id="backtotop">

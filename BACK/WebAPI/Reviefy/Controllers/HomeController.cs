@@ -12,11 +12,11 @@ namespace Reviefy.Controllers
 
         public HomeController(AppDataConnection connection) => _connection = connection;
 
-        private IEnumerable<News> GetNews() =>
-            _connection.News.OrderByDescending(x => x.NewsDate).ToList().Take(3);
+        private List<News> GetNews() =>
+            _connection.News.OrderByDescending(x => x.NewsDate).Take(3).ToList();
         
-        private IEnumerable<Movie> GetMovies() =>
-            _connection.Movie.OrderByDescending(x => x.ReleaseDate).ToList().Take(6);
+        private List<Movie> GetMovies() =>
+            _connection.Movie.OrderByDescending(x => x.ReleaseDate).Take(6).ToList();
 
         public IActionResult Index()
         {
@@ -33,10 +33,7 @@ namespace Reviefy.Controllers
             return View();
         }
 
-        public IActionResult ContactUs()
-        {
-            return View();
-        }
+        public IActionResult ContactUs() => View();
 
         public IActionResult AboutUs() => View();
 

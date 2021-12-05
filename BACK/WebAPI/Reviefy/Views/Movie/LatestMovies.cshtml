@@ -31,7 +31,7 @@
 
                  @if (Model.Any())
                  {
-                     @foreach (Movie entity in Model)
+                     @foreach (var movie in Model)
                      {
                          <!-- Movie List Item -->
                          <div class="col-lg-4 col-md-6 col-sm-12" >
@@ -39,13 +39,13 @@
 
                                  <!-- Start of Poster -->
                                  <div class="poster">
-                                     <img src="@entity.PosterPath" alt="" style="width: 350px; height: 495px;">
+                                     <img src="@movie.PosterPath" alt="" style="width: 350px; height: 495px;">
                                  </div>
                                  <!-- End of Poster -->
 
                                  <!-- Start of Buttons -->
                                  <div class="buttons">
-                                     <a href="@entity.TrailerPath" class="play-video">
+                                     <a href="@movie.TrailerPath" class="play-video">
                                          <i class="fa fa-play"></i>
                                      </a>
                                  </div>
@@ -54,9 +54,9 @@
                                  <!-- Start of Movie Details -->
                                  <div class="movie-details">
                                      <h4 class="movie-title">
-                                         <a asp-controller="Movie" asp-action="LatestMovies" asp-route-id="@entity.MovieId">@entity.Title</a>
+                                         <a asp-controller="Movie" asp-action="GetMovie" asp-route-id="@movie.MovieId">@movie.Title</a>
                                      </h4>
-                                     <span class="released">@entity.ReleaseDate.ToString("d")</span>
+                                     <span class="released">@movie.ReleaseDate.ToString("d")</span>
                                  </div>
                                  <!-- End of Movie Details -->
 
@@ -69,7 +69,7 @@
                                          <i class="fa fa-star"></i>
                                          <i class="fa fa-star-o"></i>
                                      </div>
-                                     <span>@entity.Rating / 10</span>
+                                     <span>@movie.Rating / 10</span>
                                  </div>
                                  <!-- End of Rating -->
 

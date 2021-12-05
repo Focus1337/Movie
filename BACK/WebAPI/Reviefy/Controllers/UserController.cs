@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
 using Reviefy.Models;
 
@@ -12,22 +10,27 @@ namespace Reviefy.Controllers
     {
         private readonly AppDataConnection _connection;
         public UserController(AppDataConnection connection) => _connection = connection;
+        
+        private List<Movie> GetMoviesList() =>
+            _connection.Movie.OrderByDescending(x => x.ReleaseDate).ToList();
 
         // GET
         public IActionResult UserProfile(Guid id)
         {
-            if (id == Guid.Empty)
+            if (_connection.User.All(x => x.UserId != id))
                 return RedirectToAction("PageNotFound", "Home");
+            
+            var viewModel = new ViewModel
+            {
+                Movies = GetMoviesList(),
+                Reviews = _connection.Review
+                    .Where(x => x.UserId == id)
+                    .OrderByDescending(x => x.ReviewDate).ToList(),
 
-            var user = _connection.User.FirstOrDefault(x => x.UserId == id);
+                UserById = _connection.User.FirstOrDefault(x => x.UserId == id)
+            };
 
-            ViewBag.User = user;
-            ViewBag.Reviews = _connection.Review
-                .Where(x => x.UserId == id)
-                .OrderByDescending(x => x.ReviewDate).ToList();
-            ViewBag.Movie = _connection.Movie;
-
-            return user == null ? RedirectToAction("PageNotFound", "Home") : View(user);
+            return View("UserProfile", viewModel);
         }
 
         public IActionResult MyProfile() => View();

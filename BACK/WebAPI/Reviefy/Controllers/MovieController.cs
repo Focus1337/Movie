@@ -9,29 +9,39 @@ namespace Reviefy.Controllers
     public class MovieController : Controller
     {
         private readonly AppDataConnection _connection;
-        private List<Movie> GetMovies() =>
-            _connection.Movie.OrderByDescending(x => x.ReleaseDate).ToList();
         public MovieController(AppDataConnection connection) => _connection = connection;
 
+        private List<Movie> GetMoviesList() =>
+            _connection.Movie.OrderByDescending(x => x.ReleaseDate).ToList();
+
+        private List<MoviePhoto> GetMoviePhotosList() =>
+            _connection.MoviePhoto.ToList();
+
+        private List<User> GetUsersList() =>
+            _connection.User.ToList();
+        
+        public IActionResult LatestMovies() => View(GetMoviesList());
+
         // GET
-        public IActionResult LatestMovies(Guid id)
+        public IActionResult GetMovie(Guid id)
         {
-            if (id == Guid.Empty)
-                return View(GetMovies());
+            if (_connection.Movie.All(x => x.MovieId != id))
+                return RedirectToAction("PageNotFound", "Home");
 
-            var movie = _connection.Movie.FirstOrDefault(x => x.MovieId == id);
-            var moviePhoto = _connection.MoviePhoto.FirstOrDefault(x => x.MovieId == id);
-            var reviews = _connection.Review
-                                    .Where(x => x.MovieId == id)
-                                    .OrderBy(x => x.ReviewDate).ToList();
+            var viewModel = new ViewModel
+            {
+                Movies = GetMoviesList(),
+                Reviews = _connection.Review
+                    .Where(x => x.MovieId == id)
+                    .OrderBy(x => x.ReviewDate).ToList(),
+                MoviePhotos = GetMoviePhotosList(),
+                Users = GetUsersList(),
 
-            var user = _connection.User;
+                MovieById = _connection.Movie.FirstOrDefault(x => x.MovieId == id),
+                MoviePhotoById = _connection.MoviePhoto.FirstOrDefault(x => x.MovieId == id)
+            };
 
-            ViewBag.Movie = movie;
-            ViewBag.MoviePhoto = moviePhoto;
-            ViewBag.Reviews = reviews;
-            ViewBag.User = user;
-            return movie == null ? RedirectToAction("PageNotFound", "Home") : View("MovieDetail");
+            return View("MovieDetail", viewModel);
         }
 
         public IActionResult TopRatedMovies() => View();
