@@ -14,13 +14,11 @@ namespace Reviefy.Controllers
         private List<Movie> GetMoviesList() =>
             _connection.Movie.OrderByDescending(x => x.ReleaseDate).ToList();
 
-        private List<MoviePhoto> GetMoviePhotosList() =>
-            _connection.MoviePhoto.ToList();
-
         private List<User> GetUsersList() =>
             _connection.User.ToList();
         
         public IActionResult LatestMovies() => View(GetMoviesList());
+        public IActionResult TopRatedMovies() => View();
 
         // GET
         public IActionResult GetMovie(Guid id)
@@ -30,11 +28,9 @@ namespace Reviefy.Controllers
 
             var viewModel = new ViewModel
             {
-                Movies = GetMoviesList(),
                 Reviews = _connection.Review
                     .Where(x => x.MovieId == id)
                     .OrderBy(x => x.ReviewDate).ToList(),
-                MoviePhotos = GetMoviePhotosList(),
                 Users = GetUsersList(),
 
                 MovieById = _connection.Movie.FirstOrDefault(x => x.MovieId == id),
@@ -44,6 +40,11 @@ namespace Reviefy.Controllers
             return View("MovieDetail", viewModel);
         }
 
-        public IActionResult TopRatedMovies() => View();
+        // public IActionResult Search(string title)
+        // {
+        //     var movieIdByTitle = _connection.Movie.FirstOrDefault(x => x.Title == title)?.MovieId;
+        //     return movieIdByTitle == null ? RedirectToAction("PageNotFound", "Home") : GetMovie((Guid) movieIdByTitle);
+        // }
+        
     }
 }

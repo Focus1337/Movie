@@ -1,0 +1,33 @@
+@{
+    ViewBag.Title = "Top rated movies";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    @await Html.PartialAsync("MetatagsPartial")
+    @await Html.PartialAsync("CssPartial")
+</head>
+
+<body>
+
+<!-- =============== START OF WRAPPER =============== -->
+<div class="wrapper">
+    <main class="coming-soon">
+        <div class="container">
+            <h3 style="padding: 0 0; margin: 0 0;">@Html.Raw(ViewBag.AuthStatus)</h3>
+            <a asp-controller="Home" asp-action="Index" class="text-white">Back to Home</a>
+        </div>
+    </main>
+    
+</div>
+<!-- =============== END OF WRAPPER =============== -->
+
+@await Html.PartialAsync("ScriptsPartial")
+
+</body>
+
+</html>

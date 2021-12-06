@@ -66,35 +66,37 @@
                     <h3 class="title">Contact Form</h3>
 
                     <!-- Start of Contact Form -->
-                    <form id="contact-form" method="post">
+                    <form method="post">
 
                         <!-- contact result -->
-                        <div id="contact-result"></div>
+                        <div id="contact-result">
+                            <p>@ViewBag.ContactResult</p>
+                        </div>
                         <!-- end of contact result -->
 
                         <!-- Form Group -->
                         <div class="form-group">
-                            <input class="form-control input-box" type="text" name="name" placeholder="Your Name"
-                                   autocomplete="off">
+                            <input name="name" type="text" placeholder="Your Name" class="form-control input-box"
+                                   autocomplete="off" required>
                         </div>
 
                         <!-- Form Group -->
                         <div class="form-group">
-                            <input class="form-control input-box" type="email" name="email"
-                                   placeholder="example@example.com" autocomplete="off">
+                            <input name="email" type="email" class="form-control input-box"
+                                   placeholder="example@example.com" autocomplete="off" required>
                         </div>
 
 
                         <!-- Form Group -->
                         <div class="form-group">
-                            <input class="form-control input-box" type="text" name="subject" placeholder="Subject"
-                                   autocomplete="off">
+                            <input name="subject" type="text" placeholder="Subject" class="form-control input-box"
+                                   autocomplete="off" required>
                         </div>
 
                         <!-- Form Group -->
                         <div class="form-group mb20">
-                            <textarea class="form-control textarea-box" rows="8" name="message"
-                                    placeholder="Type your message..."></textarea>
+                            <textarea name="message" class="form-control textarea-box" rows="8" 
+                                    placeholder="Type your message..." required></textarea>
                         </div>
 
                         <!-- Form Group -->

@@ -7,7 +7,7 @@ namespace Reviefy.Models
     public class User
     {
         [Column("user_id"), PrimaryKey, NotNull]
-        public Guid UserId { get; set; }// = Guid.NewGuid();
+        public Guid UserId { get; set; }
 
         [Column("password"), NotNull]
         public string Password { get; set; }

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Reviefy.Models;
+using Reviefy.Services;
 
 namespace Reviefy.Controllers
 {
@@ -27,13 +29,19 @@ namespace Reviefy.Controllers
             };
             return View("Index", viewModel);
         }
-
-        public IActionResult Authorization()
-        {
-            return View();
-        }
-
+        
+        [HttpGet]
         public IActionResult ContactUs() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> ContactUs(string name, string email, string subject, string message)
+        {
+            var emailService = new EmailService();
+            var msg = $"Email from Reviefy user. Name: {name}. Email: {email}. Message:\n{message}";
+            var sbj = $"Reviefy Question: {subject}";
+            await emailService.SendEmailAsync("focus_test@mail.ru", sbj, msg);
+            return Ok("Email successfully was send");
+        }
 
         public IActionResult AboutUs() => View();
 

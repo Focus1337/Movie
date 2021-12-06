@@ -1,0 +1,91 @@
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    @await Html.PartialAsync("MetatagsPartial")
+    @await Html.PartialAsync("CssPartial")
+</head>
+
+
+<body>
+
+    <!-- =============== START OF WRAPPER =============== -->
+    <div class="wrapper">
+        <main class="login-register-page" style="background-image: url(https://img.freepik.com/free-photo/top-view-laptop-with-notebook-magnifying-glass_23-2148578061.jpg)">
+
+            <div class="container">
+
+                <!-- =============== START OF LOGIN & REGISTER POPUP =============== -->
+                <div class="small-dialog login-register">
+
+                    <!-- ===== Start of Signup wrapper ===== -->
+                    <div class="signin-wrapper">
+                        <div class="small-dialog-headline">
+                            <h4 class="text-center">Sign Up</h4>
+                        </div>
+
+                        <div class="small-dialog-content">
+
+                            <!-- Start of Registration form -->
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="nickname">Nickname *</label>
+                                    <input type="text" name="nickname" id="nickname" class="form-control" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" name="email" id="email" class="form-control" required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Password *</label>
+                                    <input type="password" name="password" id="password" class="form-control" />
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm Password *</label>
+                                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-main btn-effect nomargin" 
+                                           value="Register" required/>
+                                </div>
+                            </form>
+                            <!-- End of Registration form -->
+
+                            <div class="bottom-links">
+                                <span>
+                                    Already have an account?
+                                    <a asp-controller="Auth" asp-action="Login">Sign in</a>
+                                </span>
+                            </div>
+
+                        </div>
+                        <!-- .small-dialog-content -->
+
+                    </div>
+                    <!-- ===== End of Signup wrapper ===== -->
+
+                </div>
+                <!-- =============== END OF LOGIN & REGISTER POPUP =============== -->
+
+                <a asp-controller="Home" asp-action="Index" class="text-white">Back to Home</a>
+
+            </div>
+        </main>
+    </div>
+    <!-- =============== END OF WRAPPER =============== -->
+
+@await Html.PartialAsync("ScriptsPartial")
+
+</body>
+
+</html>

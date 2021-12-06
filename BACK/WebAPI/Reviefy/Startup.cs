@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Reviefy.Options;
 
 namespace Reviefy
 {
@@ -25,7 +26,6 @@ namespace Reviefy
         
         public void ConfigureServices(IServiceCollection services)
         {
-         // services.AddMvc();
             services.AddControllersWithViews();
             
             services.AddLinqToDbContext<AppDataConnection>((provider, options) => {
@@ -33,6 +33,9 @@ namespace Reviefy
                     .UseSqlServer(Configuration.GetConnectionString("Default"))
                     .UseDefaultLogging(provider);
             });
+            
+            var authOptionsConfiguration = Configuration.GetSection("Auth");
+            services.Configure<AuthOptions>(authOptionsConfiguration);
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -52,6 +55,7 @@ namespace Reviefy
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,0 +1,86 @@
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    @await Html.PartialAsync("MetatagsPartial")
+    @await Html.PartialAsync("CssPartial")
+</head>
+
+
+<body>
+    <!-- =============== START OF WRAPPER =============== -->
+    <div class="wrapper">
+        <main class="login-register-page" style="background-image: url(https://img.freepik.com/free-photo/top-view-laptop-with-notebook-magnifying-glass_23-2148578061.jpg)">
+
+            <div class="container">
+
+                <!-- =============== START OF LOGIN =============== -->
+                <div class="small-dialog login-register">
+
+                    <!-- ===== Start of Signin wrapper ===== -->
+                    <div class="signin-wrapper">
+                        <div class="small-dialog-headline">
+                            <h4 class="text-center">Sign in</h4>
+                        </div>
+
+                        <div class="small-dialog-content">
+
+                            <!-- Start of Login form -->
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" name="email" id="email" class="form-control"
+                                           required placeholder="Your Email *" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Password *</label>
+                                    <input type="password" name="password" id="password" class="form-control"
+                                           require placeholder="Your Password *" />
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="checkbox pad-bottom-10">
+                                        <input type="checkbox" id="check1" name="remember" value="yes">
+                                        <label for="check1">Keep me signed in</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Sign in" class="btn btn-main btn-effect nomargin" />
+                                </div>
+                            </form>
+                            <!-- End of Login form -->
+
+                            <div class="bottom-links">
+                                <span>
+                                    Not a member?
+                                    <a asp-controller="Auth" asp-action="Register">Sign up</a>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- ===== End of Signin wrapper ===== -->
+
+                </div>
+                <!-- =============== END OF LOGIN =============== -->
+
+                <a asp-controller="Home" asp-action="Index" class="text-white">Back to Home</a>
+
+            </div>
+        </main>
+    </div>
+    <!-- =============== END OF WRAPPER =============== -->
+
+@await Html.PartialAsync("ScriptsPartial")
+
+</body>
+
+</html>

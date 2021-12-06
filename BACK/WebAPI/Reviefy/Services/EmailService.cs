@@ -10,7 +10,7 @@ namespace Reviefy.Services
         {
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress("Администрация сайта", "focus_test@mail.ru"));
+            emailMessage.From.Add(new MailboxAddress("Reviefy", "focus_test@mail.ru"));
             emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
@@ -21,7 +21,7 @@ namespace Reviefy.Services
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync("smtp.mail.ru", 465, true);
-                await client.AuthenticateAsync("focus_test@mail.ru", "pass");
+                await client.AuthenticateAsync("focus_test@mail.ru", "L8iK9dfhcU7MapTxd1hN");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);
