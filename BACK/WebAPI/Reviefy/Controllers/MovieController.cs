@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
 using Reviefy.Models;
+
 
 namespace Reviefy.Controllers
 {
@@ -40,11 +42,34 @@ namespace Reviefy.Controllers
             return View("MovieDetail", viewModel);
         }
 
-        // public IActionResult Search(string title)
-        // {
-        //     var movieIdByTitle = _connection.Movie.FirstOrDefault(x => x.Title == title)?.MovieId;
-        //     return movieIdByTitle == null ? RedirectToAction("PageNotFound", "Home") : GetMovie((Guid) movieIdByTitle);
-        // }
-        
+        [HttpPost]
+        public IActionResult WriteReview(int rating, string text, Guid movieId, Guid userId)
+        {
+            // TODO:Парсить id пользователя из хедера мб, хз как это сделать (пользователь должен быть залогинен по идее)
+            var us = Guid.Parse("F9E234D4-F225-4AB9-99D8-84B81CA0257A");
+
+            // Check if review is already exists
+            var review = ReviewExists(movieId, us);
+            if (review != null)
+                return Ok("Your review already exists for this movie!");
+
+            review = new Review
+            {
+                ReviewId = Guid.NewGuid(),
+                MovieId = movieId,
+                UserId = us,
+                Helpfulness = 0,
+                Rating = rating,
+                Text = text,
+                ReviewDate = DateTime.Now
+            };
+
+            _connection.Insert(review);
+
+            return RedirectToAction("GetMovie", "Movie", new {id = movieId});
+        }
+
+        private Review ReviewExists(Guid movieId, Guid userId) =>
+            _connection.Review.FirstOrDefault(u => u.MovieId == movieId && u.UserId == userId);
     }
 }

@@ -66,14 +66,7 @@
                     <h3 class="title">Contact Form</h3>
 
                     <!-- Start of Contact Form -->
-                    <form method="post">
-
-                        <!-- contact result -->
-                        <div id="contact-result">
-                            <p>@ViewBag.ContactResult</p>
-                        </div>
-                        <!-- end of contact result -->
-
+                    <form asp-controller="Home" asp-action="Contact" method="post">
                         <!-- Form Group -->
                         <div class="form-group">
                             <input name="name" type="text" placeholder="Your Name" class="form-control input-box"
