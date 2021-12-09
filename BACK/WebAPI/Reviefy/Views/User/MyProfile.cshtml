@@ -20,18 +20,15 @@
                     
                     <div style="margin-top: 10px;">
                         <div class="movie-poster">
-                            <img src="~/images/user.png"
+                            <img src="@CurrentUser.AvatarPath"
                                  alt="" width="200">
                         </div>
                         
                         <p></p>
                         
-                        <form id="avatar-form" method="post">
-                            <!-- Form Group -->
-                            <div class="form-group text-center col-7">
-                                <button class="btn btn-main btn-effect" type="submit">Reset</button>
-                            </div>
-                        </form>
+                        <div class="form-group text-center col-7">
+                            <button asp-controller="User" asp-action="ResetAvatar" class="btn btn-main btn-effect" type="submit">Reset</button>
+                        </div>
                     </div>
                 </div>
                 <!-- End of Avatar Form -->
@@ -47,19 +44,19 @@
                         <div class="form-group">
                             <label for="nickname">Nickname</label>
                             <input name="nickname" id="nickname" class="form-control input-box" type="text" 
-                                   value="Current Name" autocomplete="off" required/>
+                                   value="@CurrentUser.Nickname" autocomplete="off" required/>
                         </div>
 
                         <!-- Form Group -->
                         <div class="form-group">
                             <label for="avatar">Avatar url</label>
                             <input name="avatar" id="avatar" class="form-control input-box" type="url" 
-                                   value="link to avatar" autocomplete="off" required/>
+                                   value="@CurrentUser.AvatarPath" autocomplete="off" required/>
                         </div>
                         
                         <!-- Form Group -->
                         <div>
-                            <label>Registration date: 2021-12-01</label>
+                            <label>Registration date: @CurrentUser.RegisterDate.ToString("d")</label>
                         </div>
                         
                         <!-- Form Group -->
@@ -83,14 +80,14 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input name="email" id="email" class="form-control input-box" type="email" 
-                                   value="example@example.com" autocomplete="off" required/>
+                                   value="@CurrentUser.Email" autocomplete="off" required/>
                         </div>
                         
                         <!-- Form Group -->
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input name="password" id="password" class="form-control input-box" type="password" 
-                                   value="123456" autocomplete="off" required/>
+                                   value="@CurrentUser.Password" autocomplete="off" required/>
                         </div>
 
                         <!-- Form Group -->

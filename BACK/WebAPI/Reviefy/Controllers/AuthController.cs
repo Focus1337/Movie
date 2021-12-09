@@ -28,10 +28,10 @@ namespace Reviefy.Controllers
         }
 
         public IActionResult AuthStatus() => View();
-        
+
         [HttpGet]
         public IActionResult Register() => View();
-        
+
         [HttpGet]
         public IActionResult Login() => View();
 
@@ -47,7 +47,7 @@ namespace Reviefy.Controllers
 
             if (password != confirmPassword)
                 return Ok("Password differs");
-            
+
             user = new User
             {
                 UserId = Guid.NewGuid(),
@@ -55,14 +55,14 @@ namespace Reviefy.Controllers
                 Password = PassHashing.Encrypt(password),
                 Nickname = nickname,
                 RegisterDate = DateTime.Now,
-                AvatarPath = ""
+                AvatarPath = "https://i.imgur.com/dNOjQWC.png"
             };
-            
+
             _connection.Insert(user);
 
-           // return Ok("Registered");
-           ViewBag.AuthStatus = "Successfully registered!";
-           return View("AuthStatus");
+            // return Ok("Registered");
+            ViewBag.AuthStatus = "Successfully registered!";
+            return View("AuthStatus");
         }
 
 
@@ -76,11 +76,72 @@ namespace Reviefy.Controllers
 
             var token = JwtGenerate(user);
 
+            // типо входим в аккаунт
+            CurrentUser.UserId = user.UserId;
+            CurrentUser.Password = PassHashing.Decrypt(user.Password); // not hashed pass
+            CurrentUser.Email = user.Email;
+            CurrentUser.Nickname = user.Nickname;
+            CurrentUser.RegisterDate = user.RegisterDate;
+            CurrentUser.AvatarPath = user.AvatarPath;
+            CurrentUser.IsLoggedIn = true;
+            CurrentUser.Token = token;
+
             //return Ok($"access_token= {token}\nemail = {email}\npassword = {password}");
 
-            ViewBag.AuthStatus = $"Successfully logged in!";//\naccess_token= {token}\nemail = {email}\npassword = {password}";
+            ViewBag.AuthStatus =
+                $"Successfully logged in!";
+
             return View("AuthStatus");
         }
+
+        public IActionResult Logout()
+        {
+            // типо выходим из аккаунта
+            CurrentUser.UserId = Guid.Empty;
+            CurrentUser.Password = null;
+            CurrentUser.Email = null;
+            CurrentUser.Nickname = null;
+            CurrentUser.RegisterDate = DateTime.Today;
+            CurrentUser.AvatarPath = null;
+            CurrentUser.IsLoggedIn = false;
+            CurrentUser.Token = null;
+
+            ViewBag.AuthStatus =
+                $"Successfully logged out!";
+            return View("AuthStatus");
+        }
+
+        private User AuthenticateUser(string email, string password) =>
+            _connection.User.FirstOrDefault(u => u.Email == email && u.Password == password);
+
+        private User IsUserExist(string email) =>
+            _connection.User.FirstOrDefault(u => u.Email == email);
+
+        private string JwtGenerate(User user)
+        {
+            var authParams = _authOptions.Value;
+
+            var securityKey = authParams.GetSymmetricSecurityKey();
+
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new List<Claim>
+            {
+                new(JwtRegisteredClaimNames.Email, user.Email),
+                new(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
+                new(JwtRegisteredClaimNames.Sub, user.Password),
+            };
+
+            var token = new JwtSecurityToken(
+                authParams.Issuer,
+                authParams.Audience,
+                claims,
+                expires: DateTime.Now.AddSeconds(authParams.TokenLifeTime),
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
 
         // [Route("registration")]
         // [HttpPost]
@@ -127,38 +188,5 @@ namespace Reviefy.Controllers
         //         request.Password,
         //     });
         // }
-
-
-        private User AuthenticateUser(string email, string password) =>
-            _connection.User.FirstOrDefault(u => u.Email == email && u.Password == password);
-
-        private User IsUserExist(string email) =>
-            _connection.User.FirstOrDefault(u => u.Email == email);
-
-        private string JwtGenerate(User user)
-        {
-            var authParams = _authOptions.Value;
-
-            var securityKey = authParams.GetSymmetricSecurityKey();
-
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new List<Claim>
-            {
-                new(JwtRegisteredClaimNames.Email, user.Email),
-                new(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
-                new(JwtRegisteredClaimNames.Sub, user.Password),
-
-            };
-
-            var token = new JwtSecurityToken(
-                authParams.Issuer,
-                authParams.Audience,
-                claims,
-                expires: DateTime.Now.AddSeconds(authParams.TokenLifeTime),
-                signingCredentials: credentials
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
     }
 }

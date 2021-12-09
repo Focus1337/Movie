@@ -19,7 +19,7 @@
              <ul class="dropdown-menu">
                  <!-- Menu Item -->
                  <li>
-                     <a class="dropdown-item" asp-controller="Movie" asp-action="LatestMovies" asp-route-id="">Latest Movies</a>
+                     <a class="dropdown-item" asp-controller="Movie" asp-action="LatestMovies">Latest Movies</a>
                  </li>
 
                  <!-- Menu Item -->
@@ -31,7 +31,7 @@
 
          <!-- Menu Item -->
          <li class="nav-item">
-             <a class="nav-link" asp-controller="News" asp-action="LatestNews" asp-route-id="">News</a>
+             <a class="nav-link" asp-controller="News" asp-action="LatestNews">News</a>
          </li>
 
          <!-- Menu Item -->
@@ -50,13 +50,41 @@
 
      <!-- ====== Start of Extra Nav ====== -->
      <ul class="navbar-nav extra-nav">
-                    
-         <!-- Menu Item -->
-         <li class="nav-item m-auto">
-             <a asp-controller="Auth" asp-action="Login" class="btn btn-main btn-effect login-btn">
-                 <i class="icon-user"></i>login
-             </a>
-         </li>
+
+         @if (CurrentUser.IsLoggedIn)
+         {
+             <!-- Menu Item -->
+             <li class="nav-item dropdown m-auto">
+                 <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                     <img style="border-radius: 50%" src="@CurrentUser.AvatarPath" alt="" width="35">
+                     @* @CurrentUser.Nickname *@
+                 </a>
+
+                 <!-- Dropdown Menu -->
+                 <ul class="dropdown-menu">
+                     <!-- Menu Item -->
+                     <li>
+                         <a class="dropdown-item"  asp-controller="User" asp-action="MyProfile">My Profile</a>
+                     </li>
+
+                     <!-- Menu Item -->
+                     <li>
+                         <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Logout</a>
+                     </li>
+                 </ul>
+             </li>
+         }
+         else
+         {
+             <!-- Menu Item -->
+             <li class="nav-item m-auto">
+                 <a asp-controller="Auth" asp-action="Login" class="btn btn-main btn-effect login-btn">
+                     <i class="icon-user"></i>login
+                 </a>
+             </li>
+         }
+        
      </ul>
      <!-- ====== End of Extra Nav ====== -->
 
