@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Json;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Reviefy.Helpers;
 using Reviefy.Models;
 using Reviefy.Options;
 using Reviefy.Security;
 
 namespace Reviefy.Controllers
 {
-    // [Route("api/[controller]")]
-    // [ApiController]
     public class AuthController : Controller
     {
         private readonly IOptions<AuthOptions> _authOptions;
         private readonly AppDataConnection _connection;
-
-
+        
         public AuthController(IOptions<AuthOptions> options, AppDataConnection connection)
         {
             _authOptions = options;
@@ -77,19 +76,20 @@ namespace Reviefy.Controllers
             var token = JwtGenerate(user);
 
             // типо входим в аккаунт
-            CurrentUser.UserId = user.UserId;
-            CurrentUser.Password = PassHashing.Decrypt(user.Password); // not hashed pass
-            CurrentUser.Email = user.Email;
-            CurrentUser.Nickname = user.Nickname;
-            CurrentUser.RegisterDate = user.RegisterDate;
-            CurrentUser.AvatarPath = user.AvatarPath;
-            CurrentUser.IsLoggedIn = true;
-            CurrentUser.Token = token;
-
-            //return Ok($"access_token= {token}\nemail = {email}\npassword = {password}");
-
+            // CurrentUser.UserId = user.UserId;
+            // CurrentUser.Password = PassHashing.Decrypt(user.Password); // not hashed pass
+            // CurrentUser.Email = user.Email;
+            // CurrentUser.Nickname = user.Nickname;
+            // CurrentUser.RegisterDate = user.RegisterDate;
+            // CurrentUser.AvatarPath = user.AvatarPath;
+            // CurrentUser.IsLoggedIn = true;
+            // CurrentUser.Token = token;
+            
+            if (!HttpContext.Session.Keys.Contains("user")) 
+                HttpContext.Session.Set("user", user);
+                
             ViewBag.AuthStatus =
-                $"Successfully logged in!";
+                "Successfully logged in!";
 
             return View("AuthStatus");
         }
@@ -97,17 +97,20 @@ namespace Reviefy.Controllers
         public IActionResult Logout()
         {
             // типо выходим из аккаунта
-            CurrentUser.UserId = Guid.Empty;
-            CurrentUser.Password = null;
-            CurrentUser.Email = null;
-            CurrentUser.Nickname = null;
-            CurrentUser.RegisterDate = DateTime.Today;
-            CurrentUser.AvatarPath = null;
-            CurrentUser.IsLoggedIn = false;
-            CurrentUser.Token = null;
+            // CurrentUser.UserId = Guid.Empty;
+            // CurrentUser.Password = null;
+            // CurrentUser.Email = null;
+            // CurrentUser.Nickname = null;
+            // CurrentUser.RegisterDate = DateTime.Today;
+            // CurrentUser.AvatarPath = null;
+            // CurrentUser.IsLoggedIn = false;
+            // CurrentUser.Token = null;
+
+            if (HttpContext.Session.Keys.Contains("user"))
+                HttpContext.Session.Remove("user");
 
             ViewBag.AuthStatus =
-                $"Successfully logged out!";
+                "Successfully logged out!";
             return View("AuthStatus");
         }
 
@@ -141,52 +144,5 @@ namespace Reviefy.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-
-        // [Route("registration")]
-        // [HttpPost]
-        // public IActionResult Registration([FromBody] RegRequest request)
-        // {
-        //     //try to Authenticate User
-        //     var user = IsUserExist(request.Email);
-        //     if (user != null)
-        //     {
-        //         return Ok("This account already exists");
-        //     }
-        //
-        //     user = new User
-        //     {
-        //         UserId = Guid.NewGuid(),
-        //         Email = request.Email,
-        //         Password = PassHashing.Encrypt(request.Password),
-        //         //Role = "User",
-        //         Nickname = request.Nickname,
-        //         RegisterDate = DateTime.Now,
-        //         AvatarPath = ""
-        //     };
-        //
-        //     _connection.Insert(user);
-        //
-        //     return Ok("Registered");
-        // }
-        //
-        //
-        // [Route("login")]
-        // [HttpPost]
-        // public IActionResult Login([FromBody] AuthRequest request)
-        // {
-        //     var pass = PassHashing.Encrypt(request.Password);
-        //     var user = AuthenticateUser(request.Email, pass);
-        //     if (user == null)
-        //         return Unauthorized();
-        //
-        //     var token = JwtGenerate(user);
-        //     return Ok(new
-        //     {
-        //         access_token = token,
-        //         request.Email,
-        //         request.Password,
-        //     });
-        // }
     }
 }

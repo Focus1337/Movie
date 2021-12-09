@@ -1,6 +1,9 @@
+@using Reviefy.Helpers
 @{
     ViewBag.Title = "My Profile";
     Layout = "_Layout";
+    
+    var user = Context.Session.Get<User>("user");
 }
 
 <body>
@@ -20,7 +23,7 @@
                     
                     <div style="margin-top: 10px;">
                         <div class="movie-poster">
-                            <img src="@CurrentUser.AvatarPath"
+                            <img src="@user.AvatarPath"
                                  alt="" width="200">
                         </div>
                         
@@ -44,19 +47,19 @@
                         <div class="form-group">
                             <label for="nickname">Nickname</label>
                             <input name="nickname" id="nickname" class="form-control input-box" type="text" 
-                                   value="@CurrentUser.Nickname" autocomplete="off" required/>
+                                   value="@user.Nickname" autocomplete="off" required/>
                         </div>
 
                         <!-- Form Group -->
                         <div class="form-group">
                             <label for="avatar">Avatar url</label>
                             <input name="avatar" id="avatar" class="form-control input-box" type="url" 
-                                   value="@CurrentUser.AvatarPath" autocomplete="off" required/>
+                                   value="@user.AvatarPath" autocomplete="off" required/>
                         </div>
                         
                         <!-- Form Group -->
                         <div>
-                            <label>Registration date: @CurrentUser.RegisterDate.ToString("d")</label>
+                            <label>Registration date: @user.RegisterDate.ToString("d")</label>
                         </div>
                         
                         <!-- Form Group -->
@@ -80,14 +83,14 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input name="email" id="email" class="form-control input-box" type="email" 
-                                   value="@CurrentUser.Email" autocomplete="off" required/>
+                                   value="@user.Email" autocomplete="off" required/>
                         </div>
                         
                         <!-- Form Group -->
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input name="password" id="password" class="form-control input-box" type="password" 
-                                   value="@CurrentUser.Password" autocomplete="off" required/>
+                                   value="@user.Password" autocomplete="off" required/>
                         </div>
 
                         <!-- Form Group -->

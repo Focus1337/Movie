@@ -1,4 +1,10 @@
- <!-- ====== Start of #main-nav ====== -->
+@using Reviefy.Helpers
+
+@{
+    var user = Context.Session.Get<User>("user");
+}
+
+<!-- ====== Start of #main-nav ====== -->
  <div class="navbar-collapse" id="main-nav">
 
      <!-- ====== Start of Main Menu ====== -->
@@ -51,13 +57,13 @@
      <!-- ====== Start of Extra Nav ====== -->
      <ul class="navbar-nav extra-nav">
 
-         @if (CurrentUser.IsLoggedIn)
+         @if (Context.Session.Keys.Contains("user"))
          {
              <!-- Menu Item -->
              <li class="nav-item dropdown m-auto">
                  <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                     <img style="border-radius: 50%" src="@CurrentUser.AvatarPath" alt="" width="35">
+                     <img style="border-radius: 50%" src="@user.AvatarPath" alt="" width="35">
                      @* @CurrentUser.Nickname *@
                  </a>
 

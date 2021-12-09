@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
+using Reviefy.Helpers;
 using Reviefy.Models;
 
 namespace Reviefy.Controllers
@@ -36,7 +37,7 @@ namespace Reviefy.Controllers
 
         public IActionResult ResetAvatar()
         {
-            var user = _connection.User.FirstOrDefault(u => u.UserId == CurrentUser.UserId);
+            var user = _connection.User.FirstOrDefault(u => u.UserId == GetUserBySession().UserId);
 
             if (user != null)
             {
@@ -47,7 +48,28 @@ namespace Reviefy.Controllers
             return NoContent();
         }
 
-        public IActionResult MyProfile() =>
-            !CurrentUser.IsLoggedIn ? RedirectToAction("PageNotFound", "Home") : View();
+        public IActionResult MyProfile()
+        {
+            if (!UserExistInSession())
+                return RedirectToAction("PageNotFound", "Home");
+
+            // var viewModel = new ViewModel
+            // {
+            //     Movies = GetMoviesList(),
+            //     Reviews = _connection.Review
+            //         .Where(x => x.UserId == GetUserBySession().UserId)
+            //         .OrderByDescending(x => x.ReviewDate).ToList(),
+            //
+            //     UserById = GetUserBySession()
+            // };
+
+            return View("MyProfile"); //, viewModel);
+        }
+
+        private bool UserExistInSession() => 
+            HttpContext.Session.Keys.Contains("user");
+
+        private User GetUserBySession() => 
+            HttpContext.Session.Get<User>("user");
     }
 }
