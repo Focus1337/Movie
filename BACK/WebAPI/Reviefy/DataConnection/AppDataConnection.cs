@@ -1,12 +1,11 @@
 ﻿using LinqToDB;
 using LinqToDB.Configuration;
-using LinqToDB.Data;
 using Reviefy.Models;
 
-namespace Reviefy
+namespace Reviefy.DataConnection
 {
     // Custom Data Connection
-    public class AppDataConnection : DataConnection
+    public class AppDataConnection : LinqToDB.Data.DataConnection
     {
         public ITable<User> User => GetTable<User>();
         public ITable<Movie> Movie => GetTable<Movie>();

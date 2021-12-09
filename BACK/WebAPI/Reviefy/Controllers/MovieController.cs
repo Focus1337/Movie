@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
+using Reviefy.DataConnection;
 using Reviefy.Models;
-
 
 namespace Reviefy.Controllers
 {
@@ -13,63 +12,41 @@ namespace Reviefy.Controllers
         private readonly AppDataConnection _connection;
         public MovieController(AppDataConnection connection) => _connection = connection;
 
+        private Movie GetMovieById(Guid id) =>
+            _connection.Movie.FirstOrDefault(m => m.MovieId == id);
+
         private List<Movie> GetMoviesList() =>
-            _connection.Movie.OrderByDescending(x => x.ReleaseDate).ToList();
+            _connection.Movie.OrderByDescending(m => m.ReleaseDate).ToList();
+
+        private MoviePhoto GetMoviePhotoById(Guid id) =>
+            _connection.MoviePhoto.FirstOrDefault(m => m.MovieId == id);
 
         private List<User> GetUsersList() =>
             _connection.User.ToList();
-        
+
+        private List<Review> GetReviewListById(Guid id) =>
+            _connection.Review
+                .Where(m => m.MovieId == id)
+                .OrderBy(r => r.ReviewDate).ToList();
+
         public IActionResult LatestMovies() => View(GetMoviesList());
         public IActionResult TopRatedMovies() => View();
 
-        // GET
         public IActionResult GetMovie(Guid id)
         {
-            if (_connection.Movie.All(x => x.MovieId != id))
+            if (GetMovieById(id) == null)
                 return RedirectToAction("PageNotFound", "Home");
 
             var viewModel = new ViewModel
             {
-                Reviews = _connection.Review
-                    .Where(x => x.MovieId == id)
-                    .OrderBy(x => x.ReviewDate).ToList(),
+                Reviews = GetReviewListById(id),
                 Users = GetUsersList(),
 
-                MovieById = _connection.Movie.FirstOrDefault(x => x.MovieId == id),
-                MoviePhotoById = _connection.MoviePhoto.FirstOrDefault(x => x.MovieId == id)
+                MovieById = GetMovieById(id),
+                MoviePhotoById = GetMoviePhotoById(id)
             };
 
             return View("MovieDetail", viewModel);
         }
-
-        [HttpPost]
-        public IActionResult WriteReview(int rating, string text, Guid movieId, Guid userId)
-        {
-            // TODO:Парсить id пользователя из хедера мб, хз как это сделать (пользователь должен быть залогинен по идее)
-            var us = Guid.Parse("F9E234D4-F225-4AB9-99D8-84B81CA0257A");
-
-            // Check if review is already exists
-            var review = ReviewExists(movieId, us);
-            if (review != null)
-                return Ok("Your review already exists for this movie!");
-
-            review = new Review
-            {
-                ReviewId = Guid.NewGuid(),
-                MovieId = movieId,
-                UserId = us,
-                Helpfulness = 0,
-                Rating = rating,
-                Text = text,
-                ReviewDate = DateTime.Now
-            };
-
-            _connection.Insert(review);
-
-            return RedirectToAction("GetMovie", "Movie", new {id = movieId});
-        }
-
-        private Review ReviewExists(Guid movieId, Guid userId) =>
-            _connection.Review.FirstOrDefault(u => u.MovieId == movieId && u.UserId == userId);
     }
 }

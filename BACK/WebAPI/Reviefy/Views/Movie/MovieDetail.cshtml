@@ -209,11 +209,13 @@
 
                                         <div class="review-box-helpfulness">
                                             Review helpfulness:
-                                            <a href="#" class="btn">
+                                            <a asp-controller="Review" asp-action="IncreaseHelpfulness"
+                                               asp-route-id="@review.ReviewId" class="btn">
                                                 <i class="fa fa-arrow-up"></i>
                                             </a>
                                             <span>@review.Helpfulness</span>
-                                            <a href="#" class="btn">
+                                            <a asp-controller="Review" asp-action="DecreaseHelpfulness"
+                                               asp-route-id="@review.ReviewId" class="btn">
                                                 <i class="fa fa-arrow-down"></i>
                                             </a>
                                         </div>
@@ -233,38 +235,43 @@
                     <h3 class="mt-0 mb-1">Add Review</h3>
                     <h3></h3>
 
-                    <form class="row mt30" asp-controller="Movie" asp-action="WriteReview" method="post">
-                        <div class="form-group col-md-6" style="padding-right: 35%;">
-                            <label class="subtitle">Rating</label>
-                            <select name="rating" required>
-                                <option value="">Choose rating</option>
-                                <option value="1">1 -> Terrible</option>
-                                <option value="2">2 -> Bad</option>
-                                <option value="3">3 -> Bad</option>
-                                <option value="4">4 -> OK</option>
-                                <option value="5">5 -> OK</option>
-                                <option value="6">6 -> Good</option>
-                                <option value="7">7 -> Good</option>
-                                <option value="8">8 -> Great</option>
-                                <option value="9">9 -> Great</option>
-                                <option value="10">10 -> Excellent</option>
-                            </select>
-                        </div>
+                    @if (Context.Session.Keys.Contains("user"))
+                    {
+                    <form class="row mt30" asp-controller="Review" asp-action="WriteReview" method="post">
+                            <div class="form-group col-md-6" style="padding-right: 35%;">
+                                <label class="subtitle">Rating</label>
+                                <select name="rating" required>
+                                    <option value="">Choose rating</option>
+                                    <option value="1">1 -> Terrible</option>
+                                    <option value="2">2 -> Bad</option>
+                                    <option value="3">3 -> Bad</option>
+                                    <option value="4">4 -> OK</option>
+                                    <option value="5">5 -> OK</option>
+                                    <option value="6">6 -> Good</option>
+                                    <option value="7">7 -> Good</option>
+                                    <option value="8">8 -> Great</option>
+                                    <option value="9">9 -> Great</option>
+                                    <option value="10">10 -> Excellent</option>
+                                </select>
+                            </div>
 
-                        <div class="form-group col-md-12 m-t-20">
-                            <textarea name="text" class="form-control" rows="5"
+                            <div class="form-group col-md-12 m-t-20">
+                                <textarea name="text" class="form-control" rows="5"
                                 placeholder="Review" required></textarea>
-                        </div>
+                            </div>
 
-                        <div class="form-group col-md-12 m-t-20">
-                            <button type="submit" class="btn btn-main btn-effect">Submit</button>
-                        </div>
-                        
-                        <input name="movieId" type="hidden" value="@Model.MovieById.MovieId">
-                        
-                        @* TODO: Получить id пользователя и внести в value*@
-                         <input name="userId" type="hidden" value="">
+                            <div class="form-group col-md-12 m-t-20">
+                                <button type="submit" class="btn btn-main btn-effect">Submit</button>
+                            </div>
+
+                            <input name="movieId" type="hidden" value="@Model.MovieById.MovieId">
                     </form>
+                    }
+                    else
+                    {
+                        <h6>Oops! You must -
+                            <a asp-controller="Auth" asp-action="Login"><b>Log in</b></a> - before leaving review!</h6>
+                    }
                 </div>
                 <!-- End of Review Form -->
 
