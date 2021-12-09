@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Reviefy.DataConnection;
 using Reviefy.Models;
 
 namespace Reviefy.Controllers
@@ -11,30 +12,38 @@ namespace Reviefy.Controllers
         private readonly AppDataConnection _connection;
         public MovieController(AppDataConnection connection) => _connection = connection;
 
+        private Movie GetMovieById(Guid id) =>
+            _connection.Movie.FirstOrDefault(m => m.MovieId == id);
+
         private List<Movie> GetMoviesList() =>
-            _connection.Movie.OrderByDescending(x => x.ReleaseDate).ToList();
+            _connection.Movie.OrderByDescending(m => m.ReleaseDate).ToList();
+
+        private MoviePhoto GetMoviePhotoById(Guid id) =>
+            _connection.MoviePhoto.FirstOrDefault(m => m.MovieId == id);
 
         private List<User> GetUsersList() =>
             _connection.User.ToList();
-        
+
+        private List<Review> GetReviewListById(Guid id) =>
+            _connection.Review
+                .Where(m => m.MovieId == id)
+                .OrderBy(r => r.ReviewDate).ToList();
+
         public IActionResult LatestMovies() => View(GetMoviesList());
         public IActionResult TopRatedMovies() => View();
 
-        // GET
         public IActionResult GetMovie(Guid id)
         {
-            if (_connection.Movie.All(x => x.MovieId != id))
+            if (GetMovieById(id) == null)
                 return RedirectToAction("PageNotFound", "Home");
 
             var viewModel = new ViewModel
             {
-                Reviews = _connection.Review
-                    .Where(x => x.MovieId == id)
-                    .OrderBy(x => x.ReviewDate).ToList(),
+                Reviews = GetReviewListById(id),
                 Users = GetUsersList(),
 
-                MovieById = _connection.Movie.FirstOrDefault(x => x.MovieId == id),
-                MoviePhotoById = _connection.MoviePhoto.FirstOrDefault(x => x.MovieId == id)
+                MovieById = GetMovieById(id),
+                MoviePhotoById = GetMoviePhotoById(id)
             };
 
             return View("MovieDetail", viewModel);

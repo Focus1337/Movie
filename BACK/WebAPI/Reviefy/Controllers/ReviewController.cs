@@ -2,8 +2,9 @@ using System;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
-using Reviefy.Helpers;
+using Reviefy.DataConnection;
 using Reviefy.Models;
+using Reviefy.Services;
 
 namespace Reviefy.Controllers
 {
@@ -12,14 +13,28 @@ namespace Reviefy.Controllers
         private readonly AppDataConnection _connection;
         public ReviewController(AppDataConnection connection) => _connection = connection;
 
+        private Review ReviewExists(Guid movieId, Guid userId) =>
+            _connection.Review.FirstOrDefault(r => r.MovieId == movieId && r.UserId == userId);
+
+        private Review GetReviewById(Guid id) =>
+            _connection.Review.FirstOrDefault(r => r.ReviewId == id);
+        
+        private bool IsCurrentUserExists() =>
+            HttpContext.Session.Keys.Contains("user");
+
+        private User GetCurrentUser() =>
+            HttpContext.Session.Get<User>("user");
+
+
         [HttpPost]
         public IActionResult WriteReview(int rating, string text, Guid movieId)
         {
-            // TODO:Парсить id пользователя из хедера мб, хз как это сделать (пользователь должен быть залогинен по идее)
+            if (!IsCurrentUserExists())
+                return Ok("You must be logged in!");
             
             // Check if review is already exists
-            var review = ReviewExists(movieId, GetUserBySession().UserId);
-            
+            var review = ReviewExists(movieId, GetCurrentUser().UserId);
+
             if (review != null)
                 return Ok("Your review already exists for this movie!");
 
@@ -27,7 +42,7 @@ namespace Reviefy.Controllers
             {
                 ReviewId = Guid.NewGuid(),
                 MovieId = movieId,
-                UserId = GetUserBySession().UserId,
+                UserId = GetCurrentUser().UserId,
                 Helpfulness = 0,
                 Rating = rating,
                 Text = text,
@@ -41,10 +56,10 @@ namespace Reviefy.Controllers
 
         public IActionResult IncreaseHelpfulness(Guid id)
         {
-            if (!UserExistInSession())
+            if (!IsCurrentUserExists())
                 return Ok("You must be logged in!");
 
-            var review = _connection.Review.FirstOrDefault(u => u.ReviewId == id);
+            var review = GetReviewById(id);
 
             if (review != null)
             {
@@ -57,10 +72,10 @@ namespace Reviefy.Controllers
 
         public IActionResult DecreaseHelpfulness(Guid id)
         {
-            if (!UserExistInSession())
+            if (!IsCurrentUserExists())
                 return Ok("You must be logged in!");
-            
-            var review = _connection.Review.FirstOrDefault(u => u.ReviewId == id);
+
+            var review = GetReviewById(id);
 
             if (review != null)
             {
@@ -70,15 +85,5 @@ namespace Reviefy.Controllers
 
             return NoContent();
         }
-
-        private Review ReviewExists(Guid movieId, Guid userId) =>
-            _connection.Review.FirstOrDefault(u => u.MovieId == movieId && u.UserId == userId);
-        
-
-        private bool UserExistInSession() => 
-            HttpContext.Session.Keys.Contains("user");
-
-        private User GetUserBySession() => 
-            HttpContext.Session.Get<User>("user");
     }
 }

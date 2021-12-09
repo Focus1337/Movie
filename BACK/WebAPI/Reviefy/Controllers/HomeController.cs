@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Reviefy.DataConnection;
 using Reviefy.Models;
 using Reviefy.Services;
 
@@ -17,7 +18,7 @@ namespace Reviefy.Controllers
 
         private List<News> GetNews() =>
             _connection.News.OrderByDescending(x => x.NewsDate).Take(3).ToList();
-        
+
         private List<Movie> GetMovies() =>
             _connection.Movie.OrderByDescending(x => x.ReleaseDate).Take(6).ToList();
 
@@ -30,7 +31,7 @@ namespace Reviefy.Controllers
             };
             return View("Index", viewModel);
         }
-        
+
 
         [HttpPost]
         public async Task<IActionResult> Contact(string name, string email, string subject, string message)
@@ -50,9 +51,10 @@ namespace Reviefy.Controllers
 
             var minDistance = int.MaxValue;
             var matchingTitle = title;
+            var titleToCompare = string.Concat(title.ToLower().Where(c => !char.IsWhiteSpace(c)));
             foreach (var movie in _connection.Movie.ToList())
             {
-                var distance = LevenshteinDistance(string.Concat(title.ToLower().Where(c => !char.IsWhiteSpace(c))),
+                var distance = LevenshteinDistance(titleToCompare,
                     string.Concat(movie.Title.ToLower().Where(c => !char.IsWhiteSpace(c))));
 
                 if (distance == 0)
@@ -75,9 +77,9 @@ namespace Reviefy.Controllers
 
         private static int LevenshteinDistance(string string1, string string2)
         {
-            if (string1 == null) 
+            if (string1 == null)
                 throw new ArgumentNullException(nameof(string1));
-            if (string2 == null) 
+            if (string2 == null)
                 throw new ArgumentNullException(nameof(string2));
 
             var m = new int[string1.Length + 1, string2.Length + 1];
@@ -88,17 +90,16 @@ namespace Reviefy.Controllers
                 m[0, j] = j;
 
             for (var i = 1; i <= string1.Length; i++)
+            for (var j = 1; j <= string2.Length; j++)
             {
-                for (var j = 1; j <= string2.Length; j++)
-                {
-                    var diff = (string1[i - 1] == string2[j - 1]) ? 0 : 1;
+                var diff = (string1[i - 1] == string2[j - 1]) ? 0 : 1;
 
-                    m[i, j] = Math.Min(Math.Min(m[i - 1, j] + 1, m[i, j - 1] + 1), m[i - 1, j - 1] + diff);
-                }
+                m[i, j] = Math.Min(Math.Min(m[i - 1, j] + 1, m[i, j - 1] + 1), m[i - 1, j - 1] + diff);
             }
+
             return m[string1.Length, string2.Length];
         }
-        
+
         public IActionResult ContactUs() => View();
         public IActionResult AboutUs() => View();
         public IActionResult LegalDisclaimer() => View();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Reviefy.DataConnection;
 using Reviefy.Options;
 
 namespace Reviefy
@@ -54,6 +55,16 @@ namespace Reviefy
 
             app.UseSession();
 
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/Home/PageNotFound";
+                    await next();
+                }
+            });
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

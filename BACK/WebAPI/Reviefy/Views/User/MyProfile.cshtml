@@ -1,16 +1,12 @@
-@using Reviefy.Helpers
+@model ViewModel
 @{
     ViewBag.Title = "My Profile";
     Layout = "_Layout";
-    
-    var user = Context.Session.Get<User>("user");
 }
 
 <body>
 <!-- =============== START OF WRAPPER =============== -->
 <div class="wrapper">
-    
-    
     
     <!-- =============== START OF MAIN =============== -->
     <main class="contact-page ptb100">
@@ -23,48 +19,48 @@
                     
                     <div style="margin-top: 10px;">
                         <div class="movie-poster">
-                            <img src="@user.AvatarPath"
+                            <img src="@Model.UserById.AvatarPath"
                                  alt="" width="200">
                         </div>
                         
                         <p></p>
                         
-                        <div class="form-group text-center col-7">
-                            <button asp-controller="User" asp-action="ResetAvatar" class="btn btn-main btn-effect" type="submit">Reset</button>
-                        </div>
+                        <form class="row mt30" asp-controller="User" asp-action="ResetAvatar" method="post">
+                            <div class="form-group text-center col-7">
+                                <button class="btn btn-main btn-effect" type="submit">Reset</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- End of Avatar Form -->
 
-
-                
                 <div class="col-md-8">
                     <!-- Start of Information Form -->
                     <h3 class="title">Information</h3>
-                    <form id="information-form" method="post">
+                    <form id="information-form" asp-controller="User" asp-action="UpdateInformation" method="post">
                         
                         <!-- Form Group -->
                         <div class="form-group">
                             <label for="nickname">Nickname</label>
                             <input name="nickname" id="nickname" class="form-control input-box" type="text" 
-                                   value="@user.Nickname" autocomplete="off" required/>
+                                   value="@Model.UserById.Nickname" autocomplete="off" required/>
                         </div>
 
                         <!-- Form Group -->
                         <div class="form-group">
                             <label for="avatar">Avatar url</label>
                             <input name="avatar" id="avatar" class="form-control input-box" type="url" 
-                                   value="@user.AvatarPath" autocomplete="off" required/>
+                                   value="@Model.UserById.AvatarPath" autocomplete="off" required/>
                         </div>
                         
                         <!-- Form Group -->
                         <div>
-                            <label>Registration date: @user.RegisterDate.ToString("d")</label>
+                            <label>Registration date: @Model.UserById.RegisterDate.ToString("d")</label>
                         </div>
                         
                         <!-- Form Group -->
                         <div>
-                            <label>Reviews count: 21</label>
+                            <label>Reviews count: @Model.Reviews.Count</label>
                         </div>
 
                         <!-- Form Group -->
@@ -77,20 +73,20 @@
                     
                     <h3 class="title">Security</h3>
                     <!-- Start of Security Form -->
-                    <form id="security-form" method="post">
+                    <form id="security-form" asp-controller="User" asp-action="UpdateSecurity" method="post">
                     
                         <!-- Form Group -->
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input name="email" id="email" class="form-control input-box" type="email" 
-                                   value="@user.Email" autocomplete="off" required/>
+                                   value="@Model.UserById.Email" autocomplete="off" required/>
                         </div>
                         
                         <!-- Form Group -->
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input name="password" id="password" class="form-control input-box" type="password" 
-                                   value="@user.Password" autocomplete="off" required/>
+                                   value="" autocomplete="off" required/>
                         </div>
 
                         <!-- Form Group -->
@@ -101,6 +97,24 @@
                     <!-- End of Security Form -->
                 </div>
             </div>
+            
+            <p></p>
+            <hr>
+            <h4 class="row justify-content-center pt10">Latest Reviews</h4>
+            <ol>
+                @foreach (var review in Model.Reviews)
+                {
+                    <li>
+                        <a asp-controller="Movie" asp-action="GetMovie" asp-route-id="@review.MovieId"
+                           class="row justify-content-center" style="font-weight: 400; margin-right: 25px">
+                            @Model.Movies.FirstOrDefault(x => x.MovieId == review.MovieId)?.Title
+                        </a>
+                        <small class="row justify-content-center" style="font-weight: 400; margin-right: 25px">
+                            review from @review.ReviewDate.ToString("d")
+                        </small>
+                    </li>
+                }
+            </ol>
         </div>
     </main>
     <!-- =============== END OF MAIN =============== -->
