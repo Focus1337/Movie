@@ -48,23 +48,8 @@ namespace Reviefy.Controllers
             return NoContent();
         }
 
-        public IActionResult MyProfile()
-        {
-            if (!UserExistInSession())
-                return RedirectToAction("PageNotFound", "Home");
-
-            // var viewModel = new ViewModel
-            // {
-            //     Movies = GetMoviesList(),
-            //     Reviews = _connection.Review
-            //         .Where(x => x.UserId == GetUserBySession().UserId)
-            //         .OrderByDescending(x => x.ReviewDate).ToList(),
-            //
-            //     UserById = GetUserBySession()
-            // };
-
-            return View("MyProfile"); //, viewModel);
-        }
+        public IActionResult MyProfile() => 
+            !UserExistInSession() ? RedirectToAction("PageNotFound", "Home") : View();
 
         private bool UserExistInSession() => 
             HttpContext.Session.Keys.Contains("user");

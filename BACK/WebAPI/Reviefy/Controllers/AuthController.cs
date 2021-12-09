@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text.Json;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -58,8 +57,7 @@ namespace Reviefy.Controllers
             };
 
             _connection.Insert(user);
-
-            // return Ok("Registered");
+            
             ViewBag.AuthStatus = "Successfully registered!";
             return View("AuthStatus");
         }
@@ -74,16 +72,6 @@ namespace Reviefy.Controllers
                 return Unauthorized();
 
             var token = JwtGenerate(user);
-
-            // типо входим в аккаунт
-            // CurrentUser.UserId = user.UserId;
-            // CurrentUser.Password = PassHashing.Decrypt(user.Password); // not hashed pass
-            // CurrentUser.Email = user.Email;
-            // CurrentUser.Nickname = user.Nickname;
-            // CurrentUser.RegisterDate = user.RegisterDate;
-            // CurrentUser.AvatarPath = user.AvatarPath;
-            // CurrentUser.IsLoggedIn = true;
-            // CurrentUser.Token = token;
             
             if (!HttpContext.Session.Keys.Contains("user")) 
                 HttpContext.Session.Set("user", user);
@@ -96,16 +84,6 @@ namespace Reviefy.Controllers
 
         public IActionResult Logout()
         {
-            // типо выходим из аккаунта
-            // CurrentUser.UserId = Guid.Empty;
-            // CurrentUser.Password = null;
-            // CurrentUser.Email = null;
-            // CurrentUser.Nickname = null;
-            // CurrentUser.RegisterDate = DateTime.Today;
-            // CurrentUser.AvatarPath = null;
-            // CurrentUser.IsLoggedIn = false;
-            // CurrentUser.Token = null;
-
             if (HttpContext.Session.Keys.Contains("user"))
                 HttpContext.Session.Remove("user");
 
