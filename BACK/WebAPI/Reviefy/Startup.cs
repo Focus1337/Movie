@@ -1,4 +1,3 @@
-using System;
 using LinqToDB.AspNet;
 using LinqToDB.AspNet.Logging;
 using LinqToDB.Configuration;
@@ -22,16 +21,7 @@ namespace Reviefy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            // services.AddDistributedMemoryCache();
-            //
-            // services.AddSession(options =>
-            // {
-            //     options.Cookie.Name = ".Reviefy.Session";
-            //     options.IdleTimeout = TimeSpan.FromSeconds(1800); // 30 min afk
-            //     options.Cookie.HttpOnly = true;
-            // });
-
+            
             services.AddLinqToDbContext<AppDataConnection>((provider, options) =>
             {
                 options
@@ -49,8 +39,6 @@ namespace Reviefy
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            //app.UseSession();
 
             app.Use(async (context, next) =>
             {

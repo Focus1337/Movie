@@ -1,7 +1,4 @@
-@using Reviefy.Services
-@{
-    // var user = Context.Session.Get<User>("user");
-}
+@model ViewModel
 
 <!-- ====== Start of #main-nav ====== -->
  <div class="navbar-collapse" id="main-nav">
@@ -56,23 +53,23 @@
      <!-- ====== Start of Extra Nav ====== -->
      <ul class="navbar-nav extra-nav">
 
-         @*@if (Context.Session.Keys.Contains("user"))*@
-         @*{*@
-         <!-- Menu Item -->
+         @if (Context.Request.Cookies.ContainsKey("Authorization"))
+         {
+             
+             <!-- Menu Item -->
              <li class="nav-item dropdown m-auto">
                  <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                     
-                     @* TODO: FIX USER USAGE*@
-                     <img style="border-radius: 50%" src="~/images/admin.jpg" alt="" width="35">
 
+                     @* TODO: FIX USER USAGE*@
+                     <img style="border-radius: 50%" src="~/images/user.png" alt="" width="35">
                  </a>
 
                  <!-- Dropdown Menu -->
                  <ul class="dropdown-menu">
                      <!-- Menu Item -->
                      <li>
-                         <a class="dropdown-item"  asp-controller="User" asp-action="MyProfile">My Profile</a>
+                         <a class="dropdown-item" asp-controller="User" asp-action="MyProfile">My Profile</a>
                      </li>
 
                      <!-- Menu Item -->
@@ -81,16 +78,16 @@
                      </li>
                  </ul>
              </li>
-         @* } *@
-         @* else *@
-         @* { *@
+         }
+         else
+         {
              <!-- Menu Item -->
              <li class="nav-item m-auto">
                  <a asp-controller="Auth" asp-action="Login" class="btn btn-main btn-effect login-btn">
                      <i class="icon-user"></i>login
                  </a>
              </li>
-         @*}*@
+         }
         
      </ul>
      <!-- ====== End of Extra Nav ====== -->

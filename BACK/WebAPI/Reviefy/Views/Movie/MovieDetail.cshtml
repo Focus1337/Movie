@@ -235,7 +235,7 @@
                     <h3 class="mt-0 mb-1">Add Review</h3>
                     <h3></h3>
 
-                    @if (Context.Session.Keys.Contains("user"))
+                    @if (Context.Request.Cookies.ContainsKey("Authorization"))
                     {
                     <form class="row mt30" asp-controller="Review" asp-action="WriteReview" method="post">
                             <div class="form-group col-md-6" style="padding-right: 35%;">

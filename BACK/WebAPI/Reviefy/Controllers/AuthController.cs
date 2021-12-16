@@ -1,4 +1,5 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace Reviefy.Controllers
     public class AuthController : Controller
     {
         private readonly AppDataConnection _connection;
-        
+
         public AuthController(AppDataConnection connection)
         {
             _connection = connection;
@@ -25,8 +26,8 @@ namespace Reviefy.Controllers
 
         [HttpGet]
         public IActionResult Login() => View();
-        
-        
+
+
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
@@ -34,16 +35,25 @@ namespace Reviefy.Controllers
             var user = AuthenticateUser(email, pass);
             if (user == null)
                 return BadRequest();
-            
+
             var token = JwtGenerator.GenerateJwtToken(user.UserId);
 
             HttpContext.Response.Cookies.Append("Authorization", token);
 
             ViewBag.AuthStatus =
                 "Successfully logged in!";
-            
+
             Console.WriteLine("login:" + token);
-            Console.WriteLine((HttpContext.Items["User"] as User)?.Nickname);
+            //    Console.WriteLine((HttpContext.Items["User"] as User)?.Nickname);
+
+
+            // var handler = new JwtSecurityTokenHandler();
+            // var jwtSecurityToken = handler.ReadJwtToken(token);
+            // var jti = jwtSecurityToken.Claims.First(claim => claim.Type == "id").Value;
+
+            // Console.WriteLine($"UserId From Cookie = {jti}");
+            // Console.WriteLine("User Nickname:" +
+            //                   _connection.User.FirstOrDefault(x => x.UserId == Guid.Parse(jti))?.Nickname);
 
             return View("AuthStatus");
         }
@@ -71,21 +81,23 @@ namespace Reviefy.Controllers
             };
 
             var token = JwtGenerator.GenerateJwtToken(user.UserId);
-            
+
             _connection.Insert(user);
             HttpContext.Response.Cookies.Append("Authorization", token);
-            
-            
+
+
             Console.WriteLine("registration:" + token);
-            
+
             ViewBag.AuthStatus = "Successfully registered!";
+
+
             return View("AuthStatus");
         }
-        
+
         public IActionResult Logout()
         {
-            if (!HttpContext.Request.Cookies.ContainsKey("Authorization"))
-                HttpContext.Response.Cookies.Delete("Authorization");
+            //if (!HttpContext.Request.Cookies.ContainsKey("Authorization"))
+            HttpContext.Response.Cookies.Delete("Authorization");
 
             ViewBag.AuthStatus =
                 "Successfully logged out!";

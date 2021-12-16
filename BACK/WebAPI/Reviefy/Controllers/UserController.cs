@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
@@ -25,19 +26,27 @@ namespace Reviefy.Controllers
 
         private User GetUserById(Guid id) =>
             _connection.User.FirstOrDefault(u => u.UserId == id);
-
-        // private bool IsCurrentUserExists() =>
-        //     HttpContext.Session.Keys.Contains("user");
-        //
-        // private User GetCurrentUser() =>
-        //     HttpContext.Session.Get<User>("user");
+        
+        
+        
+        private Guid UserIdFromJwt()
+        {
+            if (!HttpContext.Request.Cookies.ContainsKey("Authorization"))
+                return Guid.Empty;
+            
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(HttpContext.Request.Cookies["Authorization"]); //(token);
+            return Guid.Parse(jwtSecurityToken.Claims.First(claim => claim.Type == "id").Value);
+        }
 
         private bool IsCurrentUserExists() =>
-            _connection.User.Contains(_connection.User.FirstOrDefault(x => x.Nickname == "Focus"));
-
-        private User GetCurrentUser() =>
-            _connection.User.FirstOrDefault(x => x.Nickname == "Focus");
+            _connection.User.Contains(_connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt()));
         
+        private User GetCurrentUser() =>
+            _connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt());
+        
+        
+
         private RedirectToActionResult RedirectToPageNotFound() =>
             RedirectToAction("PageNotFound", "Home");
 

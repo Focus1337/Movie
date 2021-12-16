@@ -1,4 +1,5 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +26,19 @@ namespace Reviefy.Controllers
         // private User GetCurrentUser() =>
         //     HttpContext.Session.Get<User>("user");
         
+        private Guid UserIdFromJwt()
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(HttpContext.Request.Cookies["Authorization"]); //(token);
+            return Guid.Parse(jwtSecurityToken.Claims.First(claim => claim.Type == "id").Value);
+        }
+
         private bool IsCurrentUserExists() =>
-            _connection.User.Contains(_connection.User.FirstOrDefault(x => x.Nickname == "Focus"));
-
+            _connection.User.Contains(_connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt()));
+        
         private User GetCurrentUser() =>
-            _connection.User.FirstOrDefault(x => x.Nickname == "Focus");
-
+            _connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt());
+        
 
         [HttpPost]
         public IActionResult WriteReview(int rating, string text, Guid movieId)
