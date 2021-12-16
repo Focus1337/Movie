@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using LinqToDB;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -73,10 +74,14 @@ namespace Reviefy.Controllers
                 return Unauthorized();
 
             var token = JwtGenerate(user);
-            
-            if (!HttpContext.Session.Keys.Contains("user")) 
+
+            if (!HttpContext.Session.Keys.Contains("user"))
                 HttpContext.Session.Set("user", user);
-                
+
+
+            if (!HttpContext.Request.Cookies.ContainsKey("name"))
+                HttpContext.Response.Cookies.Append("jwt", token);
+
             ViewBag.AuthStatus =
                 "Successfully logged in!";
 
@@ -87,6 +92,9 @@ namespace Reviefy.Controllers
         {
             if (HttpContext.Session.Keys.Contains("user"))
                 HttpContext.Session.Remove("user");
+
+            if (!HttpContext.Request.Cookies.ContainsKey("name"))
+                HttpContext.Response.Cookies.Delete("jwt");
 
             ViewBag.AuthStatus =
                 "Successfully logged out!";

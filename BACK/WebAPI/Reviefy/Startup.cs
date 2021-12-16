@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Reviefy.DataConnection;
 using Reviefy.Options;
+using Reviefy.Services;
 
 namespace Reviefy
 {
@@ -73,6 +74,8 @@ namespace Reviefy
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseMiddleware<JwtMiddleware>();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
