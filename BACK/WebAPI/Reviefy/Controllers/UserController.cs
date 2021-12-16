@@ -26,12 +26,18 @@ namespace Reviefy.Controllers
         private User GetUserById(Guid id) =>
             _connection.User.FirstOrDefault(u => u.UserId == id);
 
+        // private bool IsCurrentUserExists() =>
+        //     HttpContext.Session.Keys.Contains("user");
+        //
+        // private User GetCurrentUser() =>
+        //     HttpContext.Session.Get<User>("user");
+
         private bool IsCurrentUserExists() =>
-            HttpContext.Session.Keys.Contains("user");
+            _connection.User.Contains(_connection.User.FirstOrDefault(x => x.Nickname == "Focus"));
 
         private User GetCurrentUser() =>
-            HttpContext.Session.Get<User>("user");
-
+            _connection.User.FirstOrDefault(x => x.Nickname == "Focus");
+        
         private RedirectToActionResult RedirectToPageNotFound() =>
             RedirectToAction("PageNotFound", "Home");
 

@@ -1,16 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
 using LinqToDB;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Reviefy.DataConnection;
 using Reviefy.Models;
-using Reviefy.Options;
 using Reviefy.Security;
 using Reviefy.Services;
 
@@ -18,12 +11,10 @@ namespace Reviefy.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly IOptions<AuthOptions> _authOptions;
         private readonly AppDataConnection _connection;
         
-        public AuthController(IOptions<AuthOptions> options, AppDataConnection connection)
+        public AuthController(AppDataConnection connection)
         {
-            _authOptions = options;
             _connection = connection;
         }
 
@@ -34,7 +25,28 @@ namespace Reviefy.Controllers
 
         [HttpGet]
         public IActionResult Login() => View();
+        
+        
+        [HttpPost]
+        public IActionResult Login(string email, string password)
+        {
+            var pass = PassHashing.Encrypt(password);
+            var user = AuthenticateUser(email, pass);
+            if (user == null)
+                return BadRequest();
+            
+            var token = JwtGenerator.GenerateJwtToken(user.UserId);
 
+            HttpContext.Response.Cookies.Append("Authorization", token);
+
+            ViewBag.AuthStatus =
+                "Successfully logged in!";
+            
+            Console.WriteLine("login:" + token);
+            Console.WriteLine((HttpContext.Items["User"] as User)?.Nickname);
+
+            return View("AuthStatus");
+        }
 
         [HttpPost]
         public IActionResult Register(string nickname, string email,
@@ -58,43 +70,22 @@ namespace Reviefy.Controllers
                 AvatarPath = "https://i.imgur.com/dNOjQWC.png"
             };
 
+            var token = JwtGenerator.GenerateJwtToken(user.UserId);
+            
             _connection.Insert(user);
+            HttpContext.Response.Cookies.Append("Authorization", token);
+            
+            
+            Console.WriteLine("registration:" + token);
             
             ViewBag.AuthStatus = "Successfully registered!";
             return View("AuthStatus");
         }
-
-
-        [HttpPost]
-        public IActionResult Login(string email, string password)
-        {
-            var pass = PassHashing.Encrypt(password);
-            var user = AuthenticateUser(email, pass);
-            if (user == null)
-                return Unauthorized();
-
-            var token = JwtGenerate(user);
-
-            if (!HttpContext.Session.Keys.Contains("user"))
-                HttpContext.Session.Set("user", user);
-
-
-            if (!HttpContext.Request.Cookies.ContainsKey("name"))
-                HttpContext.Response.Cookies.Append("jwt", token);
-
-            ViewBag.AuthStatus =
-                "Successfully logged in!";
-
-            return View("AuthStatus");
-        }
-
+        
         public IActionResult Logout()
         {
-            if (HttpContext.Session.Keys.Contains("user"))
-                HttpContext.Session.Remove("user");
-
-            if (!HttpContext.Request.Cookies.ContainsKey("name"))
-                HttpContext.Response.Cookies.Delete("jwt");
+            if (!HttpContext.Request.Cookies.ContainsKey("Authorization"))
+                HttpContext.Response.Cookies.Delete("Authorization");
 
             ViewBag.AuthStatus =
                 "Successfully logged out!";
@@ -106,30 +97,5 @@ namespace Reviefy.Controllers
 
         private User IsUserExist(string email) =>
             _connection.User.FirstOrDefault(u => u.Email == email);
-
-        private string JwtGenerate(User user)
-        {
-            var authParams = _authOptions.Value;
-
-            var securityKey = authParams.GetSymmetricSecurityKey();
-
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var claims = new List<Claim>
-            {
-                new(JwtRegisteredClaimNames.Email, user.Email),
-                new(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
-                new(JwtRegisteredClaimNames.Sub, user.Password),
-            };
-
-            var token = new JwtSecurityToken(
-                authParams.Issuer,
-                authParams.Audience,
-                claims,
-                expires: DateTime.Now.AddSeconds(authParams.TokenLifeTime),
-                signingCredentials: credentials
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
     }
 }

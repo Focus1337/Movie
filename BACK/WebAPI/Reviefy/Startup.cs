@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Reviefy.DataConnection;
-using Reviefy.Options;
 using Reviefy.Services;
 
 namespace Reviefy
@@ -24,14 +23,14 @@ namespace Reviefy
         {
             services.AddControllersWithViews();
 
-            services.AddDistributedMemoryCache();
-
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = ".Reviefy.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(1800); // 30 min afk
-                options.Cookie.HttpOnly = true;
-            });
+            // services.AddDistributedMemoryCache();
+            //
+            // services.AddSession(options =>
+            // {
+            //     options.Cookie.Name = ".Reviefy.Session";
+            //     options.IdleTimeout = TimeSpan.FromSeconds(1800); // 30 min afk
+            //     options.Cookie.HttpOnly = true;
+            // });
 
             services.AddLinqToDbContext<AppDataConnection>((provider, options) =>
             {
@@ -39,9 +38,6 @@ namespace Reviefy
                     .UseSqlServer(Configuration.GetConnectionString("Default"))
                     .UseDefaultLogging(provider);
             });
-
-            var authOptionsConfiguration = Configuration.GetSection("Auth");
-            services.Configure<AuthOptions>(authOptionsConfiguration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -54,7 +50,7 @@ namespace Reviefy
                 app.UseHsts();
             }
 
-            app.UseSession();
+            //app.UseSession();
 
             app.Use(async (context, next) =>
             {

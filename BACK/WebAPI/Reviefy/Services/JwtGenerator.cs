@@ -7,7 +7,7 @@ namespace Reviefy.Services
 {
     public static class JwtGenerator
     {
-        public static string GenerateJwtToken(int accountId)
+        public static string GenerateJwtToken(Guid accountId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor

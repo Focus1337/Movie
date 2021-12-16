@@ -1,6 +1,6 @@
 @using Reviefy.Services
 @{
-    var user = Context.Session.Get<User>("user");
+    // var user = Context.Session.Get<User>("user");
 }
 
 <!-- ====== Start of #main-nav ====== -->
@@ -56,14 +56,16 @@
      <!-- ====== Start of Extra Nav ====== -->
      <ul class="navbar-nav extra-nav">
 
-         @if (Context.Session.Keys.Contains("user"))
-         {
-             <!-- Menu Item -->
+         @*@if (Context.Session.Keys.Contains("user"))*@
+         @*{*@
+         <!-- Menu Item -->
              <li class="nav-item dropdown m-auto">
                  <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                     <img style="border-radius: 50%" src="@user.AvatarPath" alt="" width="35">
-                     @* @CurrentUser.Nickname *@
+                     
+                     @* TODO: FIX USER USAGE*@
+                     <img style="border-radius: 50%" src="~/images/admin.jpg" alt="" width="35">
+
                  </a>
 
                  <!-- Dropdown Menu -->
@@ -79,16 +81,16 @@
                      </li>
                  </ul>
              </li>
-         }
-         else
-         {
+         @* } *@
+         @* else *@
+         @* { *@
              <!-- Menu Item -->
              <li class="nav-item m-auto">
                  <a asp-controller="Auth" asp-action="Login" class="btn btn-main btn-effect login-btn">
                      <i class="icon-user"></i>login
                  </a>
              </li>
-         }
+         @*}*@
         
      </ul>
      <!-- ====== End of Extra Nav ====== -->

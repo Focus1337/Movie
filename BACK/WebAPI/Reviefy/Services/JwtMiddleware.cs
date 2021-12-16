@@ -1,6 +1,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using Reviefy.DataConnection;
@@ -14,16 +15,16 @@ namespace Reviefy.Services
         public JwtMiddleware(RequestDelegate next) =>
             _next = next;
 
-        public void Invoke(HttpContext context, AppDataConnection dataConnection)
+        public async Task Invoke(HttpContext context, AppDataConnection dataConnection)
         {
             var token = context.Request.Cookies["Authorization"];
             if (token is not null && token != string.Empty)
-                AttachAccountToContext(context, dataConnection, token);
+                await AttachAccountToContext(context, dataConnection, token);
 
-            _next(context);
+            await _next(context);
         }
 
-        private void AttachAccountToContext(HttpContext context, AppDataConnection dataConnection, string token)
+        private async Task AttachAccountToContext(HttpContext context, AppDataConnection dataConnection, string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             tokenHandler.ValidateToken(token, new TokenValidationParameters
