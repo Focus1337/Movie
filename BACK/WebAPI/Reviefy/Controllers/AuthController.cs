@@ -1,9 +1,9 @@
 using System;
-using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
-using Reviefy.DataConnection;
+using Reviefy.Attributes;
 using Reviefy.Models;
+using Reviefy.Repository;
 using Reviefy.Security;
 using Reviefy.Services;
 
@@ -30,7 +30,7 @@ namespace Reviefy.Controllers
         public IActionResult Login(string email, string password)
         {
             var pass = PassHashing.Encrypt(password);
-            var user = AuthenticateUser(email, pass);
+            var user = DbHelper.AuthenticateUser(email, pass, _connection);
             if (user == null)
                 return BadRequest();
 
@@ -49,7 +49,7 @@ namespace Reviefy.Controllers
             string password, string confirmPassword)
         {
             //try to Authenticate User
-            var user = IsUserExist(email);
+            var user = DbHelper.UserByEmail(email, _connection);
             if (user != null)
                 return Ok("This account already exists");
 
@@ -70,30 +70,21 @@ namespace Reviefy.Controllers
 
             _connection.Insert(user);
             HttpContext.Response.Cookies.Append("Authorization", token);
-
-
+            
             Console.WriteLine("registration:" + token);
 
             ViewBag.AuthStatus = "Successfully registered!";
-
-
             return View("AuthStatus");
         }
 
+        [Authorize]
         public IActionResult Logout()
         {
-            //if (!HttpContext.Request.Cookies.ContainsKey("Authorization"))
             HttpContext.Response.Cookies.Delete("Authorization");
 
             ViewBag.AuthStatus =
                 "Successfully logged out!";
             return View("AuthStatus");
         }
-
-        private User AuthenticateUser(string email, string password) =>
-            _connection.User.FirstOrDefault(u => u.Email == email && u.Password == password);
-
-        private User IsUserExist(string email) =>
-            _connection.User.FirstOrDefault(u => u.Email == email);
     }
 }

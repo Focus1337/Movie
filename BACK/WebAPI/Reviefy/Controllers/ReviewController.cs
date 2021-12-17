@@ -4,9 +4,8 @@ using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
 using Reviefy.Attributes;
-using Reviefy.DataConnection;
 using Reviefy.Models;
-using Reviefy.Services;
+using Reviefy.Repository;
 
 namespace Reviefy.Controllers
 {
@@ -14,13 +13,7 @@ namespace Reviefy.Controllers
     {
         private readonly AppDataConnection _connection;
         public ReviewController(AppDataConnection connection) => _connection = connection;
-
-        private Review ReviewExists(Guid movieId, Guid userId) =>
-            _connection.Review.FirstOrDefault(r => r.MovieId == movieId && r.UserId == userId);
-
-        private Review GetReviewById(Guid id) =>
-            _connection.Review.FirstOrDefault(r => r.ReviewId == id);
-
+        
         private Guid UserIdFromJwt()
         {
             var handler = new JwtSecurityTokenHandler();
@@ -34,6 +27,7 @@ namespace Reviefy.Controllers
         private User GetCurrentUser() =>
             _connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt());
         
+        //private User GetCurrentUser2() => (User) HttpContext.Items["User"]!;
 
         [Authorize, HttpPost]
         public IActionResult WriteReview(int rating, string text, Guid movieId)
@@ -42,7 +36,7 @@ namespace Reviefy.Controllers
                 return Ok("You must be logged in!");
             
             // Check if review is already exists
-            var review = ReviewExists(movieId, GetCurrentUser().UserId);
+            var review = DbHelper.ReviewExists(movieId, GetCurrentUser().UserId, _connection);
 
             if (review != null)
                 return Ok("Your review already exists for this movie!");
@@ -69,7 +63,7 @@ namespace Reviefy.Controllers
             if (!IsCurrentUserExists())
                 return Ok("You must be logged in!");
 
-            var review = GetReviewById(id);
+            var review = DbHelper.ReviewById(id, _connection);
 
             if (review != null)
             {
@@ -86,7 +80,7 @@ namespace Reviefy.Controllers
             if (!IsCurrentUserExists())
                 return Ok("You must be logged in!");
 
-            var review = GetReviewById(id);
+            var review = DbHelper.ReviewById(id, _connection);
 
             if (review != null)
             {

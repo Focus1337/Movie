@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Reviefy.DataConnection;
 using Reviefy.Models;
+using Reviefy.Repository;
 using Reviefy.Services;
 
 namespace Reviefy.Controllers
@@ -15,24 +14,17 @@ namespace Reviefy.Controllers
         private readonly AppDataConnection _connection;
 
         public HomeController(AppDataConnection connection) => _connection = connection;
-
-        private List<News> GetNews() =>
-            _connection.News.OrderByDescending(x => x.NewsDate).Take(3).ToList();
-
-        private List<Movie> GetMovies() =>
-            _connection.Movie.OrderByDescending(x => x.ReleaseDate).Take(6).ToList();
-
+        
         public IActionResult Index()
         {
             var viewModel = new ViewModel
             {
-                Movies = GetMovies(),
-                News = GetNews()
+                Movies = DbHelper.MoviesListByCount(6, _connection),
+                News = DbHelper.NewsListByCount(3, _connection)
             };
             return View("Index", viewModel);
         }
-
-
+        
         [HttpPost]
         public async Task<IActionResult> Contact(string name, string email, string subject, string message)
         {

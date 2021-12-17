@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
 using Reviefy.Attributes;
-using Reviefy.DataConnection;
 using Reviefy.Models;
+using Reviefy.Repository;
 using Reviefy.Security;
-using Reviefy.Services;
 
 namespace Reviefy.Controllers
 {
@@ -17,24 +15,11 @@ namespace Reviefy.Controllers
         private readonly AppDataConnection _connection;
         public UserController(AppDataConnection connection) => _connection = connection;
 
-        private List<Movie> GetMovies() =>
-            _connection.Movie.OrderByDescending(m => m.ReleaseDate).ToList();
-
-        private List<Review> GetReviewListById(Guid id) =>
-            _connection.Review
-                .Where(u => u.UserId == id)
-                .OrderByDescending(r => r.ReviewDate).ToList();
-
-        private User GetUserById(Guid id) =>
-            _connection.User.FirstOrDefault(u => u.UserId == id);
-        
-        
-        
         private Guid UserIdFromJwt()
         {
             if (!HttpContext.Request.Cookies.ContainsKey("Authorization"))
                 return Guid.Empty;
-            
+
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(HttpContext.Request.Cookies["Authorization"]); //(token);
             return Guid.Parse(jwtSecurityToken.Claims.First(claim => claim.Type == "id").Value);
@@ -42,25 +27,24 @@ namespace Reviefy.Controllers
 
         private bool IsCurrentUserExists() =>
             _connection.User.Contains(_connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt()));
-        
+
         private User GetCurrentUser() =>
             _connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt());
-        
-        
+
 
         private RedirectToActionResult RedirectToPageNotFound() =>
             RedirectToAction("PageNotFound", "Home");
 
         public IActionResult UserProfile(Guid id)
         {
-            if (GetUserById(id) == null)
+            if (DbHelper.UserById(id, _connection) == null)
                 return RedirectToPageNotFound();
 
             var viewModel = new ViewModel
             {
-                Movies = GetMovies(),
-                Reviews = GetReviewListById(id),
-                UserById = GetUserById(id)
+                Movies = DbHelper.MoviesListOrdered(_connection),
+                Reviews = DbHelper.ReviewListDescById(id, _connection),
+                UserById = DbHelper.UserById(id, _connection)
             };
 
             return View("UserProfile", viewModel);
@@ -69,7 +53,7 @@ namespace Reviefy.Controllers
         [Authorize, HttpPost]
         public IActionResult ResetAvatar()
         {
-            var user = GetUserById(GetCurrentUser().UserId);
+            var user = DbHelper.UserById(GetCurrentUser().UserId, _connection);
             if (!IsCurrentUserExists())
                 return RedirectToPageNotFound();
 
@@ -82,7 +66,7 @@ namespace Reviefy.Controllers
         [Authorize, HttpPost]
         public IActionResult UpdateInformation(string nickname, string avatar)
         {
-            var user = GetUserById(GetCurrentUser().UserId);
+            var user = DbHelper.UserById(GetCurrentUser().UserId, _connection);
             if (!IsCurrentUserExists())
                 return RedirectToPageNotFound();
 
@@ -100,7 +84,7 @@ namespace Reviefy.Controllers
         [Authorize, HttpPost]
         public IActionResult UpdateSecurity(string email, string password)
         {
-            var user = GetUserById(GetCurrentUser().UserId);
+            var user = DbHelper.UserById(GetCurrentUser().UserId, _connection);
             if (!IsCurrentUserExists())
                 return RedirectToPageNotFound();
 
@@ -123,9 +107,9 @@ namespace Reviefy.Controllers
 
             var viewModel = new ViewModel
             {
-                Movies = GetMovies(),
-                Reviews = GetReviewListById(GetCurrentUser().UserId),
-                UserById = GetUserById(GetCurrentUser().UserId)
+                Movies = DbHelper.MoviesList(_connection),
+                Reviews = DbHelper.ReviewListDescById(GetCurrentUser().UserId, _connection),
+                UserById = DbHelper.UserById(GetCurrentUser().UserId, _connection)
             };
 
             return View(viewModel);

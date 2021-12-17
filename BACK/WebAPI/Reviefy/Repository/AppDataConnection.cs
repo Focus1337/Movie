@@ -2,7 +2,7 @@
 using LinqToDB.Configuration;
 using Reviefy.Models;
 
-namespace Reviefy.DataConnection
+namespace Reviefy.Repository
 {
     // Custom Data Connection
     public class AppDataConnection : LinqToDB.Data.DataConnection
