@@ -1,5 +1,4 @@
 using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +26,6 @@ namespace Reviefy.Controllers
         [HttpGet]
         public IActionResult Login() => View();
 
-
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
@@ -42,18 +40,6 @@ namespace Reviefy.Controllers
 
             ViewBag.AuthStatus =
                 "Successfully logged in!";
-
-            Console.WriteLine("login:" + token);
-            //    Console.WriteLine((HttpContext.Items["User"] as User)?.Nickname);
-
-
-            // var handler = new JwtSecurityTokenHandler();
-            // var jwtSecurityToken = handler.ReadJwtToken(token);
-            // var jti = jwtSecurityToken.Claims.First(claim => claim.Type == "id").Value;
-
-            // Console.WriteLine($"UserId From Cookie = {jti}");
-            // Console.WriteLine("User Nickname:" +
-            //                   _connection.User.FirstOrDefault(x => x.UserId == Guid.Parse(jti))?.Nickname);
 
             return View("AuthStatus");
         }

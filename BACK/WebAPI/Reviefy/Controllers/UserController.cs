@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
+using Reviefy.Attributes;
 using Reviefy.DataConnection;
 using Reviefy.Models;
 using Reviefy.Security;
@@ -65,7 +66,7 @@ namespace Reviefy.Controllers
             return View("UserProfile", viewModel);
         }
 
-        [HttpPost]
+        [Authorize, HttpPost]
         public IActionResult ResetAvatar()
         {
             var user = GetUserById(GetCurrentUser().UserId);
@@ -78,7 +79,7 @@ namespace Reviefy.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [Authorize, HttpPost]
         public IActionResult UpdateInformation(string nickname, string avatar)
         {
             var user = GetUserById(GetCurrentUser().UserId);
@@ -96,7 +97,7 @@ namespace Reviefy.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [Authorize, HttpPost]
         public IActionResult UpdateSecurity(string email, string password)
         {
             var user = GetUserById(GetCurrentUser().UserId);
@@ -114,6 +115,7 @@ namespace Reviefy.Controllers
             return NoContent();
         }
 
+        [Authorize]
         public IActionResult MyProfile()
         {
             if (!IsCurrentUserExists())

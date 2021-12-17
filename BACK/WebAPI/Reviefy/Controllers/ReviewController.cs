@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
+using Reviefy.Attributes;
 using Reviefy.DataConnection;
 using Reviefy.Models;
 using Reviefy.Services;
@@ -19,13 +20,7 @@ namespace Reviefy.Controllers
 
         private Review GetReviewById(Guid id) =>
             _connection.Review.FirstOrDefault(r => r.ReviewId == id);
-        
-        // private bool IsCurrentUserExists() =>
-        //     HttpContext.Session.Keys.Contains("user");
-        //
-        // private User GetCurrentUser() =>
-        //     HttpContext.Session.Get<User>("user");
-        
+
         private Guid UserIdFromJwt()
         {
             var handler = new JwtSecurityTokenHandler();
@@ -40,7 +35,7 @@ namespace Reviefy.Controllers
             _connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt());
         
 
-        [HttpPost]
+        [Authorize, HttpPost]
         public IActionResult WriteReview(int rating, string text, Guid movieId)
         {
             if (!IsCurrentUserExists())
@@ -67,7 +62,8 @@ namespace Reviefy.Controllers
 
             return RedirectToAction("GetMovie", "Movie", new {id = movieId});
         }
-
+       
+        [Authorize]
         public IActionResult IncreaseHelpfulness(Guid id)
         {
             if (!IsCurrentUserExists())
@@ -84,6 +80,7 @@ namespace Reviefy.Controllers
             return NoContent();
         }
 
+        [Authorize]
         public IActionResult DecreaseHelpfulness(Guid id)
         {
             if (!IsCurrentUserExists())

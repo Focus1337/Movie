@@ -100,6 +100,7 @@ namespace Reviefy.Controllers
             return m[string1.Length, string2.Length];
         }
 
+        public IActionResult UserUnauthorized() => View();
         public IActionResult ContactUs() => View();
         public IActionResult AboutUs() => View();
         public IActionResult LegalDisclaimer() => View();

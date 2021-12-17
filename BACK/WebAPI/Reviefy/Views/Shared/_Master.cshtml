@@ -8,35 +8,37 @@
 </head>
 
 <body>
+<nav id="main-mobile-nav"></nav>
+
 <!-- =============== START OF WRAPPER =============== -->
 <div class="wrapper">
 
-<!-- =============== START OF HEADER NAVIGATION =============== -->
-<header class="header header-fixed header-transparent text-white">
-    <div class="container-fluid">
+    <!-- =============== START OF HEADER NAVIGATION =============== -->
+    <header class="header header-fixed header-transparent text-white">
+        <div class="container-fluid">
 
-        <!-- ====== Start of Navbar ====== -->
-        <nav class="navbar navbar-expand-lg">
+            <!-- ====== Start of Navbar ====== -->
+            <nav class="navbar navbar-expand-lg">
 
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                <!-- LOGO -->
-                <img src="~/images/reviefy-gradient.svg" alt="Reviefy" width="150" class="logo">
-                <!-- WHITE LOGO -->
-                <img src="~/images/reviefy-logo.svg" alt="Reviefy" width="150" class="logo-white">
-            </a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <!-- LOGO -->
+                    <img src="~/images/reviefy-gradient.svg" alt="Reviefy" width="150" class="logo">
+                    <!-- WHITE LOGO -->
+                    <img src="~/images/reviefy-logo.svg" alt="Reviefy" width="150" class="logo-white">
+                </a>
 
-            @await Html.PartialAsync("HeaderPartial")
-            
-        </nav>
-        <!-- ====== End of Navbar ====== -->
+                @await Html.PartialAsync("HeaderPartial")
 
-    </div>
-</header>
-<!-- =============== END OF HEADER NAVIGATION =============== -->
+            </nav>
+            <!-- ====== End of Navbar ====== -->
 
-@RenderBody()
+        </div>
+    </header>
+    <!-- =============== END OF HEADER NAVIGATION =============== -->
 
-@await Html.PartialAsync("FooterPartial")
+    @RenderBody()
+
+    @await Html.PartialAsync("FooterPartial")
 
 </div>
 <!-- =============== END OF WRAPPER =============== -->
