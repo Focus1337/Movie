@@ -427,7 +427,7 @@ div.small-dialog span.line {
 
 .my-mfp-zoom-in.mfp-bg {
     opacity: 0.001;
-    /* Chrome opacity transition bug */
+    /* Chrome opacity transition b ug */
     -webkit-transition: opacity 0.3s ease-out;
     -moz-transition: opacity 0.3s ease-out;
     -o-transition: opacity 0.3s ease-out;

@@ -15,7 +15,7 @@ namespace Reviefy.Services
                 Subject = new ClaimsIdentity(new[] {new Claim("id", accountId.ToString())}),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials =
-                    new SigningCredentials(new SymmetricSecurityKey(Config.JwtKey),
+                    new SigningCredentials(new SymmetricSecurityKey(JwtConfig.JwtKey),
                         SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

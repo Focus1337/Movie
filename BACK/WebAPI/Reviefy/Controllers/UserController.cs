@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using LinqToDB;
 using Microsoft.AspNetCore.Mvc;
 using Reviefy.Attributes;
@@ -15,22 +13,7 @@ namespace Reviefy.Controllers
         private readonly AppDataConnection _connection;
         public UserController(AppDataConnection connection) => _connection = connection;
 
-        private Guid UserIdFromJwt()
-        {
-            if (!HttpContext.Request.Cookies.ContainsKey("Authorization"))
-                return Guid.Empty;
-
-            var handler = new JwtSecurityTokenHandler();
-            var jwtSecurityToken = handler.ReadJwtToken(HttpContext.Request.Cookies["Authorization"]); //(token);
-            return Guid.Parse(jwtSecurityToken.Claims.First(claim => claim.Type == "id").Value);
-        }
-
-        private bool IsCurrentUserExists() =>
-            _connection.User.Contains(_connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt()));
-
-        private User GetCurrentUser() =>
-            _connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt());
-
+        private User CurrentUser() => (User) HttpContext.Items["User"]!;
 
         private RedirectToActionResult RedirectToPageNotFound() =>
             RedirectToAction("PageNotFound", "Home");
@@ -53,8 +36,8 @@ namespace Reviefy.Controllers
         [Authorize, HttpPost]
         public IActionResult ResetAvatar()
         {
-            var user = DbHelper.UserById(GetCurrentUser().UserId, _connection);
-            if (!IsCurrentUserExists())
+            var user = DbHelper.UserById(CurrentUser().UserId, _connection);
+            if (!DbHelper.IsUserExists(CurrentUser().UserId, _connection))
                 return RedirectToPageNotFound();
 
             user.AvatarPath = "https://i.imgur.com/dNOjQWC.png";
@@ -66,8 +49,8 @@ namespace Reviefy.Controllers
         [Authorize, HttpPost]
         public IActionResult UpdateInformation(string nickname, string avatar)
         {
-            var user = DbHelper.UserById(GetCurrentUser().UserId, _connection);
-            if (!IsCurrentUserExists())
+            var user = DbHelper.UserById(CurrentUser().UserId, _connection);
+            if (!DbHelper.IsUserExists(CurrentUser().UserId, _connection))
                 return RedirectToPageNotFound();
 
             if (user.Nickname != nickname)
@@ -84,8 +67,8 @@ namespace Reviefy.Controllers
         [Authorize, HttpPost]
         public IActionResult UpdateSecurity(string email, string password)
         {
-            var user = DbHelper.UserById(GetCurrentUser().UserId, _connection);
-            if (!IsCurrentUserExists())
+            var user = DbHelper.UserById(CurrentUser().UserId, _connection);
+            if (!DbHelper.IsUserExists(CurrentUser().UserId, _connection))
                 return RedirectToPageNotFound();
 
             if (user.Email != email)
@@ -102,14 +85,14 @@ namespace Reviefy.Controllers
         [Authorize]
         public IActionResult MyProfile()
         {
-            if (!IsCurrentUserExists())
+            if (!DbHelper.IsUserExists(CurrentUser().UserId, _connection))
                 return RedirectToPageNotFound();
 
             var viewModel = new ViewModel
             {
                 Movies = DbHelper.MoviesList(_connection),
-                Reviews = DbHelper.ReviewListDescById(GetCurrentUser().UserId, _connection),
-                UserById = DbHelper.UserById(GetCurrentUser().UserId, _connection)
+                Reviews = DbHelper.ReviewListDescById(CurrentUser().UserId, _connection),
+                UserById = DbHelper.UserById(CurrentUser().UserId, _connection)
             };
 
             return View(viewModel);

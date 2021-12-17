@@ -21,7 +21,7 @@ namespace Reviefy.Services
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync("smtp.mail.ru", 465, true);
-                await client.AuthenticateAsync("focus_test@mail.ru", "L8iK9dfhcU7MapTxd1hN");
+                await client.AuthenticateAsync("focus_test@mail.ru", "spasibo, shto vzlomali");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);

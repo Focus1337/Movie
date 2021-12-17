@@ -30,7 +30,7 @@ namespace Reviefy.Services
             tokenHandler.ValidateToken(token, new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Config.JwtKey),
+                IssuerSigningKey = new SymmetricSecurityKey(JwtConfig.JwtKey),
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 ClockSkew = TimeSpan.Zero

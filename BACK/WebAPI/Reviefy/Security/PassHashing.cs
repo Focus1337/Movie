@@ -8,9 +8,6 @@ namespace Reviefy.Security
 {
     public class PassHashing
     {
-        //TODO: https://stackoverflow.com/questions/20621950/asp-net-identitys-default-password-hasher-how-does-it-work-and-is-it-secure
-        //TODO: https://www.c-sharpcorner.com/blogs/encrypt-and-decrypt-a-string-in-asp-net1
-        
         /// <summary>
         /// Проверка пароля
         /// </summary>

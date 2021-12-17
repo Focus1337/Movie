@@ -47,6 +47,9 @@ namespace Reviefy.Repository
         public static User AuthenticateUser(string email, string password, AppDataConnection connection) =>
             connection.User.FirstOrDefault(u => u.Email == email && u.Password == password);
 
+        public static bool IsUserExists(Guid id, AppDataConnection connection) =>
+            connection.User.Contains(connection.User.FirstOrDefault(x => x.UserId == id));
+
         public static Movie MovieById(Guid id, AppDataConnection connection) =>
             connection.Movie.FirstOrDefault(m => m.MovieId == id);
 
@@ -62,4 +65,21 @@ namespace Reviefy.Repository
         public static Review ReviewExists(Guid movieId, Guid userId, AppDataConnection connection) =>
             connection.Review.FirstOrDefault(r => r.MovieId == movieId && r.UserId == userId);
     }
+    
+    
+    /* TODO: Декодинг Jwt токена, нужно поместить в контроллер.
+       TODO: Отказался от этой идеи, т.к. можно обраащаться прямиком к контексту
+    private Guid UserIdFromJwt()
+    {
+        var handler = new JwtSecurityTokenHandler();
+        var jwtSecurityToken = handler.ReadJwtToken(HttpContext.Request.Cookies["Authorization"]); //(token);
+        return Guid.Parse(jwtSecurityToken.Claims.First(claim => claim.Type == "id").Value);
+    }
+
+    private bool IsCurrentUserExists() =>
+        _connection.User.Contains(_connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt()));
+        
+    private User GetCurrentUser() =>
+        _connection.User.FirstOrDefault(x => x.UserId == UserIdFromJwt());
+    */
 }
